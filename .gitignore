@@ -27,3 +27,6 @@
 /config/master.key
 coverage
 .idea
+
+# Ignore application configuration
+/config/application.yml

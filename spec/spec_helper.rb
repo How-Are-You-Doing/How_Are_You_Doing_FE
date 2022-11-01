@@ -20,7 +20,9 @@ RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
+
   config.expect_with :rspec do |expectations|
+
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
     # defined using `chain`, e.g.:
@@ -43,6 +45,8 @@ RSpec.configure do |config|
   VCR.configure do |c|
     c.cassette_library_dir = "spec/vcr"
     c.hook_into :webmock
+    # c.filter_sensitive_data('<api_key>') { Figaro.env.api_key }
+    c.configure_rspec_metadata!
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
