@@ -46,6 +46,8 @@ RSpec.configure do |config|
     c.cassette_library_dir = "spec/vcr"
     c.hook_into :webmock
     # c.filter_sensitive_data('<api_key>') { Figaro.env.api_key }
+    c.filter_sensitive_data('<google_client_id>') { Figaro.env.google_client_id }
+    c.filter_sensitive_data('<google_client_secret>') { Figaro.env.google_client_secret }
     c.configure_rspec_metadata!
   end
 
