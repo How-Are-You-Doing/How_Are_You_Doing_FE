@@ -1,6 +1,8 @@
 class DashboardsController < ApplicationController
+  before_action :current_user
+  
   def show
 
-    @feelings_grid = DatabaseFacade.feelings
+    @emotions_grid = DatabaseFacade.emotions
   end
 end

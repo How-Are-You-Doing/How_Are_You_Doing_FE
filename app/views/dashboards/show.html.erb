@@ -1,1 +1,6 @@
-<h1>Welcome to the Dashboard!</h1>
+<h1>Welcome, <%=current_user.name%>!</h1>
+
+<%= form_with url: dashboard_posts_path do |f| %>
+  <%= f.select :emotion, @emotions_grid.map(&:word) %>
+  <%= f.submit 'submit' %>
+<% end %>
