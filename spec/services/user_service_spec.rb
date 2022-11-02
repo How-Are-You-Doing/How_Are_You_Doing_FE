@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UserService do
-  describe '.find_user' do
+  describe '#find_user' do
     it 'can find a user based on google id' do
       response_body = { "data": {
         "id": "36",
