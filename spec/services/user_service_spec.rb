@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UserService do
+RSpec.describe UserService do
   describe '.find_user' do
     it 'can find a user based on google id' do
       response_body = { "data": {
@@ -20,7 +20,7 @@ describe UserService do
 
       expect(result[:data][:attributes][:name]).to eq("Jacob Methusula")
       expect(result[:data][:attributes][:email]).to eq("jsnakes@gmail.com")
-      expect(result[:data][:attributes][:name]).to eq("fhsajbd912671284bf001028472jf")
+      expect(result[:data][:attributes][:google_id]).to eq("fhsajbd912671284bf001028472jf")
     end
   end
 end
