@@ -11,7 +11,6 @@ RSpec.describe 'welcome page' do
       it 'pressing the google login button allows user to login with their google info' do
         visit root_path
         click_button 'Login with Google'
-
         
       end
     end
