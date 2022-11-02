@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root 'home#welcome'
   get 'auth/google_oauth2/callback', to: 'sessions#create'
   # resources :sessions, only: %i[create]
-  resources :dashboard, only: %i[show]
+  resource :dashboard, only: %i[show]
 end

@@ -12,6 +12,7 @@ RSpec.describe 'welcome page' do
         visit root_path
         click_button 'Login with Google'
 
+        
       end
     end
   end

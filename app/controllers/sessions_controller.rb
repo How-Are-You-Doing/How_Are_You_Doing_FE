@@ -1,15 +1,17 @@
 class SessionsController < ApplicationController
 
   def create
-    user = User.find_or_create_by(user_params)
-    # user.update(name: name, google_id: google_id, token: token)
+    user = User.find_or_create_by(user_params[:email])
+    user.update(user_params)
 
     
-    #post to backend database
+    # post to backend database
+    # DatabaseFacade.find_or_create_user(user_params)
     # if DatabaseFacade.find_user(user.email) == []
+      # DatabaseFacade.create_new_user
     #   conn = Faraday.new(url: 'http://localhost:5000')
     #   conn.post "/users" do |req|
-    #     req.params['id'] = user.id
+    #     req.params['google_id'] = user.google_id
     #     req.params['name'] = user.name
     #     req.params['email'] = user.email
     #   end
