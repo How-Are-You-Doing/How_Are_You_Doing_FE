@@ -7,11 +7,6 @@ RSpec.describe 'welcome page' do
         visit root_path
         expect(page).to have_button('Login with Google')
       end
-
-      it 'pressing the google login button allows user to login with their google info' do
-        
-        
-      end
     end
   end
 end

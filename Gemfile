@@ -47,10 +47,10 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'launchy'
+  gem 'shoulda-matchers'
 end
 
 group :test do
-  gem 'shoulda-matchers'
   gem 'vcr'
   gem 'webmock'
   gem 'simplecov'

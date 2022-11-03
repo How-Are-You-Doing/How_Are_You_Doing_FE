@@ -44,14 +44,14 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  VCR.configure do |c|
-    c.cassette_library_dir = "spec/vcr"
-    c.hook_into :webmock
-    # c.filter_sensitive_data('<api_key>') { Figaro.env.api_key }
-    c.filter_sensitive_data('<google_client_id>') { Figaro.env.google_client_id }
-    c.filter_sensitive_data('<google_client_secret>') { Figaro.env.google_client_secret }
-    c.configure_rspec_metadata!
-  end
+  # VCR.configure do |c|
+  #   c.cassette_library_dir = "spec/vcr"
+  #   c.hook_into :webmock
+  #   # c.filter_sensitive_data('<api_key>') { Figaro.env.api_key }
+  #   c.filter_sensitive_data('<google_client_id>') { Figaro.env.google_client_id }
+  #   c.filter_sensitive_data('<google_client_secret>') { Figaro.env.google_client_secret }
+  #   c.configure_rspec_metadata!
+  # end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
