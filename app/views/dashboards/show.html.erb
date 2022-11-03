@@ -1,6 +1,26 @@
-<h1>Welcome, <%=current_user.name%>!</h1>
+<% if @emotion %>
+  <div id='emotion_def'>
+    <h2>I am feeling <%= @emotion.word %>:</h2>
+    <p> <%= @emotion.definition %></p>
+  </div>
 
-<%= form_with url: dashboard_posts_path do |f| %>
-  <%= f.select :emotion, @emotions_grid.map(&:word) %>
-  <%= f.submit 'submit' %>
+  <h3>Take a moment and jot down some of your thoughts about this<h3>
+  <div id='emotion_form'>
+    <%= form_with url: dashboard_posts_path do |f| %>
+      <%= f.text_area :description, size: "60x10" %>
+      <%= f.hidden_field :emotion_id, value: @emotion.id%>
+      <%= f.submit 'submit' %>
+    <% end %>
+  </div>
+
+<% else %>
+<h1>Welcome, <%=current_user.name%>!</h1>
+  <div id='emotion_form'>
+    <%= form_with url: dashboard_path, method: :get do |f| %>
+      <%= f.select :emotion, @emotions_grid.map(&:word) %>
+      <%= f.submit 'submit' %>
+    <% end %>
+  </div>
 <% end %>
+
+<div id='emotion_definition'>
