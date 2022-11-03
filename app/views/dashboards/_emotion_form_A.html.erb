@@ -1,0 +1,7 @@
+  <h4>I am feeling...<>
+  <div id='emotion_form'>
+    <%= form_with url: dashboard_path, method: :get do |f| %>
+      <%= f.select :emotion, @emotions_grid.map { |e| [ e.word, "#{e.word}-#{e.definition}"]} %>
+      <%= f.submit 'submit' %>
+    <% end %>
+  </div>
