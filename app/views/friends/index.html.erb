@@ -1,0 +1,14 @@
+<div id="find_friend_form">
+  <%= form_with url: '/friends', method: :post, local: true do |f| %>
+    <%= f.label :email, 'Email' %>
+    <%= f.text_field :email %>
+    <%= f.submit 'Find Friend' %>
+  <% end %>
+</div>
+
+<div id="search_results">
+  <% @users&.each do |user| %>
+    <%= user.name %>
+  <% end %>
+</div>
+
