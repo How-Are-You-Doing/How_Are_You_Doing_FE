@@ -1,4 +1,12 @@
-<% if @emotion %>
+<% if @recent_post %>
+    <div id='recent_post'>
+    <h2>I am feeling <%= @emotion_word %>:</h2>
+    <p> <%= @recent_post.description %></p>
+    <p> The tone of your description best matches a <%= @recent_post.tone %> tone.</p>
+    <p> Created <%= @recent_post.created_at %></p>
+    <p> This post is currently <%= @recent_post.post_status %></p>
+  </div>
+<% elsif @emotion %>
   <div id='emotion_def'>
     <h2>I am feeling <%= @emotion.word %>:</h2>
     <p> <%= @emotion.definition %></p>

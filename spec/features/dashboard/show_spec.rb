@@ -58,6 +58,14 @@ RSpec.describe 'dashboard' do
 
       describe 'when I submit an emotion and description' do
         before :each do
+          @post_data = {
+            description: 'This day is going great!',
+            emotion: @chosen_emotion.word,
+            tone: 'happy',
+            created_at: 1.hour.ago,
+            post_status: 'private'
+           }
+          allow(DatabaseFacade).to receive(:new_post).and_return(@post_data)
           within '#emotion_form' do
             select @chosen_emotion.word
             click_button 'submit'
@@ -77,7 +85,12 @@ RSpec.describe 'dashboard' do
         end
 
         it 'instead shows the most recent post' do
-          expect(page).to have_content()
+          within '#recent_post' do
+            expect(page).to have_content(@post_data[:description])
+            expect(page).to have_content("I am feeling #{@post_data[:emotion]}")
+            expect(page).to have_content(@post_data[:tone])
+            expect(page).to have_content(@post_data[:post_status])
+          end
         end
       end
 
