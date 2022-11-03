@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'auth/google_oauth2/callback', to: 'sessions#create'
   # resources :sessions, only: %i[create]
   resource :dashboard, only: %i[show]
+  resources :friends, only: [:index, :create]
 end

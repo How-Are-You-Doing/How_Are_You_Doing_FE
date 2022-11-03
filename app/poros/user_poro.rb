@@ -1,4 +1,4 @@
-class User
+class UserPoro
   attr_reader :name, :google_id, :email, :id
 
   def initialize(data)

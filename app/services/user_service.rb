@@ -4,4 +4,9 @@ class UserService
     response = DatabaseService.conn.get("/api/v1/users?search=#{google_id}")
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.search(email)
+    response = DatabaseService.conn.get("/api/v1/users?by_email=#{email}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
