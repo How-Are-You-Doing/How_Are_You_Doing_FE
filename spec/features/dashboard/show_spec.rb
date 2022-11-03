@@ -26,32 +26,54 @@ RSpec.describe 'dashboard' do
           end
         end
       end
+
       describe 'when I submit an emotion' do
-        it 'when I submit an emotion, I am returned to the dashboard page' do
+        before :each do
           within '#emotion_form' do
             select @chosen_emotion.word
             click_button 'submit'
           end
+        end
+        it 'I am returned to the dashboard page' do
           expect(current_path).to eq(dashboard_path)
         end
 
-        it 'when I submit an emotion, I see the definition of the emotion' do
-          within '#emotion_form' do
-            select @chosen_emotion.word
-            click_button 'submit'
-          end
+        it 'I see the definition of the emotion' do
           within '#emotion_def' do
             expect(page).to have_content(@chosen_emotion.definition)
           end
         end
 
-        it 'when I submit an emotion, I see a text box appear' do
+        it 'I see a text box appear' do
           within '#emotion_form' do
-            select @chosen_emotion.word
-            click_button 'submit'
+            expect(page).to have_field(:description, type: 'textarea')
           end
+        end
+
+        it 'I see a post status radio button with yes and no' do
           within '#emotion_form' do
-            page.has_field? :description, type: 'textarea'
+            expect(page).to have_field('Yes')
+            expect(page).to have_field('No')
+          end
+        end
+
+        it 'post status public question is no by default' do
+          within '#emotion_form' do
+            expect(page).to have_checked_field('No')
+          end
+        end
+
+        it 'I see a link to change emotion choice' do
+          expect(page).to have_link('Change emotion choice')
+        end
+
+        it 'clicking link to change emotion choice takes me back to dashboard page with dropdown' do
+          click_link 'Change emotion choice'
+          expect(current_path).to eq(dashboard_path)
+          within '#emotion_form' do
+            @emotions.each do |emotion|
+              page.has_select? emotion.word
+            end
           end
         end
       end
@@ -59,14 +81,11 @@ RSpec.describe 'dashboard' do
       describe 'when I submit an emotion and description' do
         before :each do
           @last_post = build(:post)
-            # description: 'This day is going great!'
-            # emotion: @chosen_emotion.word,
-            # created_at: 1.hour.ago,
-            # post_status: 'private' 
 
           allow(DatabaseFacade).to receive(:new_post).and_return(201)
           allow(DatabaseFacade).to receive(:last_post).and_return(@last_post)
           allow(DatabaseFacade).to receive(:emotion_by_id).and_return(@chosen_emotion.word)
+
           within '#emotion_form' do
             select @chosen_emotion.word
             click_button 'submit'
@@ -76,6 +95,7 @@ RSpec.describe 'dashboard' do
             click_button 'submit'
           end
         end
+
         it 'returns me to the dashboard' do
           expect(current_path).to eq(dashboard_path)
         end
@@ -92,10 +112,6 @@ RSpec.describe 'dashboard' do
             expect(page).to have_content(@last_post.post_status)
           end
         end
-      end
-
-      it 'choosing a feeling word and pressing submit refreshes dashboard without dropdown' do
-
       end
     end
   end
