@@ -19,7 +19,7 @@ class DashboardsController < ApplicationController
     {
       description: params[:description],
       emotion_id: params[:emotion_id],
-      gui: @current_user.google_id
+      gui: current_user.google_id
     }
   end
 
@@ -29,7 +29,7 @@ class DashboardsController < ApplicationController
   # end
 
   def show_recent_post
-    @recent_post = DatabaseFacade.last_post(@current_user.google_id)
+    @recent_post = DatabaseFacade.last_post(current_user.google_id)
     @emotion_word = DatabaseFacade.emotion_by_id(@recent_post.emotion_id)
   end
 end

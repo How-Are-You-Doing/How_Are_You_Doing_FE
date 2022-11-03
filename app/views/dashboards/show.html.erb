@@ -1,34 +1,10 @@
 <% if @recent_post %>
-    <div id='recent_post'>
-    <h2>I am feeling <%= @emotion_word %>:</h2>
-    <p> <%= @recent_post.description %></p>
-    <p> The tone of your description best matches a <%= @recent_post.tone %> tone.</p>
-    <p> Created <%= @recent_post.created_at %></p>
-    <p> This post is currently <%= @recent_post.post_status %></p>
-  </div>
-<% elsif @emotion %>
-  <div id='emotion_def'>
-    <h2>I am feeling <%= @emotion.word %>:</h2>
-    <p> <%= @emotion.definition %></p>
-  </div>
+  <%= render partial: 'my_post_show' %>
 
-  <h3>Take a moment and jot down some of your thoughts about this<h3>
-  <div id='emotion_form'>
-    <%= form_with url: dashboard_posts_path do |f| %>
-      <%= f.text_area :description, size: "60x10" %>
-      <%= f.hidden_field :emotion_id, value: @emotion.id%>
-      <%= f.submit 'submit' %>
-    <% end %>
-  </div>
+<% elsif @emotion %>
+  <%= render partial: 'emotion_form_B' %>
 
 <% else %>
-<h1>Welcome, <%=current_user.name%>!</h1>
-  <div id='emotion_form'>
-    <%= form_with url: dashboard_path, method: :get do |f| %>
-      <%= f.select :emotion, @emotions_grid.map(&:word) %>
-      <%= f.submit 'submit' %>
-    <% end %>
-  </div>
+  <h1>Welcome, <%=current_user.name%>!</h1>
+  <%= render partial: 'emotion_form_A' %>
 <% end %>
-
-<div id='emotion_definition'>

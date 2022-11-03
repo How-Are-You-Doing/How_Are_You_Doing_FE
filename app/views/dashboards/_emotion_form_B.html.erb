@@ -1,0 +1,13 @@
+  <div id='emotion_def'>
+    <h2>I am feeling <%= @emotion.word %>:</h2>
+    <p> <%= @emotion.definition %></p>
+  </div>
+
+  <h3>Take a moment and jot down some of your thoughts about this<h3>
+  <div id='emotion_form'>
+    <%= form_with url: dashboard_path, method: :get do |f| %>
+      <%= f.text_area :description, size: "60x10" %>
+      <%= f.hidden_field :emotion_id, value: @emotion.id%>
+      <%= f.submit 'submit' %>
+    <% end %>
+  </div>

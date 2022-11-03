@@ -58,23 +58,23 @@ RSpec.describe 'dashboard' do
 
       describe 'when I submit an emotion and description' do
         before :each do
-          @post_data = {
-            description: 'This day is going great!',
-            emotion: @chosen_emotion.word,
-            tone: 'happy',
-            created_at: 1.hour.ago,
-            post_status: 'private'
-           }
-          allow(DatabaseFacade).to receive(:new_post).and_return(@post_data)
+          @last_post = build(:post)
+            # description: 'This day is going great!'
+            # emotion: @chosen_emotion.word,
+            # created_at: 1.hour.ago,
+            # post_status: 'private' 
+
+          allow(DatabaseFacade).to receive(:new_post).and_return(201)
+          allow(DatabaseFacade).to receive(:last_post).and_return(@last_post)
+          allow(DatabaseFacade).to receive(:emotion_by_id).and_return(@chosen_emotion.word)
           within '#emotion_form' do
             select @chosen_emotion.word
             click_button 'submit'
           end
           within '#emotion_form' do
-            fill_in :description, with: 'This day is going great!'
+            fill_in :description, with: @last_post.description
             click_button 'submit'
           end
-          # @post = 
         end
         it 'returns me to the dashboard' do
           expect(current_path).to eq(dashboard_path)
@@ -86,10 +86,10 @@ RSpec.describe 'dashboard' do
 
         it 'instead shows the most recent post' do
           within '#recent_post' do
-            expect(page).to have_content(@post_data[:description])
-            expect(page).to have_content("I am feeling #{@post_data[:emotion]}")
-            expect(page).to have_content(@post_data[:tone])
-            expect(page).to have_content(@post_data[:post_status])
+            expect(page).to have_content(@last_post.description)
+            expect(page).to have_content("I am feeling #{@chosen_emotion.word}")
+            expect(page).to have_content(@last_post.tone)
+            expect(page).to have_content(@last_post.post_status)
           end
         end
       end
