@@ -1,5 +1,5 @@
 class Post
-  attr_reader :emotion_id,
+  attr_reader :emotion,
               :description,
               :id,
               :post_status,
@@ -10,7 +10,7 @@ class Post
 
   def initialize(post_data)
     @id = Faker::Number.unique.number
-    @emotion_id = post_data[:attributes][:emotion_id]
+    @emotion = post_data[:attributes][:emotion]
     @description = post_data[:attributes][:description]
     @post_status = post_data[:attributes][:post_status]
     @user_id = post_data[:attributes][:user_id]

@@ -1,6 +1,6 @@
   <div id='emotion_def'>
-    <h2>I am feeling <%= @emotion.word %>:</h2>
-    <p> <%= @emotion.definition %></p>
+    <h2>I am feeling <%= @emotion.first %>:</h2>
+    <p> <%= @emotion.last %></p>
   </div>
   <%=link_to 'Change emotion choice', url: dashboard_path %>
 
@@ -14,7 +14,7 @@
       <%= f.label :post_status, 'No', value: 'private'%>
       <%= f.radio_button :post_status, 'private', checked: true %>
       </p>
-      <%= f.hidden_field :emotion_id, value: @emotion.id%>
+      <%= f.hidden_field :emotion, value: @emotion.first%>
       <%= f.submit 'submit' %>
     <% end %>
   </div>

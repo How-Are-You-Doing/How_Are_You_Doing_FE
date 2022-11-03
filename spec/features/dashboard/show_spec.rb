@@ -19,7 +19,6 @@ RSpec.describe 'dashboard' do
       end
 
       it 'has a drop down menu with a list of all emotions' do
-        # save_and_open_page
         within '#emotion_form' do
           @emotions.each do |emotion|
             page.has_select? emotion.word
@@ -107,7 +106,7 @@ RSpec.describe 'dashboard' do
         it 'instead shows the most recent post' do
           within '#recent_post' do
             expect(page).to have_content(@last_post.description)
-            expect(page).to have_content("I am feeling #{@chosen_emotion.word}")
+            expect(page).to have_content("I am feeling #{@last_post.emotion}")
             expect(page).to have_content(@last_post.tone)
             expect(page).to have_content(@last_post.post_status)
           end
