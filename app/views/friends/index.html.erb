@@ -6,14 +6,16 @@
   <% end %>
 </div>
 
-<div id="search_results">
-  <% @users&.each do |user| %>
-    <%= user.name %>
-  <% end %>
-</div>
+<% if @user %>
+  <h3>Search Results</h3>
+  <div id="search_results">
+    <%= @user.name %>
+  </div>
+<% end %>
 
 <div id="friends_list">
-<% @friends.each do |friend| %>
-  <%= friend.name %>
+  <h3>Friend List</h3>
+  <% @friends.each do |friend| %>
+    <%= friend.name %>
   <% end %>
 </div>
