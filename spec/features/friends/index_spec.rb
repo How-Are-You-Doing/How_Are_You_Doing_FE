@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'friends index page' do
   before :each do
-    user_search_response = { "data": [{
+    user_search_response = { "data": {
       "id": "36",
       "type": "user",
       "attributes": {
@@ -10,9 +10,9 @@ RSpec.describe 'friends index page' do
         "email": "somedude@hotmail.com",
         "google_id": "whocares"
       }
-    }] }.to_json
+    }}.to_json
 
-    stub_request(:get, "http://localhost:5000/api/v1/users?by_email=somedude@hotmail.com").
+    stub_request(:get, "http://localhost:5000/api/v1/users?email=somedude@hotmail.com").
       to_return(status: 200, body: user_search_response, headers: {})
 
     friends_response = { "data":
