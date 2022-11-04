@@ -1,6 +1,9 @@
 class DatabaseFacade
   def self.emotions
-
+    Rails.cache.fetch("my_cache_key/emotions", expires_in: 24.hours) do
+      emotions = DatabaseService.emotions[:data]
+      emotions.map { |emotion| Emotion.new(emotion) }
+    end
   end
 
   def self.emotion(emotion_word)
@@ -16,7 +19,7 @@ class DatabaseFacade
   end
 
   def self.emotion_by_id(emotion_id)
-    
+
   end
 
   def self.pending_requests(user_id)

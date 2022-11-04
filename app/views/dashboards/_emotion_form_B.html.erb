@@ -1,12 +1,13 @@
+
   <div id='emotion_def'>
     <h2>I am feeling <%= @emotion.first %>:</h2>
     <p> <%= @emotion.last %></p>
   </div>
-  <%=link_to 'Change emotion choice', url: dashboard_path %>
+  <%=link_to 'Change emotion choice', url: dashboard_path, local: true %>
 
   <h3>Take a moment and jot down some of your thoughts about this<h3>
   <div id='emotion_form'>
-    <%= form_with url: dashboard_path, method: :get do |f| %>
+    <%= form_with url: dashboard_path, method: :get, local: true do |f| %>
       <%= f.text_area :description, size: "60x10" %><br>
       <p>Would you like to make this post public?
       <%= f.label :post_status, 'Yes', value: 'public'%>

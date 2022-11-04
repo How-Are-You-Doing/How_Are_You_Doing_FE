@@ -4,5 +4,17 @@ class DatabaseService
   def self.conn
     Faraday.new(url: 'http://localhost:5000')
   end
+
+  def self.pending_requests(google_id)
+    response = conn.get("/api/v1/friends?request_status=pending") do |req|
+      req.headers[:user] = google_id.to_s
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.emotions
+    response = conn.get('/api/v1/emotions')
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
 
