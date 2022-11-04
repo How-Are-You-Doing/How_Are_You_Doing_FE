@@ -1,5 +1,5 @@
 <div id="find_friend_form">
-  <%= form_with url: '/friends', method: :post, local: true do |f| %>
+  <%= form_with url: '/friends', method: :get, local: true do |f| %>
     <%= f.label :email, 'Email' %>
     <%= f.text_field :email %>
     <%= f.submit 'Find Friend' %>
@@ -12,3 +12,8 @@
   <% end %>
 </div>
 
+<div id="friends_list">
+<% @friends.each do |friend| %>
+  <%= friend.name %>
+  <% end %>
+</div>
