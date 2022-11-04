@@ -9,4 +9,10 @@ class UserFacade
       UserPoro.new(data)
     end
   end
+
+  def self.friends
+    UserService.friends[:data].map do |data|
+      UserPoro.new(data)
+    end
+  end
 end

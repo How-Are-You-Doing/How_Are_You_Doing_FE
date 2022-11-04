@@ -1,9 +1,6 @@
 class FriendsController < ApplicationController
   def index
-  end
-
-  def create
-    @users = UserFacade.search(params[:email])
-    render :index
+    @friends = UserFacade.friends
+    @users = UserFacade.search(params[:email]) if params[:email]
   end
 end
