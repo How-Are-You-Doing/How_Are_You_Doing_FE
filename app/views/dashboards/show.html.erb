@@ -9,3 +9,17 @@
   <h2>How are you doing?</h2>
   <%= render partial: 'emotion_form_A' %>
 <% end %>
+
+<ul id='pending_requests'>
+  <% if @pending_requests.nil? %>
+    <h4>No Pending Requests</h4>
+  <% else%>
+    <% @pending_requests.each do |user| %>
+      <li id="friend_<%=user.id%>">
+        <%=user.name%>:
+        <%=button_to 'Accept', dashboard_path, method: :get, params: {follower: user.id, request_status: 'accepted'}, local: true %>
+        <%=button_to 'Reject', dashboard_path, method: :get, params: {follower: user.id, request_status: 'rejected'}, local: true %><br>
+      </li>
+    <% end%>
+  <% end%>
+</ul>

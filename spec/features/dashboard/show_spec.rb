@@ -9,19 +9,64 @@ RSpec.describe 'dashboard' do
         emotions_list = CSV.parse(File.read('spec/emotions_list/Emotions.csv'), headers:true)
         @emotions = emotions_list.map {|emotion| Emotion.new(emotion)} 
         @chosen_emotion = @emotions.first
+        @pending_friends = create_list(:user, 3)
         allow(DatabaseFacade).to receive(:emotions).and_return(@emotions)
         allow(DatabaseFacade).to receive(:emotion).with(@chosen_emotion.word).and_return(@chosen_emotion)
         allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
+        allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends)
         visit dashboard_path
       end
-      it 'has a welcome message with users name' do
-        expect(page).to have_content("Welcome, #{@user.name}")
+      describe 'I see a list of my pending friend requests' do
+        it 'lists the users/followers whose friend status with me are pending' do
+          within '#pending_requests' do
+            @pending_friends.each do |friend|
+              within "#friend_#{friend.id}" do
+                expect(page).to have_content(friend.name)
+              end
+            end
+          end
+        end
+        it 'beside each pending request is an accept or reject button' do
+          within '#pending_requests' do
+            @pending_friends.each do |friend|
+              within "#friend_#{friend.id}" do
+                expect(page).to have_button('Accept')
+                expect(page).to have_button('Reject')
+              end
+            end
+          end
+        end
+        it 'pressing the accept or reject button reloads the page and the user is no longer in the list' do
+          allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends[1..2])
+          within '#pending_requests' do
+            within "#friend_#{@pending_friends.first.id}" do
+              click_button 'Accept'
+            end
+
+            expect(page).to_not have_css("#friend_#{@pending_friends.first.id}")
+          end
+        end
+        context 'there are no pending requests' do
+          it 'returns a message saying there are none' do
+            allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(nil)
+            visit dashboard_path
+            within '#pending_requests' do
+              expect(page).to have_content('No Pending Requests')
+            end
+          end
+        end
       end
 
-      it 'has a drop down menu with a list of all emotions' do
-        within '#emotion_form' do
-          @emotions.each do |emotion|
-            page.has_select? emotion.word
+      context 'I have not posted recently' do
+        it 'has a welcome message with users name' do
+          expect(page).to have_content("Welcome, #{@user.name}")
+        end
+
+        it 'has a drop down menu with a list of all emotions' do
+          within '#emotion_form' do
+            @emotions.each do |emotion|
+              page.has_select? emotion.word
+            end
           end
         end
       end

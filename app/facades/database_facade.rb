@@ -18,4 +18,8 @@ class DatabaseFacade
   def self.emotion_by_id(emotion_id)
     
   end
+
+  def self.pending_requests(user_id)
+    
+  end
 end
