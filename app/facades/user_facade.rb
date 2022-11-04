@@ -1,4 +1,8 @@
 class UserFacade
+  def self.create_user(user_params)
+    UserService.create_user(user_params)
+  end
+
   def self.find_user(google_id)
     json = UserService.find_user(google_id)
     UserPoro.new(json[:data])
