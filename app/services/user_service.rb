@@ -5,7 +5,6 @@ class UserService
       req.headers['EMAIL'] = user_params[:email]
       req.headers['GOOGLE_ID'] = user_params[:google_id]
     end
-    JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.find_user(google_id)
