@@ -3,23 +3,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_or_create_by(email: user_params[:email])
     user.update(user_params)
-    # TODO: synchronize with the backend!!
-    # make an API request to the backend to say bruh theres a user now
-    # POST /api/v1/users
-    # body: user_params
-
-    
-    # post to backend database
-    # DatabaseFacade.find_or_create_user(user_params)
-    # if DatabaseFacade.find_user(user.email) == []
-      # DatabaseFacade.create_new_user
-    #   conn = Faraday.new(url: 'http://localhost:5000')
-    #   conn.post "/users" do |req|
-    #     req.params['google_id'] = user.google_id
-    #     req.params['name'] = user.name
-    #     req.params['email'] = user.email
-    #   end
-    # end
+    UserFacade.create_user(user_params)
     
     session[:user_id] = user.id
     redirect_to dashboard_path
