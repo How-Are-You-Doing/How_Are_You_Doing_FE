@@ -12,8 +12,8 @@ class UserFacade
     UserPoro.new(UserService.search(email)[:data])
   end
 
-  def self.friends_of(user)
-    UserService.friends_of(user)[:data].map do |data|
+  def self.relationships_filter(user, request_status)
+    UserService.user_relationships_filter(user, request_status)[:data].map do |data|
       UserPoro.new(data)
     end
   end

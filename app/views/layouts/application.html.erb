@@ -7,6 +7,11 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <div id="account">
+      <% if current_user %>
+        <%= button_to "logout", logout_path, id: "logout", method: :get %>
+      <% end %>
+    </div>
   </head>
 
   <body>

@@ -18,8 +18,8 @@ class UserService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def self.friends_of(user)
-    response = DatabaseService.conn(user).get("api/v1/friends")
+  def self.user_relationships_filter(user, request_status)
+    response = DatabaseService.conn(user).get("api/v1/friends?request_status=#{request_status}")
     JSON.parse(response.body, symbolize_names: true)
   end
 end

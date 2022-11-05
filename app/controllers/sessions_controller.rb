@@ -6,7 +6,12 @@ class SessionsController < ApplicationController
     UserFacade.create_user(user_params)
     
     session[:user_id] = user.id
-    redirect_to dashboard_path
+    redirect_to dashboard_path, notice: "Logged in as #{user.name}"
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path, notice: "Goodbye!"
   end
 
 

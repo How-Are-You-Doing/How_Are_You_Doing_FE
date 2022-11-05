@@ -10,12 +10,13 @@
   <h3>Search Results</h3>
   <div id="search_results">
     <%= @user.name %>
+    <%= button_to 'Follow', '/friends' %>
   </div>
 <% end %>
 
 <div id="friends_list">
   <h3>Friend List</h3>
-  <% @friends.each do |friend| %>
+  <% @accepted_friends.each do |friend| %>
     <%= friend.name %>
   <% end %>
 </div>
