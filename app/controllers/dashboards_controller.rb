@@ -30,7 +30,7 @@ class DashboardsController < ApplicationController
   # end
 
   def show_recent_post
-    @recent_post = DatabaseFacade.last_post(current_user)
+    @recent_post = DatabaseFacade.last_post(current_user.google_id)
   end
 
 end
