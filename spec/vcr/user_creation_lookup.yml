@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v1/users?email=joe@joe.joe
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"8a5a91a7f612666d5bb5cdafcb8e2ce9"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 42a7f29d-ba92-4a83-8dd4-90df2e79d5f9
+      X-Runtime:
+      - '0.019279'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":"8","type":"user","attributes":{"name":"joe","email":"joe@joe.joe","google_id":"123456789"}}}'
+  recorded_at: Sat, 05 Nov 2022 03:11:42 GMT
+recorded_with: VCR 6.1.0

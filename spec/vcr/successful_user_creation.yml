@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:5000/api/v1/users
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Google-Id:
+      - '123456789'
+      Name:
+      - joe
+      Email:
+      - joe@joe.joe
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"90caae39dbaaaf74a09ec48770065288"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0d7a0f32-e19c-4ab2-96cf-f26f2051c00e
+      X-Runtime:
+      - '0.062036'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"message":"User successfully created"}'
+  recorded_at: Sat, 05 Nov 2022 03:11:42 GMT
+recorded_with: VCR 6.1.0

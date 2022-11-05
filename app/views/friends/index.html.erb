@@ -6,17 +6,22 @@
   <% end %>
 </div>
 
-<% if @user %>
-  <h3>Search Results</h3>
-  <div id="search_results">
-    <%= @user.name %>
-    <%= button_to 'Follow', '/friends' %>
-  </div>
-<% end %>
+<div id="search_results">
+  <% if @user %>
+    <% if @user.present? %>
+      <%= @user.name %>
+      <%= button_to 'Follow', '/friends' %>
+    <% else %>
+      <p>No search results</p>
+    <% end %>
+  <% end %>
+</div>
 
 <div id="friends_list">
   <h3>Friend List</h3>
-  <% @accepted_friends.each do |friend| %>
-    <%= friend.name %>
-  <% end %>
+  <ol>
+    <% @accepted_friends.each do |friend| %>
+      <li><%= friend.name %></li>
+    <% end %>
+  </ol>
 </div>
