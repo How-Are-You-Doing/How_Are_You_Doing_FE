@@ -18,8 +18,10 @@ class UserService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def self.friends
-    response = DatabaseService.conn.get('api/v1/friends')
+  def self.friends(user)
+    response = DatabaseService.conn.get('api/v1/friends') do |req|
+      req.headers['user'] = user.google_id
+    end
     JSON.parse(response.body, symbolize_names: true)
   end
 

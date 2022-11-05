@@ -15,8 +15,8 @@ class UserFacade
     UserPoro.new(user_data)
   end
 
-  def self.friends_of(user)
-    UserService.friends_of(user)[:data].map do |data|
+  def self.friends(user)
+    UserService.friends(user)[:data].map do |data|
       UserPoro.new(data)
     end
   end

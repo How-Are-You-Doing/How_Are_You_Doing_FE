@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'friends index page' do
   before :each do
+    @user = create(:user)
+    allow_any_instance_of(FriendsController).to receive(:current_user).and_return(@user)
     user_search_response = { "data": {
       "id": "36",
       "type": "user",
