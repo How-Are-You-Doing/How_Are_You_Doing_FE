@@ -18,4 +18,11 @@ class DatabaseService
     response = conn.get('/api/v1/emotions')
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.last_post(user)
+    response = conn.get("/api/v1/posts/last") do |req|
+      req.headers[:user] = user.google_id
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
