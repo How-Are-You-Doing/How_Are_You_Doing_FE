@@ -3,15 +3,13 @@ class SessionsController < ApplicationController
   def create
     user = User.find_or_create_by(email: user_params[:email])
     user.update(user_params)
-
-    
     # post to backend database
     # DatabaseFacade.find_or_create_user(user_params)
     if UserFacade.search(user.email) == []
       UserFacade.create(user)
-    end
-    
+    end  
     session[:user_id] = user.id
+    redirect_to dashboard_path
   end
 
   def destroy
