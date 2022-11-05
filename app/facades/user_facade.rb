@@ -9,12 +9,19 @@ class UserFacade
   end
 
   def self.search(email)
-    UserPoro.new(UserService.search(email)[:data])
+    user_data = UserService.search(email)[:data]
+    return user_data if user_data.empty?
+
+    UserPoro.new(user_data)
   end
 
-  def self.friends_of(user)
-    UserService.friends_of(user)[:data].map do |data|
+  def self.friends(user)
+    UserService.friends(user)[:data].map do |data|
       UserPoro.new(data)
     end
+  end
+
+  def self.create(user)
+    UserService.create(user)
   end
 end

@@ -11,6 +11,7 @@ class DashboardsController < ApplicationController
     else
       @emotions_grid = DatabaseFacade.emotions
     end
+    @pending_requests = DatabaseFacade.pending_requests(current_user.google_id)
   end
 
   private

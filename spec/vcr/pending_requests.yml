@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v1/friends?request_status=pending
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      User:
+      - '19023306'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"a02984bc0171402e22e27f55d7d24333"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 8986e705-b778-4484-830a-fa762ef18526
+      X-Runtime:
+      - '0.142386'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"7","type":"user","attributes":{"name":"Jenny","email":"jenny@tommytutone.com"}},{"id":"5","type":"user","attributes":{"name":"Gon
+        Freecss","email":"gon@hunterassociation.com"}}]}'
+  recorded_at: Fri, 04 Nov 2022 21:14:03 GMT
+recorded_with: VCR 6.1.0

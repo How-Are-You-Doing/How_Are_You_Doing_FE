@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'friends index page' do
   before :each do
+    @user = create(:user)
+    allow_any_instance_of(FriendsController).to receive(:current_user).and_return(@user)
     user_search_response = { "data": {
       "id": "36",
       "type": "user",
@@ -10,7 +12,7 @@ RSpec.describe 'friends index page' do
         "email": "somedude@hotmail.com",
         "google_id": "whocares"
       }
-    }}.to_json
+    } }.to_json
 
     stub_request(:get, "http://localhost:5000/api/v1/users?email=somedude@hotmail.com").
       to_return(status: 200, body: user_search_response, headers: {})
@@ -20,13 +22,18 @@ RSpec.describe 'friends index page' do
         {
           "id": "1",
           "type": "user",
-          "attributes": { "name": "Quinland Rutherford" }
+          "attributes": { "name": "Quinland Rutherford",
+                          "email": "sedude@hotmail.com",
+                          "google_id": "whares"
+                        }
         },
         {
           "id": "2",
           "type": "user",
-          "attributes": { "name": "Spider Man" },
-        },
+          "attributes": { "name": "Spider Man", 
+                          "email": "sedu@hotmail.com",
+                          "google_id": "hars"}
+        }
       ]
     }.to_json
 
@@ -44,6 +51,26 @@ RSpec.describe 'friends index page' do
 
     within("#search_results") do
       expect(page).to have_content("Some Dude")
+    end
+  end
+
+  context 'if there are no results' do
+    it 'returns message' do
+      user_search_response = { "data": [] }.to_json
+  
+      stub_request(:get, "http://localhost:5000/api/v1/users?email=somedude@hotmail.com").
+        to_return(status: 200, body: user_search_response, headers: {})
+
+      visit '/friends'
+
+      within("#find_friend_form") do
+        fill_in 'Email', with: "somedude@hotmail.com"
+        click_button 'Find Friend'
+      end
+  
+      within("#search_results") do
+        expect(page).to have_content('No search results')
+      end
     end
   end
 

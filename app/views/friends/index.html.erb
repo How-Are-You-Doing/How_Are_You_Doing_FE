@@ -5,11 +5,13 @@
     <%= f.submit 'Find Friend' %>
   <% end %>
 </div>
-
-<% if @user %>
-  <h3>Search Results</h3>
+<% if @users %>
   <div id="search_results">
-    <%= @user.name %>
+    <% if @users == [] %>
+      <p>No search results</p>
+    <% else %>
+      <%= @users.name %>
+    <% end%>
   </div>
 <% end %>
 

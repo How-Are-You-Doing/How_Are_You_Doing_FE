@@ -6,5 +6,16 @@ class DatabaseService
       req.headers['USER'] = user.google_id if user
     end
   end
-end
 
+  def self.pending_requests(google_id)
+    response = conn.get("/api/v1/friends?request_status=pending") do |req|
+      req.headers[:user] = google_id
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.emotions
+    response = conn.get('/api/v1/emotions')
+    JSON.parse(response.body, symbolize_names: true)
+  end
+end
