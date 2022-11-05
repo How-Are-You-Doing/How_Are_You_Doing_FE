@@ -15,6 +15,7 @@ class UserFacade
     UserService.user_relationships_filter(user, request_status)[:data].map do |data|
       UserPoro.new(data)
     end
+  end
     
   def self.friends(user)
     UserService.friends(user)[:data].map do |data|
