@@ -19,7 +19,6 @@ class UserService
     response = DatabaseService.conn.post 'api/v1/users' do |req|
       req.headers[:google_id] = user.google_id
       req.headers[:name] = user.name
-      # .gsub(' ','_')
       req.headers[:email] = user.email
     end
     JSON.parse(response.body, symbolize_names: true)

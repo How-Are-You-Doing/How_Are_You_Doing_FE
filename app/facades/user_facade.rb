@@ -6,7 +6,9 @@ class UserFacade
 
   def self.search(email)
     user_data = UserService.search(email)[:data]
-    UserPoro.new(user_data) unless user_data.empty?
+    return user_data if user_data.empty?
+
+    UserPoro.new(user_data)
   end
 
   def self.friends

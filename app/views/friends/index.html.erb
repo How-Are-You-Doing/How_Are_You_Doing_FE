@@ -5,12 +5,15 @@
     <%= f.submit 'Find Friend' %>
   <% end %>
 </div>
-
-<div id="search_results">
-  <% @users&.each do |user| %>
-    <%= user.name %>
-  <% end %>
-</div>
+<% if @users %>
+  <div id="search_results">
+    <% if @users == [] %>
+      <p>No search results</p>
+    <% else %>
+      <%= @users.name %>
+    <% end%>
+  </div>
+<% end %>
 
 <div id="friends_list">
 <% @friends.each do |friend| %>

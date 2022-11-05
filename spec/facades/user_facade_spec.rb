@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DatabaseFacade do
+RSpec.describe UserFacade do
   describe 'class methods' do
     describe '#create' do
       it 'can create a new user in the backend db' do

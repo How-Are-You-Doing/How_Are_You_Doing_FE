@@ -6,12 +6,11 @@ RSpec.describe 'dashboard' do
     describe 'when I visit the dashboard' do
       before :each do
         @user = create(:user)
-        emotions_list = CSV.parse(File.read('spec/emotions_list/Emotions.csv'), headers:true)
-        @emotions = emotions_list.map {|emotion| Emotion.new(emotion)} 
-        @chosen_emotion = @emotions.first
         @pending_friends = create_list(:user, 3)
-        allow(DatabaseFacade).to receive(:emotions).and_return(@emotions)
-        allow(DatabaseFacade).to receive(:emotion).with(@chosen_emotion.word).and_return(@chosen_emotion)
+        VCR.use_cassette('emotions') do
+          @emotions = DatabaseFacade.emotions
+        end
+        @chosen_emotion = @emotions.first
         allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
         allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends)
         visit dashboard_path
@@ -48,7 +47,7 @@ RSpec.describe 'dashboard' do
         end
         context 'there are no pending requests' do
           it 'returns a message saying there are none' do
-            allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(nil)
+            allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return([])
             visit dashboard_path
             within '#pending_requests' do
               expect(page).to have_content('No Pending Requests')
