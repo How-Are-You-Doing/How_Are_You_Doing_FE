@@ -1,4 +1,8 @@
 class UserFacade
+  def self.create_user(user_params)
+    UserService.create_user(user_params)
+  end
+
   def self.find_user(google_id)
     json = UserService.find_user(google_id)
     UserPoro.new(json[:data])
@@ -11,8 +15,8 @@ class UserFacade
     UserPoro.new(user_data)
   end
 
-  def self.friends
-    UserService.friends[:data].map do |data|
+  def self.friends_of(user)
+    UserService.friends_of(user)[:data].map do |data|
       UserPoro.new(data)
     end
   end
