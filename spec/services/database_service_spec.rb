@@ -34,5 +34,26 @@ RSpec.describe DatabaseService do
         end
       end
     end
+
+    describe '#emotions' do
+      before :each do
+        VCR.use_cassette('emotions') do
+          @emotions = DatabaseService.emotions
+        end
+      end
+      describe 'returns a list of emotions with their definitions' do
+        it 'returns a hash' do
+          expect(@emotions).to be_a(Hash)
+        end
+        it 'returns an array of hashes' do
+          expect(@emotions[:data]).to be_an(Array)
+        end
+        it 'inside array, is a hash with emotion attributes' do
+          expect(@emotions[:data].first[:attributes][:emotion]).to be_a(String)
+          expect(@emotions[:data].first[:attributes][:definition]).to be_a(String)
+          expect(@emotions[:data].first[:id]).to be_an(String)
+        end
+      end
+    end
   end
 end
