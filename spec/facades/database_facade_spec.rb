@@ -40,3 +40,4 @@ RSpec.describe DatabaseFacade do
     end
   end
 end
+
