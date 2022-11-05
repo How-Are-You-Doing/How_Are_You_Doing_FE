@@ -12,7 +12,7 @@
 <% end %>
 
 <ul id='pending_requests'>
-  <% if @pending_requests.nil? %>
+  <% if @pending_requests.empty? %>
     <h4>No Pending Requests</h4>
   <% else%>
     <% @pending_requests.each do |user| %>

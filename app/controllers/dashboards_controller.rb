@@ -6,6 +6,7 @@ class DashboardsController < ApplicationController
     if params[:description]
       DatabaseFacade.new_post(post_params)
       show_recent_post
+      require 'pry'; binding.pry
     elsif params[:emotion]
       @emotion = params[:emotion].split('-')
     else

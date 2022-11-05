@@ -24,6 +24,8 @@ class DatabaseFacade
 
   def self.pending_requests(google_id)
     pending_requests = DatabaseService.pending_requests(google_id)
+    return pending_requests if pending_requests.empty?
+    
     pending_requests[:data].map { |user| UserPoro.new(user) }
   end
 end

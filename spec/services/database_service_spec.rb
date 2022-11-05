@@ -4,7 +4,7 @@ RSpec.describe DatabaseService do
   describe 'class methods' do
     describe '#pending_requests' do
       before :each do
-        user_google_id = 19023306
+        user_google_id = '19023306'
         VCR.use_cassette('pending_requests') do
           @pending_requests = DatabaseService.pending_requests(user_google_id)
         end
@@ -26,7 +26,7 @@ RSpec.describe DatabaseService do
 
       context 'when the user has no pending requests' do
         it 'returns an empty array' do
-          user_google_id = 7357151
+          user_google_id = '7357151'
           VCR.use_cassette('no_pending_requests') do
             @pending_requests = DatabaseService.pending_requests(user_google_id)
           end

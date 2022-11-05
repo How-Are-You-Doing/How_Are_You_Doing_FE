@@ -6,12 +6,22 @@ class UserService
   end
 
   def self.search(email)
-    response = DatabaseService.conn.get("/api/v1/users?by_email=#{email}")
+    response = DatabaseService.conn.get("/api/v1/users?email=#{email}")
     JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.friends
-    response = DatabaseService.conn.get("api/v1/friends")
+    response = DatabaseService.conn.get('api/v1/friends')
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.create(user)
+    response = DatabaseService.conn.post 'api/v1/users' do |req|
+      req.headers[:google_id] = user.google_id
+      req.headers[:name] = user.name
+      # .gsub(' ','_')
+      req.headers[:email] = user.email
+    end
     JSON.parse(response.body, symbolize_names: true)
   end
 end

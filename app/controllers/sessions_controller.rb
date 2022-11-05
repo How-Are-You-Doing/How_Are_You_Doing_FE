@@ -7,15 +7,9 @@ class SessionsController < ApplicationController
     
     # post to backend database
     # DatabaseFacade.find_or_create_user(user_params)
-    # if DatabaseFacade.find_user(user.email) == []
-      # DatabaseFacade.create_new_user
-    #   conn = Faraday.new(url: 'http://localhost:5000')
-    #   conn.post "/users" do |req|
-    #     req.params['google_id'] = user.google_id
-    #     req.params['name'] = user.name
-    #     req.params['email'] = user.email
-    #   end
-    # end
+    if UserFacade.search(user.email) == []
+      UserFacade.create(user)
+    end
     
     session[:user_id] = user.id
     redirect_to dashboard_path
