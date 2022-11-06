@@ -27,4 +27,14 @@ class UserService
     end
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.send_friend_request(current_user, email)
+    DatabaseService.conn(current_user).post("api/v1/friends?email=#{email}")
+  end
+
+  def self.sent_requests(google_id)
+    requests = DatabaseService.sent_requests(google_id)
+    return requests if requests.empty?
+    requests[:data].map { |user| UserPoro.new(user)}
+  end
 end

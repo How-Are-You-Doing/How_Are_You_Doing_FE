@@ -31,22 +31,36 @@ RSpec.describe 'friends index page' do
     stub_request(:get, "http://localhost:5000/api/v1/users?email=frodo@hotmail.com").
       to_return(status: 200, body: user_2, headers: {})
 
+    user_3 = { "data": {
+      "id": "48",
+      "type": "user",
+      "attributes": {
+        "name": "Fofandalf",
+        "email": "wizardstuff3@hotmail.com",
+        "google_id": "midtierearth"
+      }
+    },
+    }.to_json
+
+    stub_request(:get, "http://localhost:5000/api/v1/users?email=wizardstuff3@hotmail.com").
+      to_return(status: 200, body: user_3, headers: {})
+
     friends_response = { "data":
       [
         {
           "id": "1",
           "type": "user",
           "attributes": { "name": "Quinland Rutherford",
-                          "email": "sedude@hotmail.com",
-                          "google_id": "whares"
-                        }
+            "email": "sedude@hotmail.com",
+            "google_id": "whares"
+          }
         },
         {
           "id": "2",
           "type": "user",
-          "attributes": { "name": "Spider Man", 
-                          "email": "sedu@hotmail.com",
-                          "google_id": "hars"}
+          "attributes": { "name": "Spider Man",
+            "email": "sedu@hotmail.com",
+            "google_id": "hars" }
         }
       ]
     }.to_json
@@ -98,6 +112,15 @@ RSpec.describe 'friends index page' do
 
     stub_request(:get, "http://localhost:5000/api/v1/friends?request_status=pending").
       to_return(status: 200, body: pending_friends_response)
+
+    sent_friend_request_response = { "data":
+      { "attributes":
+        { "email": "wizardstuff3@hotmail.com" }
+      }
+    }.to_json
+
+    stub_request(:post, "http://localhost:5000/api/v1/friends?email=wizardstuff3@hotmail.com").
+      to_return(status: 201, body: sent_friend_request_response)
   end
 
   it 'has a friends index page with a search field to find new users by email' do
@@ -115,18 +138,30 @@ RSpec.describe 'friends index page' do
 
   it 'has a button to follow a new friend' do
     visit 'friends'
-    fill_in 'Email', with: "frodo@hotmail.com"
+    fill_in 'Email', with: "wizardstuff3@hotmail.com"
     click_button 'Find Friend'
 
-    expect(page).to have_content("Frodo")
-    click_button 'Follow'
+    expect(page).to have_content("Fofandalf")
+    click_button 'Send Friend Request'
     expect(current_path).to eq('/friends')
+  end
+
+  it 'returns a message when a friend request is successfully sent' do
+    visit 'friends'
+    fill_in 'Email', with: "wizardstuff3@hotmail.com"
+    click_button 'Find Friend'
+    click_button 'Send Friend Request'
+    expect(page).to have_content("Friend Request Sent Successfully")
+
+    within("#sent_friend_requests") do
+      expect(page).to have_content("wizardstuff3@hotmail.com")
+    end
   end
 
   context 'if there are no results' do
     it 'returns message' do
       user_search_response = { "data": [] }.to_json
-  
+
       stub_request(:get, "http://localhost:5000/api/v1/users?email=somedude@hotmail.com").
         to_return(status: 200, body: user_search_response, headers: {})
 
@@ -136,7 +171,7 @@ RSpec.describe 'friends index page' do
         fill_in 'Email', with: "somedude@hotmail.com"
         click_button 'Find Friend'
       end
-  
+
       within("#search_results") do
         expect(page).to have_content('No search results')
       end

@@ -10,11 +10,20 @@
   <% if @user %>
     <% if @user.present? %>
       <%= @user.name %>
-      <%= button_to 'Follow', '/friends' %>
+      <%= button_to 'Send Friend Request', "/friends?email=#{params[:email]}" %>
     <% else %>
       <p>No search results</p>
     <% end %>
   <% end %>
+</div>
+
+<div id="sent_friend_requests">
+  <h3>Sent Friend Requests</h3>
+  <ul>
+    <% @friend_request_sent.each do |friend| %>
+      <li><%= friend.email %></li>
+    <% end %>
+  </ul>
 </div>
 
 <div id="friends_list">

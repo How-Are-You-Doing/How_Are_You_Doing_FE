@@ -18,4 +18,11 @@ class DatabaseService
     response = conn.get('/api/v1/emotions')
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.sent_requests(google_id)
+    response = conn.get("/api/v1/friends?request_status=pending") do |req|
+      req.headers[:user] = google_id
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end

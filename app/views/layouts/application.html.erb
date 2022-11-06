@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>HowAreYouDoingFe</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>HowAreYouDoingFe</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <div id="account">
-      <% if current_user %>
-        <%= button_to "logout", logout_path, id: "logout", method: :get %>
-      <% end %>
-    </div>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <div id="account">
+    <% if current_user %>
+      <%= button_to "logout", logout_path, id: "logout", method: :get %>
+    <% end %>
+  </div>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<%= flash[:success] %>
+<%= yield %>
+</body>
 </html>

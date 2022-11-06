@@ -26,4 +26,7 @@ class UserFacade
     UserService.create(user)
   end
 
+  def self.send_friend_request(current_user, email)
+    UserService.send_friend_request(current_user, email)
+  end
 end
