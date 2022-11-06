@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'friends index page' do
   before :each do
     @user = create(:user)
+    allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
     allow_any_instance_of(FriendsController).to receive(:current_user).and_return(@user)
     user_search_response = { "data": {
       "id": "36",
@@ -183,5 +184,11 @@ RSpec.describe 'friends index page' do
     within("#friends_list") do
       expect(page).to have_content("Gandalf")
     end
+  end
+
+  it 'has a button to return to user dashboard page' do
+    visit '/friends'
+    click_button 'Dashboard'
+    expect(current_path).to eq(dashboard_path)
   end
 end

@@ -1,4 +1,11 @@
 class FriendsController < ApplicationController
+  before_action do
+    if current_user.nil?
+      flash[:error] = "You must be signed in to do that!"
+      redirect_to '/'
+    end
+  end
+
   def index
     @user = UserFacade.search(params[:email]) if params[:email]
     @accepted_friends = UserFacade.relationships_filter(current_user, "accepted")
