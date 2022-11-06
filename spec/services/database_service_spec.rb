@@ -55,5 +55,55 @@ RSpec.describe DatabaseService do
         end
       end
     end
+
+    describe '#last_post' do
+      # TODO Edge cases: user doesn't exist
+      context 'the user has one or more posts' do
+        before :each do
+          VCR.use_cassette('last_post_for_user_19023306') do
+            @last_post = DatabaseService.last_post(19023306)
+          end
+        end
+        it 'returns a hash of the last post' do
+          expect(@last_post).to be_a(Hash)
+        end
+        it 'hash has a data key with a hash as its value' do
+          expect(@last_post[:data]).to be_a(Hash)
+        end
+
+        it 'inside the data keys hash is the post id and a list of attributes' do
+          expect(@last_post[:data][:id]).to be_a(String)
+          expect(@last_post[:data][:attributes][:emotion]).to be_a(String)
+          expect(@last_post[:data][:attributes][:post_status]).to be_a(String)
+          expect(@last_post[:data][:attributes][:description]).to be_a(String)
+          expect(@last_post[:data][:attributes][:tone]).to be_a(String)
+          expect(@last_post[:data][:attributes][:created_at]).to be_a(String)
+        end
+      end
+
+      context 'the user has no posts' do
+        # User with no posts to add to seed in BE
+        # user_8 = User.create!(name: "Lonely", email: "noposts@lonely.alone", google_id: "8675310")
+        before :each do
+          # VCR.use_cassette('no_posts_user_8675310') do
+          #   @last_post = DatabaseService.last_post(8675310)
+          # end
+          response_body = {"data"=>{}}.to_json
+          stub_request(:get, "http://localhost:5000/api/v2/posts/last?user=8675310").
+            to_return(status: 200, body: response_body, headers: {})
+          @last_post = DatabaseService.last_post(8_675_310)
+        end
+        it 'returns a hash of the last post' do
+          expect(@last_post).to be_a(Hash)
+        end
+        it 'hash has a data key with a hash as its value' do
+          expect(@last_post[:data]).to be_a(Hash)
+        end
+
+        it 'inside the data keys hash is nothing' do
+          expect(@last_post[:data].empty?).to eq(true)
+        end
+      end
+    end
   end
 end

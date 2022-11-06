@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/posts/last?user=8675310
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"7fb9d166d1a15bce0b9f085f3818946f"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 00536d70-aef9-44a2-8390-54bfb7817b6a
+      X-Runtime:
+      - '0.153387'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{}}'
+  recorded_at: Sun, 06 Nov 2022 15:09:39 GMT
+recorded_with: VCR 6.1.0

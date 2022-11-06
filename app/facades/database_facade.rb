@@ -15,10 +15,10 @@ class DatabaseFacade
   end
 
   def self.last_post(google_id)
-   post_info = DatabaseService.last_post(current_user)
-   post_info[:data].map do |post_info|
-    Post.new(post_info)
-   end
+    post_info = DatabaseService.last_post(google_id)
+    return post_info[:data] if post_info[:data].empty?
+    
+    Post.new(post_info[:data])
   end
 
   def self.emotion_by_id(emotion_id)
