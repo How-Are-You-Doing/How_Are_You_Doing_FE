@@ -3,18 +3,16 @@ class Post
               :description,
               :id,
               :post_status,
-              :user_id,
+              :user_google_id,
               :created_at,
-              :tone,
-              :updated_at
+              :tone
 
   def initialize(post_data)
-    require 'pry'; binding.pry
     @id = post_data[:id]
     @emotion = post_data[:attributes][:emotion]
     @description = post_data[:attributes][:description]
     @post_status = post_data[:attributes][:post_status]
     @tone = post_data[:attributes][:tone]
-    @created_at = post_data[:attributes][:created_at]
+    @created_at = post_data[:attributes][:created_at].to_datetime
   end
 end

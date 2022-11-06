@@ -23,4 +23,15 @@ class DatabaseService
     response = conn.get("/api/v2/posts/last?user=#{google_id}")
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.new_post(post)
+    response = conn.post("/api/v2/posts") do |req|
+      req.params[:user] = post.user_google_id
+      req.params[:description] = post.description
+      req.params[:post_status] = post.post_status
+      req.params[:emotion] = post.emotion
+    end
+    # response.status == 201 edge case when it isn't...
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end

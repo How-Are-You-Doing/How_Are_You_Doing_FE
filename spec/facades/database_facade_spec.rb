@@ -57,7 +57,7 @@ RSpec.describe DatabaseFacade do
           expect(@last_post.post_status).to be_a(String)
           expect(@last_post.description).to be_a(String)
           expect(@last_post.tone).to be_a(String)
-          expect(@last_post.created_at).to be_a(String)
+          expect(@last_post.created_at).to be_a(DateTime)
         end
       end
 
@@ -78,6 +78,31 @@ RSpec.describe DatabaseFacade do
         end
         it 'inside the data keys hash is nothing' do
           expect(@last_post.empty?).to eq(true)
+        end
+      end
+    end
+
+    describe '#new_post' do
+      describe 'creates a new post on the backend and returns that post' do
+        before :each do
+          post_data = { 
+            description: 'so excited for this is a new post to be made by the front end!',
+            emotion: 'Grateful',
+            post_status: 'personal',
+            user_google_id: '8675309'
+}
+          @user_post = UserPost.new(post_data)
+          VCR.use_cassette('successful_post_creation') do
+            @new_post = DatabaseFacade.new_post(@user_post)
+          end
+        end
+        it 'returns the post as a Post object with the same attributes' do
+          expect(@new_post).to be_a(Post)
+          expect(@new_post.description).to eq(@user_post.description)
+          expect(@new_post.emotion).to eq(@user_post.emotion)
+          expect(@new_post.post_status).to eq(@user_post.post_status)
+          expect(@new_post.tone).to be_a(String)
+          expect(@new_post.created_at).to be_a(DateTime)
         end
       end
     end

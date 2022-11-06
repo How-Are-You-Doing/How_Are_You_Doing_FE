@@ -124,10 +124,9 @@ RSpec.describe 'dashboard' do
       describe 'when I submit an emotion and description' do
         before :each do
           @last_post = build(:post)
-
-          allow(DatabaseFacade).to receive(:new_post).and_return(201)
+          
+          allow(DatabaseFacade).to receive(:new_post).and_return(@last_post)
           allow(DatabaseFacade).to receive(:last_post).and_return(@last_post)
-          allow(DatabaseFacade).to receive(:emotion_by_id).and_return(@chosen_emotion.word)
 
           within '#emotion_form' do
             select @chosen_emotion.word

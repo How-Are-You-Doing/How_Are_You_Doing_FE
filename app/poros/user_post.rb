@@ -3,16 +3,14 @@
 class UserPost
   attr_reader :emotion,
               :description,
-              :id,
               :post_status,
-              :user_id
+              :user_google_id
 
 
   def initialize(post_data)
-    @id = Faker::Number.unique.number
-    @emotion = post_data[:attributes][:emotion]
-    @description = post_data[:attributes][:description]
-    @post_status = post_data[:attributes][:post_status]
-    @user_id = post_data[:attributes][:user_id]
+    @emotion = post_data[:emotion]
+    @description = post_data[:description]
+    @post_status = post_data[:post_status]
+    @user_google_id = post_data[:user_google_id]
   end
 end

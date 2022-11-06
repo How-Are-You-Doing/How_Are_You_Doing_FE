@@ -105,5 +105,58 @@ RSpec.describe DatabaseService do
         end
       end
     end
+
+    describe '#new_post' do
+      describe 'create a new post' do
+        context 'when successful' do
+          before :each do
+            post_data = { 
+                          description: 'so excited for this is a new post to be made by the front end!',
+                          emotion: 'Grateful',
+                          post_status: 'personal',
+                          user_google_id: '8675309'
+            }
+  
+            @user_post = UserPost.new(post_data)
+            VCR.use_cassette('successful_post_creation') do
+              @new_be_post = DatabaseService.new_post(@user_post)
+            end
+          end
+          it 'returns the BE post' do
+            expect(@new_be_post[:data][:attributes][:emotion]).to eq(@user_post.emotion)
+            expect(@new_be_post[:data][:attributes][:post_status]).to eq(@user_post.post_status)
+            expect(@new_be_post[:data][:attributes][:description]).to eq(@user_post.description)
+          end
+  
+          it 'can be found as the last post' do
+            VCR.use_cassette('post_creation_lookup') do
+              expect(DatabaseService.last_post(@user_post.user_google_id)[:data][:attributes][:description]).to eq(@user_post.description)
+            end
+          end
+
+        end
+
+        context 'when unsuccessfully created' do
+          # TODO
+        end
+      end
+    end
   end
 end
+
+
+            # response_body = { data: {
+            #   id: 1,
+            #   attributes: {
+            #   description: 'this is a new post made by the front end!', 
+            #   emotion: 'grateful', 
+            #   user_google_id: 8675309, 
+            #   post_status:'private',
+            #   tone: 'hungry',
+            #   created_at: DateTime.now.to_s } }
+            # }.to_json
+            # stub_request(:post, "http://localhost:5000/api/v2/posts").with(query: post_data)
+            #   .to_return(status: 200, body: response_body, headers: {})
+            # stub_request(:post, "http://localhost:5000/api/v2/posts?description=this%20is%20a%20new%20post%20made%20by%20the%20front%20end!&emotion=grateful&post_status=private&user=8675309")
+            #   .to_return(status: 201, body: response_body, headers: {})
+            # new_be_post = DatabaseService.new_post(@user_post)
