@@ -122,6 +122,10 @@ RSpec.describe 'friends index page' do
 
     stub_request(:post, "http://localhost:5000/api/v1/friends?email=wizardstuff3@hotmail.com").
       to_return(status: 201, body: sent_friend_request_response)
+
+    incoming_friend_requests_response = { data: [] }
+    stub_request(:get, "http://localhost:5000/api/v2/user/followers?request_status=pending").
+      to_return(status: 200, body: incoming_friend_requests_response.to_json, headers: {})
   end
 
   it 'has a friends index page with a search field to find new users by email' do

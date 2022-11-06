@@ -7,8 +7,16 @@ class DatabaseService
     end
   end
 
-  def self.pending_requests(google_id)
-    response = conn.get("/api/v1/friends?request_status=pending") do |req|
+  # def self.pending_requests(google_id)
+  #   response = conn.get("/api/v1/friends?request_status=pending") do |req|
+  #     req.headers[:user] = google_id
+  #   end
+  #   JSON.parse(response.body, symbolize_names: true)
+  # end
+
+  #these are incoming pending friend requests for the user to accept or reject
+  def self.users_pending_requests(google_id)
+    response = conn.get("/api/v2/user/followers?request_status=pending") do |req|
       req.headers[:user] = google_id
     end
     JSON.parse(response.body, symbolize_names: true)
@@ -19,6 +27,7 @@ class DatabaseService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  #these are outgoing requests that display on the friends index once a request has been sent
   def self.sent_requests(google_id)
     response = conn.get("/api/v1/friends?request_status=pending") do |req|
       req.headers[:user] = google_id
