@@ -3,11 +3,9 @@ class DashboardsController < ApplicationController
 
   def show
     # return show_recent_post if recently_posted?
-    require 'pry'; binding.pry
     if params[:description]
       new_post = UserPost.new(post_params)
-      @last_post = DatabaseFacade.new_post(new_post)
-      # show_recent_post
+      @recent_post = DatabaseFacade.new_post(new_post)
     elsif params[:emotion]
       @emotion = params[:emotion].split('-')
     else
