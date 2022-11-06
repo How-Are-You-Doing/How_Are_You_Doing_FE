@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
     if UserFacade.search(user.email) == []
       UserFacade.create(user)
     end
-    
     session[:user_id] = user.id
+    redirect_to dashboard_path
   end
 
   def destroy

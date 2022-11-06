@@ -7,13 +7,11 @@
 </div>
 
 <div id="search_results">
-  <% if @user %>
-    <% if @user.present? %>
-      <%= @user.name %>
-      <%= button_to 'Follow', '/friends' %>
-    <% else %>
-      <p>No search results</p>
-    <% end %>
+  <% if @user.present? %>
+    <%= @user.name %>
+    <%= button_to 'Send Friend Request', "/friends?email=#{params[:email]}" %>
+  <% else %>
+    <p>No search results</p>
   <% end %>
 </div>
 
@@ -22,6 +20,15 @@
   <ol>
     <% @accepted_friends.each do |friend| %>
       <li><%= friend.name %></li>
+    <% end %>
+  </ol>
+</div>
+
+<div id="friend_requests_sent">
+  <h3>Friend Requests Sent</h3>
+  <ol>
+    <% @friend_requests_sent.each do |friend| %>
+      <li><%= friend.email %></li>
     <% end %>
   </ol>
 </div>

@@ -7,8 +7,15 @@ class DatabaseService
     end
   end
 
-  def self.pending_requests(google_id)
+  def self.sent_requests(google_id)
     response = conn.get("/api/v1/friends?request_status=pending") do |req|
+      req.headers[:user] = google_id
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.pending_requests(google_id)
+    response = conn.get("/api/v2/user/followers?request_status=pending") do |req|
       req.headers[:user] = google_id
     end
     JSON.parse(response.body, symbolize_names: true)

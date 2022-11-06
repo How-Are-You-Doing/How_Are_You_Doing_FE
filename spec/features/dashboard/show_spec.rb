@@ -12,7 +12,36 @@ RSpec.describe 'dashboard' do
         end
         @chosen_emotion = @emotions.first
         allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
-        allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends)
+        allow(DatabaseFacade).to receive(:sent_requests).with(@user.google_id).and_return(@pending_friends)
+
+        sent_requests_response = { "data": [
+            {
+              "id": "2",
+              "type": "user",
+              "attributes": {
+                "name": "Bubbles",
+                "email": "catlover69@hotmail.com"
+              }
+            },
+            {
+              "id": "3",
+              "type": "user",
+              "attributes": {
+                "name": "Jim Lahey",
+                "email": "supervisor@sunnyvale.ca"
+              }
+            }
+          ]
+        }.to_json
+
+        stub_request(:get, "http://localhost:5000/api/v1/friends?email=mballantyne777@gmail.com").
+          to_return(status: 200, body: sent_requests_response, headers: {})
+
+        pending_friends_response = { "data": [] }.to_json
+
+        stub_request(:get, "http://localhost:5000/api/v2/user/followers?request_status=pending").
+          to_return(status: 200, body: pending_friends_response, headers: {})
+
         visit dashboard_path
       end
       describe 'I see a list of my pending friend requests' do
@@ -36,7 +65,7 @@ RSpec.describe 'dashboard' do
           end
         end
         it 'pressing the accept or reject button reloads the page and the user is no longer in the list' do
-          allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends[1..2])
+          allow(DatabaseFacade).to receive(:sent_requests).with(@user.google_id).and_return(@pending_friends[1..2])
           within '#pending_requests' do
             within "#friend_#{@pending_friends.first.id}" do
               click_button 'Accept'
@@ -47,7 +76,7 @@ RSpec.describe 'dashboard' do
         end
         context 'there are no pending requests' do
           it 'returns a message saying there are none' do
-            allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return([])
+            allow(DatabaseFacade).to receive(:sent_requests).with(@user.google_id).and_return([])
             visit dashboard_path
             within '#pending_requests' do
               expect(page).to have_content('No Pending Requests')

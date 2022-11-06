@@ -6,7 +6,7 @@ RSpec.describe DatabaseFacade do
       before :each do
         user_google_id = "19023306"
         VCR.use_cassette('pending_requests') do
-          @pending_requests = DatabaseFacade.pending_requests(user_google_id)
+          @pending_requests = DatabaseFacade.sent_requests(user_google_id)
         end
       end
       context 'when the user has pending requests' do
@@ -20,7 +20,7 @@ RSpec.describe DatabaseFacade do
         it 'returns an empty array' do
           user_google_id = "7357151"
           VCR.use_cassette('no_pending_requests') do
-            @pending_requests = DatabaseFacade.pending_requests(user_google_id)
+            @pending_requests = DatabaseFacade.sent_requests(user_google_id)
           end
           expect(@pending_requests).to eq([])
         end
@@ -40,3 +40,6 @@ RSpec.describe DatabaseFacade do
     end
   end
 end
+
+
+

@@ -16,7 +16,7 @@ class UserService
 
   def self.friends(user)
     response = DatabaseService.conn(user).get('api/v1/friends')
-    JSON.parse(response.body, symbolize_names: true)
+      JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.create(user)
@@ -26,5 +26,12 @@ class UserService
       req.headers[:email] = user.email
     end
     JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.send_friend_request(current_user, email)
+    response = DatabaseService.conn(current_user).post("api/v1/friends?email=#{email}") do |req|
+      req.body = { email: email }.to_json
+    end
+    raise(response.body) unless response.status == 201
   end
 end

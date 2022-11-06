@@ -6,7 +6,7 @@ RSpec.describe DatabaseService do
       before :each do
         user_google_id = '19023306'
         VCR.use_cassette('pending_requests') do
-          @pending_requests = DatabaseService.pending_requests(user_google_id)
+          @pending_requests = DatabaseService.sent_requests(user_google_id)
         end
       end
       it 'returns a hash' do
@@ -28,7 +28,7 @@ RSpec.describe DatabaseService do
         it 'returns an empty array' do
           user_google_id = '7357151'
           VCR.use_cassette('no_pending_requests') do
-            @pending_requests = DatabaseService.pending_requests(user_google_id)
+            @pending_requests = DatabaseService.sent_requests(user_google_id)
           end
           expect(@pending_requests[:data]).to eq([])
         end
