@@ -1,0 +1,205 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:5000/api/v2/posts?description=this%20is%20a%20new%20post%20made%20by%20the%20front%20end!&emotion=grateful&post_status=private&user=8675309
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Request-Id:
+      - 4cd2f2e6-b648-43d2-9c93-a17b8a41a12d
+      X-Runtime:
+      - '17.399931'
+      Content-Length:
+      - '15676'
+    body:
+      encoding: UTF-8
+      string: '{"status":500,"error":"Internal Server Error","exception":"#\u003cSystemExit:
+        exit\u003e","traces":{"Application Trace":[{"id":37,"trace":"app/controllers/api/v2/posts_controller.rb:13:in
+        `create''"}],"Framework Trace":[{"id":0,"trace":"pry (0.14.1) lib/pry/commands/exit_program.rb:19:in
+        `exit''"},{"id":1,"trace":"pry (0.14.1) lib/pry/commands/exit_program.rb:19:in
+        `process''"},{"id":2,"trace":"pry (0.14.1) lib/pry/class_command.rb:82:in
+        `call''"},{"id":3,"trace":"pry (0.14.1) lib/pry/command.rb:495:in `call_with_hooks''"},{"id":4,"trace":"pry
+        (0.14.1) lib/pry/command.rb:431:in `block in call_safely''"},{"id":5,"trace":"pry
+        (0.14.1) lib/pry/command.rb:439:in `use_unpatched_symbol''"},{"id":6,"trace":"pry
+        (0.14.1) lib/pry/command.rb:430:in `call_safely''"},{"id":7,"trace":"pry (0.14.1)
+        lib/pry/command.rb:404:in `process_line''"},{"id":8,"trace":"pry (0.14.1)
+        lib/pry/command_set.rb:354:in `process_line''"},{"id":9,"trace":"pry (0.14.1)
+        lib/pry/command.rb:281:in `run''"},{"id":10,"trace":"pry (0.14.1) lib/pry/command_set.rb:203:in
+        `block in alias_command''"},{"id":11,"trace":"pry (0.14.1) lib/pry/block_command.rb:15:in
+        `instance_exec''"},{"id":12,"trace":"pry (0.14.1) lib/pry/block_command.rb:15:in
+        `call''"},{"id":13,"trace":"pry (0.14.1) lib/pry/command.rb:495:in `call_with_hooks''"},{"id":14,"trace":"pry
+        (0.14.1) lib/pry/command.rb:431:in `block in call_safely''"},{"id":15,"trace":"pry
+        (0.14.1) lib/pry/command.rb:439:in `use_unpatched_symbol''"},{"id":16,"trace":"pry
+        (0.14.1) lib/pry/command.rb:430:in `call_safely''"},{"id":17,"trace":"pry
+        (0.14.1) lib/pry/command.rb:404:in `process_line''"},{"id":18,"trace":"pry
+        (0.14.1) lib/pry/command_set.rb:354:in `process_line''"},{"id":19,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:328:in `process_command''"},{"id":20,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:361:in `process_command_safely''"},{"id":21,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:610:in `handle_line''"},{"id":22,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:261:in `block (2 levels) in eval''"},{"id":23,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:260:in `catch''"},{"id":24,"trace":"pry (0.14.1)
+        lib/pry/pry_instance.rb:260:in `block in eval''"},{"id":25,"trace":"pry (0.14.1)
+        lib/pry/pry_instance.rb:259:in `catch''"},{"id":26,"trace":"pry (0.14.1) lib/pry/pry_instance.rb:259:in
+        `eval''"},{"id":27,"trace":"pry (0.14.1) lib/pry/repl.rb:77:in `block in repl''"},{"id":28,"trace":"pry
+        (0.14.1) lib/pry/repl.rb:67:in `loop''"},{"id":29,"trace":"pry (0.14.1) lib/pry/repl.rb:67:in
+        `repl''"},{"id":30,"trace":"pry (0.14.1) lib/pry/repl.rb:38:in `block in start''"},{"id":31,"trace":"pry
+        (0.14.1) lib/pry/input_lock.rb:61:in `__with_ownership''"},{"id":32,"trace":"pry
+        (0.14.1) lib/pry/input_lock.rb:78:in `with_ownership''"},{"id":33,"trace":"pry
+        (0.14.1) lib/pry/repl.rb:38:in `start''"},{"id":34,"trace":"pry (0.14.1) lib/pry/repl.rb:15:in
+        `start''"},{"id":35,"trace":"pry (0.14.1) lib/pry/pry_class.rb:188:in `start''"},{"id":36,"trace":"pry
+        (0.14.1) lib/pry/core_extensions.rb:45:in `pry''"},{"id":38,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action''"},{"id":39,"trace":"actionpack
+        (5.2.8.1) lib/abstract_controller/base.rb:194:in `process_action''"},{"id":40,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal/rendering.rb:30:in `process_action''"},{"id":41,"trace":"actionpack
+        (5.2.8.1) lib/abstract_controller/callbacks.rb:42:in `block in process_action''"},{"id":42,"trace":"activesupport
+        (5.2.8.1) lib/active_support/callbacks.rb:98:in `run_callbacks''"},{"id":43,"trace":"actionpack
+        (5.2.8.1) lib/abstract_controller/callbacks.rb:41:in `process_action''"},{"id":44,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal/rescue.rb:22:in `process_action''"},{"id":45,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action''"},{"id":46,"trace":"activesupport
+        (5.2.8.1) lib/active_support/notifications.rb:168:in `block in instrument''"},{"id":47,"trace":"activesupport
+        (5.2.8.1) lib/active_support/notifications/instrumenter.rb:23:in `instrument''"},{"id":48,"trace":"activesupport
+        (5.2.8.1) lib/active_support/notifications.rb:168:in `instrument''"},{"id":49,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal/instrumentation.rb:32:in `process_action''"},{"id":50,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal/params_wrapper.rb:256:in `process_action''"},{"id":51,"trace":"activerecord
+        (5.2.8.1) lib/active_record/railties/controller_runtime.rb:24:in `process_action''"},{"id":52,"trace":"actionpack
+        (5.2.8.1) lib/abstract_controller/base.rb:134:in `process''"},{"id":53,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal.rb:191:in `dispatch''"},{"id":54,"trace":"actionpack
+        (5.2.8.1) lib/action_controller/metal.rb:252:in `dispatch''"},{"id":55,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/routing/route_set.rb:52:in `dispatch''"},{"id":56,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/routing/route_set.rb:34:in `serve''"},{"id":57,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/journey/router.rb:52:in `block in serve''"},{"id":58,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/journey/router.rb:35:in `each''"},{"id":59,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/journey/router.rb:35:in `serve''"},{"id":60,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/routing/route_set.rb:840:in `call''"},{"id":61,"trace":"rack
+        (2.2.4) lib/rack/etag.rb:27:in `call''"},{"id":62,"trace":"rack (2.2.4) lib/rack/conditional_get.rb:40:in
+        `call''"},{"id":63,"trace":"rack (2.2.4) lib/rack/head.rb:12:in `call''"},{"id":64,"trace":"activerecord
+        (5.2.8.1) lib/active_record/migration.rb:559:in `call''"},{"id":65,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call''"},{"id":66,"trace":"activesupport
+        (5.2.8.1) lib/active_support/callbacks.rb:98:in `run_callbacks''"},{"id":67,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call''"},{"id":68,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/executor.rb:14:in `call''"},{"id":69,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call''"},{"id":70,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call''"},{"id":71,"trace":"railties
+        (5.2.8.1) lib/rails/rack/logger.rb:38:in `call_app''"},{"id":72,"trace":"railties
+        (5.2.8.1) lib/rails/rack/logger.rb:26:in `block in call''"},{"id":73,"trace":"activesupport
+        (5.2.8.1) lib/active_support/tagged_logging.rb:71:in `block in tagged''"},{"id":74,"trace":"activesupport
+        (5.2.8.1) lib/active_support/tagged_logging.rb:28:in `tagged''"},{"id":75,"trace":"activesupport
+        (5.2.8.1) lib/active_support/tagged_logging.rb:71:in `tagged''"},{"id":76,"trace":"railties
+        (5.2.8.1) lib/rails/rack/logger.rb:26:in `call''"},{"id":77,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call''"},{"id":78,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/request_id.rb:27:in `call''"},{"id":79,"trace":"rack
+        (2.2.4) lib/rack/runtime.rb:22:in `call''"},{"id":80,"trace":"activesupport
+        (5.2.8.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in
+        `call''"},{"id":81,"trace":"actionpack (5.2.8.1) lib/action_dispatch/middleware/executor.rb:14:in
+        `call''"},{"id":82,"trace":"actionpack (5.2.8.1) lib/action_dispatch/middleware/static.rb:127:in
+        `call''"},{"id":83,"trace":"rack (2.2.4) lib/rack/sendfile.rb:110:in `call''"},{"id":84,"trace":"railties
+        (5.2.8.1) lib/rails/engine.rb:524:in `call''"},{"id":85,"trace":"puma (3.12.6)
+        lib/puma/configuration.rb:227:in `call''"},{"id":86,"trace":"puma (3.12.6)
+        lib/puma/server.rb:706:in `handle_request''"},{"id":87,"trace":"puma (3.12.6)
+        lib/puma/server.rb:476:in `process_client''"},{"id":88,"trace":"puma (3.12.6)
+        lib/puma/server.rb:334:in `block in run''"},{"id":89,"trace":"puma (3.12.6)
+        lib/puma/thread_pool.rb:135:in `block in spawn_thread''"}],"Full Trace":[{"id":0,"trace":"pry
+        (0.14.1) lib/pry/commands/exit_program.rb:19:in `exit''"},{"id":1,"trace":"pry
+        (0.14.1) lib/pry/commands/exit_program.rb:19:in `process''"},{"id":2,"trace":"pry
+        (0.14.1) lib/pry/class_command.rb:82:in `call''"},{"id":3,"trace":"pry (0.14.1)
+        lib/pry/command.rb:495:in `call_with_hooks''"},{"id":4,"trace":"pry (0.14.1)
+        lib/pry/command.rb:431:in `block in call_safely''"},{"id":5,"trace":"pry (0.14.1)
+        lib/pry/command.rb:439:in `use_unpatched_symbol''"},{"id":6,"trace":"pry (0.14.1)
+        lib/pry/command.rb:430:in `call_safely''"},{"id":7,"trace":"pry (0.14.1) lib/pry/command.rb:404:in
+        `process_line''"},{"id":8,"trace":"pry (0.14.1) lib/pry/command_set.rb:354:in
+        `process_line''"},{"id":9,"trace":"pry (0.14.1) lib/pry/command.rb:281:in
+        `run''"},{"id":10,"trace":"pry (0.14.1) lib/pry/command_set.rb:203:in `block
+        in alias_command''"},{"id":11,"trace":"pry (0.14.1) lib/pry/block_command.rb:15:in
+        `instance_exec''"},{"id":12,"trace":"pry (0.14.1) lib/pry/block_command.rb:15:in
+        `call''"},{"id":13,"trace":"pry (0.14.1) lib/pry/command.rb:495:in `call_with_hooks''"},{"id":14,"trace":"pry
+        (0.14.1) lib/pry/command.rb:431:in `block in call_safely''"},{"id":15,"trace":"pry
+        (0.14.1) lib/pry/command.rb:439:in `use_unpatched_symbol''"},{"id":16,"trace":"pry
+        (0.14.1) lib/pry/command.rb:430:in `call_safely''"},{"id":17,"trace":"pry
+        (0.14.1) lib/pry/command.rb:404:in `process_line''"},{"id":18,"trace":"pry
+        (0.14.1) lib/pry/command_set.rb:354:in `process_line''"},{"id":19,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:328:in `process_command''"},{"id":20,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:361:in `process_command_safely''"},{"id":21,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:610:in `handle_line''"},{"id":22,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:261:in `block (2 levels) in eval''"},{"id":23,"trace":"pry
+        (0.14.1) lib/pry/pry_instance.rb:260:in `catch''"},{"id":24,"trace":"pry (0.14.1)
+        lib/pry/pry_instance.rb:260:in `block in eval''"},{"id":25,"trace":"pry (0.14.1)
+        lib/pry/pry_instance.rb:259:in `catch''"},{"id":26,"trace":"pry (0.14.1) lib/pry/pry_instance.rb:259:in
+        `eval''"},{"id":27,"trace":"pry (0.14.1) lib/pry/repl.rb:77:in `block in repl''"},{"id":28,"trace":"pry
+        (0.14.1) lib/pry/repl.rb:67:in `loop''"},{"id":29,"trace":"pry (0.14.1) lib/pry/repl.rb:67:in
+        `repl''"},{"id":30,"trace":"pry (0.14.1) lib/pry/repl.rb:38:in `block in start''"},{"id":31,"trace":"pry
+        (0.14.1) lib/pry/input_lock.rb:61:in `__with_ownership''"},{"id":32,"trace":"pry
+        (0.14.1) lib/pry/input_lock.rb:78:in `with_ownership''"},{"id":33,"trace":"pry
+        (0.14.1) lib/pry/repl.rb:38:in `start''"},{"id":34,"trace":"pry (0.14.1) lib/pry/repl.rb:15:in
+        `start''"},{"id":35,"trace":"pry (0.14.1) lib/pry/pry_class.rb:188:in `start''"},{"id":36,"trace":"pry
+        (0.14.1) lib/pry/core_extensions.rb:45:in `pry''"},{"id":37,"trace":"app/controllers/api/v2/posts_controller.rb:13:in
+        `create''"},{"id":38,"trace":"actionpack (5.2.8.1) lib/action_controller/metal/basic_implicit_render.rb:6:in
+        `send_action''"},{"id":39,"trace":"actionpack (5.2.8.1) lib/abstract_controller/base.rb:194:in
+        `process_action''"},{"id":40,"trace":"actionpack (5.2.8.1) lib/action_controller/metal/rendering.rb:30:in
+        `process_action''"},{"id":41,"trace":"actionpack (5.2.8.1) lib/abstract_controller/callbacks.rb:42:in
+        `block in process_action''"},{"id":42,"trace":"activesupport (5.2.8.1) lib/active_support/callbacks.rb:98:in
+        `run_callbacks''"},{"id":43,"trace":"actionpack (5.2.8.1) lib/abstract_controller/callbacks.rb:41:in
+        `process_action''"},{"id":44,"trace":"actionpack (5.2.8.1) lib/action_controller/metal/rescue.rb:22:in
+        `process_action''"},{"id":45,"trace":"actionpack (5.2.8.1) lib/action_controller/metal/instrumentation.rb:34:in
+        `block in process_action''"},{"id":46,"trace":"activesupport (5.2.8.1) lib/active_support/notifications.rb:168:in
+        `block in instrument''"},{"id":47,"trace":"activesupport (5.2.8.1) lib/active_support/notifications/instrumenter.rb:23:in
+        `instrument''"},{"id":48,"trace":"activesupport (5.2.8.1) lib/active_support/notifications.rb:168:in
+        `instrument''"},{"id":49,"trace":"actionpack (5.2.8.1) lib/action_controller/metal/instrumentation.rb:32:in
+        `process_action''"},{"id":50,"trace":"actionpack (5.2.8.1) lib/action_controller/metal/params_wrapper.rb:256:in
+        `process_action''"},{"id":51,"trace":"activerecord (5.2.8.1) lib/active_record/railties/controller_runtime.rb:24:in
+        `process_action''"},{"id":52,"trace":"actionpack (5.2.8.1) lib/abstract_controller/base.rb:134:in
+        `process''"},{"id":53,"trace":"actionpack (5.2.8.1) lib/action_controller/metal.rb:191:in
+        `dispatch''"},{"id":54,"trace":"actionpack (5.2.8.1) lib/action_controller/metal.rb:252:in
+        `dispatch''"},{"id":55,"trace":"actionpack (5.2.8.1) lib/action_dispatch/routing/route_set.rb:52:in
+        `dispatch''"},{"id":56,"trace":"actionpack (5.2.8.1) lib/action_dispatch/routing/route_set.rb:34:in
+        `serve''"},{"id":57,"trace":"actionpack (5.2.8.1) lib/action_dispatch/journey/router.rb:52:in
+        `block in serve''"},{"id":58,"trace":"actionpack (5.2.8.1) lib/action_dispatch/journey/router.rb:35:in
+        `each''"},{"id":59,"trace":"actionpack (5.2.8.1) lib/action_dispatch/journey/router.rb:35:in
+        `serve''"},{"id":60,"trace":"actionpack (5.2.8.1) lib/action_dispatch/routing/route_set.rb:840:in
+        `call''"},{"id":61,"trace":"rack (2.2.4) lib/rack/etag.rb:27:in `call''"},{"id":62,"trace":"rack
+        (2.2.4) lib/rack/conditional_get.rb:40:in `call''"},{"id":63,"trace":"rack
+        (2.2.4) lib/rack/head.rb:12:in `call''"},{"id":64,"trace":"activerecord (5.2.8.1)
+        lib/active_record/migration.rb:559:in `call''"},{"id":65,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call''"},{"id":66,"trace":"activesupport
+        (5.2.8.1) lib/active_support/callbacks.rb:98:in `run_callbacks''"},{"id":67,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call''"},{"id":68,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/executor.rb:14:in `call''"},{"id":69,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call''"},{"id":70,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call''"},{"id":71,"trace":"railties
+        (5.2.8.1) lib/rails/rack/logger.rb:38:in `call_app''"},{"id":72,"trace":"railties
+        (5.2.8.1) lib/rails/rack/logger.rb:26:in `block in call''"},{"id":73,"trace":"activesupport
+        (5.2.8.1) lib/active_support/tagged_logging.rb:71:in `block in tagged''"},{"id":74,"trace":"activesupport
+        (5.2.8.1) lib/active_support/tagged_logging.rb:28:in `tagged''"},{"id":75,"trace":"activesupport
+        (5.2.8.1) lib/active_support/tagged_logging.rb:71:in `tagged''"},{"id":76,"trace":"railties
+        (5.2.8.1) lib/rails/rack/logger.rb:26:in `call''"},{"id":77,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call''"},{"id":78,"trace":"actionpack
+        (5.2.8.1) lib/action_dispatch/middleware/request_id.rb:27:in `call''"},{"id":79,"trace":"rack
+        (2.2.4) lib/rack/runtime.rb:22:in `call''"},{"id":80,"trace":"activesupport
+        (5.2.8.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in
+        `call''"},{"id":81,"trace":"actionpack (5.2.8.1) lib/action_dispatch/middleware/executor.rb:14:in
+        `call''"},{"id":82,"trace":"actionpack (5.2.8.1) lib/action_dispatch/middleware/static.rb:127:in
+        `call''"},{"id":83,"trace":"rack (2.2.4) lib/rack/sendfile.rb:110:in `call''"},{"id":84,"trace":"railties
+        (5.2.8.1) lib/rails/engine.rb:524:in `call''"},{"id":85,"trace":"puma (3.12.6)
+        lib/puma/configuration.rb:227:in `call''"},{"id":86,"trace":"puma (3.12.6)
+        lib/puma/server.rb:706:in `handle_request''"},{"id":87,"trace":"puma (3.12.6)
+        lib/puma/server.rb:476:in `process_client''"},{"id":88,"trace":"puma (3.12.6)
+        lib/puma/server.rb:334:in `block in run''"},{"id":89,"trace":"puma (3.12.6)
+        lib/puma/thread_pool.rb:135:in `block in spawn_thread''"}]}}'
+  recorded_at: Sun, 06 Nov 2022 18:44:15 GMT
+recorded_with: VCR 6.1.0

@@ -125,9 +125,8 @@ RSpec.describe 'dashboard' do
         before :each do
           @last_post = build(:post)
 
-          allow(DatabaseFacade).to receive(:new_post).and_return(201)
+          allow(DatabaseFacade).to receive(:new_post).and_return(@last_post)
           allow(DatabaseFacade).to receive(:last_post).and_return(@last_post)
-          allow(DatabaseFacade).to receive(:emotion_by_id).and_return(@chosen_emotion.word)
 
           within '#emotion_form' do
             select @chosen_emotion.word
@@ -155,6 +154,15 @@ RSpec.describe 'dashboard' do
             expect(page).to have_content(@last_post.post_status)
           end
         end
+      end
+
+      describe 'I can edit my post' do
+        # <%= button_to 'edit this post', dashboard_path, method: :put, params: { post_id = @recent_post.id } %>
+      end
+      
+      describe 'I can delete my post' do
+        # <%= button_to 'delete this post', method: :delete, params: { post_id = @recent_post.id } %>
+
       end
     end
   end
