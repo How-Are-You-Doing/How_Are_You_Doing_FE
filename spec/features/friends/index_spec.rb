@@ -124,7 +124,7 @@ RSpec.describe 'friends index page' do
       to_return(status: 201, body: sent_friend_request_response)
 
     incoming_friend_requests_response = { data: [] }
-    stub_request(:get, "http://localhost:5000/api/v2/user/followers?request_status=pending").
+    stub_request(:get, "http://localhost:5000/api/v2/users/followers?request_status=pending").
       to_return(status: 200, body: incoming_friend_requests_response.to_json, headers: {})
   end
 

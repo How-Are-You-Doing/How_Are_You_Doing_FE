@@ -6,7 +6,7 @@ RSpec.describe DatabaseFacade do
       let(:api_response) { { data: [] } }
 
       before :each do
-        stub_request(:get, "http://localhost:5000/api/v2/user/followers?request_status=pending").
+        stub_request(:get, "http://localhost:5000/api/v2/users/followers?request_status=pending").
           to_return(status: 200, body: api_response.to_json, headers: {})
 
         user_google_id = "19023306"
