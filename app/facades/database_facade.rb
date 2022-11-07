@@ -31,7 +31,6 @@ class DatabaseFacade
   #these are outgoing friend requests in the pending state
   def self.sent_friend_requests(google_id)
     requests = DatabaseService.sent_requests(google_id)
-    return requests if requests.empty?
     requests[:data].map { |user| UserPoro.new(user) }
     end
     

@@ -32,7 +32,8 @@ class DatabaseService
     response = conn.get("/api/v1/friends?request_status=pending") do |req|
       req.headers[:user] = google_id
     end
-    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
 
   def self.last_post(google_id) #using v2 according to Aleisha's newest endpoint drop. I'm gonna pass this back to you and update the docs from here.
     response = conn.get("/api/v2/posts/last?user=#{google_id}")
