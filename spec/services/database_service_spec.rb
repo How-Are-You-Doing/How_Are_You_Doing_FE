@@ -10,7 +10,7 @@ RSpec.describe DatabaseService do
         user_google_id = '19023306'
         # VCR.use_cassette('pending_requests') do
         #   @pending_requests = DatabaseService.users_pending_requests(user_google_id)
-        stub_request(:get, "http://localhost:5000/api/v2/users/followers?request_status=pending").
+        stub_request(:get, "http://localhost:5000/api/v2/users/followers?request_status=pending&user=19023306").
           to_return(status: 200, body: api_response.to_json, headers: {})
 
         @pending_requests = DatabaseService.users_pending_requests(user_google_id)
@@ -61,7 +61,7 @@ RSpec.describe DatabaseService do
 
         it 'returns an empty array' do
           #commented out until endpoint up and running
-          user_google_id = '7357151'
+          user_google_id = '19023306'
           # VCR.use_cassette('no_pending_requests') do
           @empty_pending_requests = DatabaseService.users_pending_requests(user_google_id)
           expect(@empty_pending_requests[:data]).to eq([])

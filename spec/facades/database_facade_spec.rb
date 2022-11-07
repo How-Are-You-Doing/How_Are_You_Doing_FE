@@ -6,7 +6,7 @@ RSpec.describe DatabaseFacade do
       let(:api_response) { { data: [] } }
 
       before :each do
-        stub_request(:get, "http://localhost:5000/api/v2/users/followers?request_status=pending").
+        stub_request(:get, "http://localhost:5000/api/v2/users/followers?request_status=pending&user=19023306").
           to_return(status: 200, body: api_response.to_json, headers: {})
 
         user_google_id = "19023306"
@@ -54,7 +54,7 @@ RSpec.describe DatabaseFacade do
         let(:api_response) { { data: [] } }
 
         it 'returns an empty array' do
-          user_google_id = "7357151"
+          user_google_id = "19023306"
           VCR.use_cassette('no_pending_requests') do
             @pending_incoming_requests = DatabaseFacade.pending_requests(user_google_id)
           end
