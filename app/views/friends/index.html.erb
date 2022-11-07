@@ -32,7 +32,7 @@
   <h3>Friend List</h3>
   <ol>
     <% @accepted_friends.each do |friend| %>
-      <li><%= friend.name %></li>
+      <li><%= link_to friend.name, "/friends/#{friend.google_id}/posts" %></li>
     <% end %>
   </ol>
 </div>

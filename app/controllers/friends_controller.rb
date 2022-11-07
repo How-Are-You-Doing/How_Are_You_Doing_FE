@@ -20,4 +20,8 @@ class FriendsController < ApplicationController
     redirect_to '/friends'
     #will be used to create new Friends(friendship) relation and send request to User dashboard
   end
+
+  def show
+
+  end
 end
