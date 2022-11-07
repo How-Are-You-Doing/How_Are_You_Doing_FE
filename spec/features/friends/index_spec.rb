@@ -15,7 +15,7 @@ RSpec.describe 'friends index page' do
       }
     } }.to_json
 
-    stub_request(:get, "http://localhost:5000/api/v1/users?email=somedude@hotmail.com").
+    stub_request(:get, "http://localhost:5000/api/v2/users?email=somedude@hotmail.com").
       to_return(status: 200, body: user_search_response, headers: {})
 
     user_2 = { "data": {
@@ -29,7 +29,7 @@ RSpec.describe 'friends index page' do
     },
     }.to_json
 
-    stub_request(:get, "http://localhost:5000/api/v1/users?email=frodo@hotmail.com").
+    stub_request(:get, "http://localhost:5000/api/v2/users?email=frodo@hotmail.com").
       to_return(status: 200, body: user_2, headers: {})
 
     user_3 = { "data": {
@@ -43,7 +43,7 @@ RSpec.describe 'friends index page' do
     },
     }.to_json
 
-    stub_request(:get, "http://localhost:5000/api/v1/users?email=wizardstuff3@hotmail.com").
+    stub_request(:get, "http://localhost:5000/api/v2/users?email=wizardstuff3@hotmail.com").
       to_return(status: 200, body: user_3, headers: {})
 
     friends_response = { "data":

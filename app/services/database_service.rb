@@ -17,7 +17,7 @@ class DatabaseService
   #these are incoming pending friend requests for the user to accept or reject
   def self.users_pending_requests(google_id)
     response = conn.get("/api/v2/users/followers?request_status=pending") do |req|
-      req.headers[:user] = google_id
+      req.params[:user] = google_id
     end
     JSON.parse(response.body, symbolize_names: true)
   end
