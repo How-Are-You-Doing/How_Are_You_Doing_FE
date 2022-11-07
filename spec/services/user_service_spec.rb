@@ -14,7 +14,7 @@ RSpec.describe UserService do
           }
         } }.to_json
 
-        stub_request(:get, "http://localhost:5000/api/v1/users?search=fhsajbd912671284bf001028472jf").
+        stub_request(:get, "http://localhost:5000/api/v2/users?search=fhsajbd912671284bf001028472jf").
           to_return(status: 200, body: response_body, headers: {})
 
         result = UserService.find_user("fhsajbd912671284bf001028472jf")

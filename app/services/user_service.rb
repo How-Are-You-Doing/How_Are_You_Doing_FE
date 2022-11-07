@@ -1,11 +1,11 @@
 class UserService
   def self.find_user(google_id)
-    response = DatabaseService.conn.get("/api/v1/users?search=#{google_id}")
+    response = DatabaseService.conn.get("/api/v2/users?search=#{google_id}")
     JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.search(email)
-    response = DatabaseService.conn.get("/api/v1/users?email=#{email}")
+    response = DatabaseService.conn.get("/api/v2/users?email=#{email}")
     JSON.parse(response.body, symbolize_names: true)
   end
 
@@ -26,5 +26,15 @@ class UserService
       req.headers[:email] = user.email
     end
     JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.send_friend_request(current_user, email)
+    DatabaseService.conn(current_user).post("api/v1/friends?email=#{email}")
+  end
+
+  def self.sent_requests(google_id)
+    requests = DatabaseService.sent_requests(google_id)
+    return requests if requests.empty?
+    requests[:data].map { |user| UserPoro.new(user)}
   end
 end

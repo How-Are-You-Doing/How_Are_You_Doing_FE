@@ -17,13 +17,19 @@ class DatabaseFacade
 
   end
 
+  #these are incoming friend requests in the pending state
   def self.pending_requests(google_id)
-    pending_requests = DatabaseService.pending_requests(google_id)
-    return pending_requests if pending_requests.empty?
-    
+    pending_requests = DatabaseService.users_pending_requests(google_id)
+    # return pending_requests if pending_requests.empty?
     pending_requests[:data].map { |user| UserPoro.new(user) }
   end
 
+  #these are outgoing friend requests in the pending state
+  def self.sent_friend_requests(google_id)
+    requests = DatabaseService.sent_requests(google_id)
+    requests[:data].map { |user| UserPoro.new(user) }
+    end
+    
   def self.new_post(post)
     post_data = DatabaseService.new_post(post)
     Post.new(post_data[:data])
