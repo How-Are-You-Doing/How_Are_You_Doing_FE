@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:5000/api/v2/users/followers?request_status=pending&user=542088022299109
+    uri: http://localhost:5000/api/v2/users?search=8675309
     body:
       encoding: US-ASCII
       string: ''
@@ -15,21 +15,23 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers:
       Content-Type:
       - application/json; charset=utf-8
+      Etag:
+      - W/"58f61257e43a823106f815d502e4d880"
       Cache-Control:
-      - no-cache
+      - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cb0a99eb-94ac-4bcf-95ce-ed240d749e8e
+      - 2464f0f9-55d7-400d-84ec-88105d0d48f6
       X-Runtime:
-      - '0.007242'
+      - '0.070989'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"data":[]}'
-  recorded_at: Mon, 07 Nov 2022 21:51:28 GMT
+      string: '{"data":{"id":"7","type":"user","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309"}}}'
+  recorded_at: Mon, 07 Nov 2022 05:21:44 GMT
 recorded_with: VCR 6.1.0

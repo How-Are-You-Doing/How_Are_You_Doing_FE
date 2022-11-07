@@ -176,6 +176,102 @@ RSpec.describe DatabaseService do
         end
       end
     end
+
+    describe '#update_post' do
+      describe 'updates a users post based on post id' do
+        before :each do
+          @post_data = {
+            description: 'so excited for this is a new post to be made by the front end!',
+            emotion: 'Grateful',
+            post_status: 'personal',
+            user_google_id: '8675309'
+          }
+          @user_post = UserPost.new(@post_data)
+          VCR.use_cassette('successful_post_creation') do
+            @new_be_post = DatabaseFacade.new_post(@user_post)
+          end
+          @updated_data = {
+            description: 'so in love with this new post to be made by the front end!',
+            emotion: 'Affectionate',
+            post_status: 'shared',
+            id: @new_be_post.id
+          }
+        end
+        context 'the id matches a post id' do
+          it 'returns the updated BE post' do
+            VCR.use_cassette('successful_post_update') do
+              @updated_post = DatabaseService.update_post(@updated_data)
+            end
+
+            expect(@updated_post[:data][:id]).to eq(@new_be_post.id)
+            expect(@updated_post[:data][:attributes][:emotion]).to eq(@updated_data[:emotion])
+            expect(@updated_post[:data][:attributes][:post_status]).to eq(@updated_data[:post_status])
+            expect(@updated_post[:data][:attributes][:description]).to eq(@updated_data[:description])
+          end
+
+          context 'not all attributes are being changed' do
+            it 'returns the updated BE post with only the changed attributes different' do
+              @updated_data = {
+                post_status: 'shared',
+                id: @new_be_post.id
+              }
+              VCR.use_cassette('successful_post_partial_update') do
+                @updated_post = DatabaseService.update_post(@updated_data)
+              end
+
+              expect(@updated_post[:data][:id]).to eq(@new_be_post.id)
+              expect(@updated_post[:data][:attributes][:emotion]).to eq(@post_data[:emotion])
+              expect(@updated_post[:data][:attributes][:post_status]).to eq(@updated_data[:post_status])
+              expect(@updated_post[:data][:attributes][:description]).to eq(@post_data[:description])
+            end
+          end
+        end
+
+        context 'the id does not match a post id' do
+          it 'returns a post not found error' do
+            updated_data = {
+              post_status: 'public',
+              id: 'A'
+            }
+            VCR.use_cassette('failed_post_update') do
+              @updated_post = DatabaseService.update_post(updated_data)
+            end
+            expect(@updated_post[:error]).to eq("Not Found")
+          end
+        end
+      end
+    end
+
+    describe '#lookup_post' do
+      describe 'finds the post based on the id passed in' do
+        context 'if the id matches an existing post' do
+          it 'returns the post that matches the id' do
+            VCR.use_cassette('find_user_8675309') do
+              @user = UserFacade.find_user(8675309)
+            end
+            @post_data = {
+              description: 'so excited for this is a new post to be made by the front end!',
+              emotion: 'Grateful',
+              post_status: 'personal',
+              user_google_id: '8675309'
+            }
+            @user_post = UserPost.new(@post_data)
+            VCR.use_cassette('successful_post_creation') do
+              @new_be_post = DatabaseFacade.new_post(@user_post)
+            end
+            VCR.use_cassette('find_post_by_id') do
+              @found_post = DatabaseService.lookup_post(@user, @new_be_post.id)
+            end
+            expect(@found_post[:data][:id]).to eq(@new_be_post.id)
+          end
+        end
+        context 'if the id doesnt match an existing post' do
+          it 'returns an error message saying post doesnt exist' do
+  
+          end
+        end
+      end
+    end
   end
 end
 

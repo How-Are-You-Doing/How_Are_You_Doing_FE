@@ -13,6 +13,7 @@ RSpec.describe 'dashboard' do
         @chosen_emotion = @emotions.first
         allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
         allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends)
+        allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(false)
         visit dashboard_path
       end
       describe 'I see a list of my pending friend requests' do
@@ -127,11 +128,12 @@ RSpec.describe 'dashboard' do
 
           allow(DatabaseFacade).to receive(:new_post).and_return(@last_post)
           allow(DatabaseFacade).to receive(:last_post).and_return(@last_post)
-
+          
           within '#emotion_form' do
             select @chosen_emotion.word
             click_button 'submit'
           end
+          allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(true)
           within '#emotion_form' do
             fill_in :description, with: @last_post.description
             click_button 'submit'
@@ -147,18 +149,16 @@ RSpec.describe 'dashboard' do
         end
 
         it 'instead shows the most recent post' do
-          within '#recent_post' do
+          within "#post_#{@last_post.id}" do
             expect(page).to have_content(@last_post.description)
             expect(page).to have_content("I am feeling #{@last_post.emotion}")
             expect(page).to have_content(@last_post.tone)
             expect(page).to have_content(@last_post.post_status)
           end
         end
+        
       end
 
-      describe 'I can edit my post' do
-        # <%= button_to 'edit this post', dashboard_path, method: :put, params: { post_id = @recent_post.id } %>
-      end
       
       describe 'I can delete my post' do
         # <%= button_to 'delete this post', method: :delete, params: { post_id = @recent_post.id } %>

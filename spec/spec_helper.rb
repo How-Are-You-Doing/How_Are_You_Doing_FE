@@ -50,6 +50,7 @@ RSpec.configure do |config|
     # c.filter_sensitive_data('<api_key>') { Figaro.env.api_key }
     c.filter_sensitive_data('<google_client_id>') { Figaro.env.google_client_id }
     c.filter_sensitive_data('<google_client_secret>') { Figaro.env.google_client_secret }
+    c.filter_sensitive_data('<tone_api_key>') { Figaro.env.tone_api_key }
     c.configure_rspec_metadata!
   end
 

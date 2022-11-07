@@ -1,7 +1,8 @@
-  <div id='recent_post'>
+  <div id='post_<%=@recent_post.id%>'>
     <h2>I am feeling <%= @recent_post.emotion %>:</h2>
     <p> <%= @recent_post.description %></p>
     <p> The tone of your description best matches a <%= @recent_post.tone %> tone.</p>
     <p> Created on <%= @recent_post.created_at.to_formatted_s(:long_ordinal) %></p>
     <p> This post is currently <%= @recent_post.post_status %></p>
+    <%= button_to 'edit this post', edit_post_path, method: :get, params: { post_id: @recent_post.id, source: 'dashboard' } %>
   </div>

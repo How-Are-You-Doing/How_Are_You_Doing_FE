@@ -126,7 +126,7 @@ RSpec.describe DatabaseFacade do
             emotion: 'Grateful',
             post_status: 'personal',
             user_google_id: '8675309'
-}
+          }
           @user_post = UserPost.new(post_data)
           VCR.use_cassette('successful_post_creation') do
             @new_post = DatabaseFacade.new_post(@user_post)
@@ -139,6 +139,104 @@ RSpec.describe DatabaseFacade do
           expect(@new_post.post_status).to eq(@user_post.post_status)
           expect(@new_post.tone).to be_a(String)
           expect(@new_post.created_at).to be_a(DateTime)
+        end
+      end
+    end
+
+    describe '#update_post' do
+      describe 'updates a users post based on post id' do
+        before :each do
+          @post_data = {
+            description: 'so excited for this is a new post to be made by the front end!',
+            emotion: 'Grateful',
+            post_status: 'personal',
+            user_google_id: '8675309'
+          }
+          @user_post = UserPost.new(@post_data)
+          VCR.use_cassette('successful_post_creation') do
+            @new_be_post = DatabaseFacade.new_post(@user_post)
+          end
+          @updated_data = {
+            description: 'so in love with this new post to be made by the front end!',
+            emotion: 'Affectionate',
+            post_status: 'shared',
+            id: @new_be_post.id
+          }
+        end
+        context 'the id matches a post id' do
+          it 'returns the updated BE post object' do
+            VCR.use_cassette('successful_post_update') do
+              @updated_post = DatabaseFacade.update_post(@updated_data)
+  
+            end
+
+            expect(@updated_post.id).to eq(@new_be_post.id)
+            expect(@updated_post.emotion).to eq(@updated_data[:emotion])
+            expect(@updated_post.post_status).to eq(@updated_data[:post_status])
+            expect(@updated_post.description).to eq(@updated_data[:description])
+          end
+
+          context 'not all attributes are being changed' do
+            it 'returns the updated BE post with only the changed attributes different' do
+              @updated_data = {
+                post_status: 'shared',
+                id: @new_be_post.id
+              }
+              VCR.use_cassette('successful_post_partial_update') do
+                @updated_post = DatabaseFacade.update_post(@updated_data)
+              end
+
+              expect(@updated_post.id).to eq(@new_be_post.id)
+              expect(@updated_post.emotion).to eq(@post_data[:emotion])
+              expect(@updated_post.post_status).to eq(@updated_data[:post_status])
+              expect(@updated_post.description).to eq(@post_data[:description])
+            end
+          end
+        end
+
+        # context 'the id does not match a post id' do
+        #   it 'returns a post not found error' do
+        #     updated_data = {
+        #       post_status: 'public',
+        #       id: 'A'
+        #     }
+        #     VCR.use_cassette('failed_post_update') do
+        #       @updated_post = DatabaseService.update_post(updated_data)
+        #     end
+        #     expect(@updated_post[:error]).to eq("Not Found")
+        #   end
+        # end
+      end
+    end
+
+    describe '#lookup_post' do
+      describe 'finds the post based on the id passed in' do
+        context 'if the id matches an existing post' do
+          it 'returns the post as a post object' do
+            VCR.use_cassette('find_user_8675309') do
+              @user = UserFacade.find_user(8675309)
+            end
+            @post_data = {
+              description: 'so excited for this is a new post to be made by the front end!',
+              emotion: 'Grateful',
+              post_status: 'personal',
+              user_google_id: '8675309'
+            }
+            @user_post = UserPost.new(@post_data)
+            VCR.use_cassette('successful_post_creation') do
+              @new_be_post = DatabaseFacade.new_post(@user_post)
+            end
+            VCR.use_cassette('find_post_by_id') do
+              @found_post = DatabaseFacade.lookup_post(@user, @new_be_post.id)
+            end
+            expect(@found_post).to be_a(Post)
+            expect(@found_post.id).to eq(@new_be_post.id)
+          end
+        end
+        context 'if the id doesnt match an existing post' do
+          it 'returns an error message saying post doesnt exist' do
+  
+          end
         end
       end
     end

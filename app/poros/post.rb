@@ -1,11 +1,10 @@
 class Post
-  attr_reader :emotion,
-              :description,
-              :id,
-              :post_status,
-              :user_google_id,
-              :created_at,
-              :tone
+  attr_reader :id,
+                :emotion,
+                :description,
+                :post_status,
+                :tone,
+                :created_at
 
   def initialize(post_data)
     @id = post_data[:id]

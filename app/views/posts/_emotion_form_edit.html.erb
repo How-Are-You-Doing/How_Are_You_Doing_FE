@@ -1,0 +1,16 @@
+  <h4>I am feeling...</h4>
+  <div id='emotion_form'>
+    <%= form_with url: post_path, method: :put, local: true do |f| %>
+      <%= f.select :emotion, @emotions_grid, selected: @post.emotion %>
+      <p>Take a moment and jot down some of your thoughts about this</p>
+      <%= f.text_area :description, size: "60x10", value: @post.description %><br>
+      <p>Would you like to make this post public?
+      <%= f.label :post_status, 'Yes', value: 'shared'%>
+      <%= f.radio_button :post_status, 'shared', checked: @post.post_status == 'personal' ? false : true  %>
+      <%= f.label :post_status, 'No', value: 'personal'%>
+      <%= f.radio_button :post_status, 'personal', checked: @post.post_status == 'personal' ? true : false %>
+      <%= f.hidden_field :id, value: @post.id%>
+      <%= f.hidden_field :source, value: @source%>
+      <%= f.submit 'submit' %>
+    <% end %>
+  </div>
