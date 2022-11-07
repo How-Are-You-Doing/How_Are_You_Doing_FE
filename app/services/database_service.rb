@@ -34,4 +34,11 @@ class DatabaseService
     # response.status == 201 edge case when it isn't...
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.update_post(post_update_params)
+    response = conn.put("/api/v2/posts/#{post_update_params[:id]}") do |req|
+      req.params = post_update_params
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end

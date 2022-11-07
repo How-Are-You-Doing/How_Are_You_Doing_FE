@@ -18,7 +18,7 @@ class DashboardsController < ApplicationController
 
   def post_params
     params[:user_google_id] = current_user.google_id
-    params.permit(:description, :emotion, :user_google_id, :post_status)
+    params.permit(:description, :emotion, :user_google_id, :post_status, :id)
   end
 
   # def recently_posted?
