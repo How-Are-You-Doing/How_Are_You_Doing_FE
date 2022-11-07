@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
+  include EmotionHelper
   before_action :current_user
   # before_action :users_post
 
   def edit
     @source = params[:source]
-    @post = DatabaseFacade.lookup_post(current_user.id, params[:post_id])
+    @post = DatabaseFacade.lookup_post(current_user, params[:post_id])
+    @emotions_grid = words_only(DatabaseFacade.emotions)
   end
 
   def update
@@ -20,9 +22,4 @@ class PostsController < ApplicationController
     # DatabaseFacade.user_post_history(current_user)
   end
 
-  private
-
-  def users_post
-
-  end
 end

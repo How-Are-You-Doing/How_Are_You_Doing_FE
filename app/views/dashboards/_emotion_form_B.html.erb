@@ -1,21 +1,19 @@
-
   <div id='emotion_def'>
-    <h2>I am feeling <%= @emotion.first %>:</h2>
-    <p> <%= @emotion.last %></p>
+    <h2>I am feeling <%= emotion %>:</h2>
+    <p> <%= definition %></p>
   </div>
-  <%=link_to 'Change emotion choice', url: dashboard_path, local: true %>
-
+    <%=link_to 'Change emotion choice', url: dashboard_path, local: true %>
   <h3>Take a moment and jot down some of your thoughts about this<h3>
   <div id='emotion_form'>
     <%= form_with url: dashboard_path, method: :get, local: true do |f| %>
       <%= f.text_area :description, size: "60x10" %><br>
       <p>Would you like to make this post public?
-      <%= f.label :post_status, 'Yes', value: 'public'%>
-      <%= f.radio_button :post_status, 'public' %>
-      <%= f.label :post_status, 'No', value: 'private'%>
-      <%= f.radio_button :post_status, 'private', checked: true %>
+      <%= f.label :post_status, 'Yes', value: 'shared'%>
+      <%= f.radio_button :post_status, 'shared'  %>
+      <%= f.label :post_status, 'No', value: 'personal'%>
+      <%= f.radio_button :post_status, 'personal', checked: true %>
       </p>
-      <%= f.hidden_field :emotion, value: @emotion.first%>
+      <%= f.hidden_field :emotion, value: emotion%>
       <%= f.submit 'submit' %>
     <% end %>
   </div>
