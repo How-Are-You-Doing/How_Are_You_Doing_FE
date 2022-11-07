@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/users/posts?id=30&user=8675309
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"c6d88068c09aa1451cea986637ae453a"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 76f603fd-dfc7-4f4e-93d2-51ba74601d31
+      X-Runtime:
+      - '4.546882'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":"30","type":"post","attributes":{"emotion":"Affectionate","post_status":"shared","description":"so
+        in love with this new post to be made by the front end!","tone":"joy","created_at":"2022-11-06T19:45:20.670Z"}}}'
+  recorded_at: Mon, 07 Nov 2022 05:24:56 GMT
+recorded_with: VCR 6.1.0

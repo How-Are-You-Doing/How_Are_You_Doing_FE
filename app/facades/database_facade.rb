@@ -34,8 +34,8 @@ class DatabaseFacade
     Post.new(updated_post[:data])
   end
 
-  def self.lookup_post(post_id)
-    found_post = DatabaseService.lookup_post(post_id)
+  def self.lookup_post(user_id, post_id)
+    found_post = DatabaseService.lookup_post(user_id, post_id)
     # return post_info[:data] if post_info[:data].empty?
 
     Post.new(found_post[:data])

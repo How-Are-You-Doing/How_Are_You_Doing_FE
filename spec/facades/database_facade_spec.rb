@@ -177,6 +177,9 @@ RSpec.describe DatabaseFacade do
       describe 'finds the post based on the id passed in' do
         context 'if the id matches an existing post' do
           it 'returns the post as a post object' do
+            VCR.use_cassette('find_user_8675309') do
+              @user = UserFacade.find_user(8675309)
+            end
             @post_data = {
               description: 'so excited for this is a new post to be made by the front end!',
               emotion: 'Grateful',
@@ -188,7 +191,7 @@ RSpec.describe DatabaseFacade do
               @new_be_post = DatabaseFacade.new_post(@user_post)
             end
             VCR.use_cassette('find_post_by_id') do
-              @found_post = DatabaseFacade.lookup_post(@new_be_post.id)
+              @found_post = DatabaseFacade.lookup_post(@user, @new_be_post.id)
             end
             expect(@found_post).to be_a(Post)
             expect(@found_post.id).to eq(@new_be_post.id)
