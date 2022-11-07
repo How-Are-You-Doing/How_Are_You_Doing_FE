@@ -41,4 +41,9 @@ class DatabaseService
     end
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.lookup_post(post_id)
+    response = conn.get("/api/v2/posts/search?id=#{post_id}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end

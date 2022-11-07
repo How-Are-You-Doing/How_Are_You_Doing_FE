@@ -206,6 +206,34 @@ RSpec.describe DatabaseService do
         end
       end
     end
+
+    describe '#lookup_post' do
+      describe 'finds the post based on the id passed in' do
+        context 'if the id matches an existing post' do
+          it 'returns the post that matches the id' do
+            @post_data = {
+              description: 'so excited for this is a new post to be made by the front end!',
+              emotion: 'Grateful',
+              post_status: 'personal',
+              user_google_id: '8675309'
+            }
+            @user_post = UserPost.new(@post_data)
+            VCR.use_cassette('successful_post_creation') do
+              @new_be_post = DatabaseFacade.new_post(@user_post)
+            end
+            VCR.use_cassette('find_post_by_id') do
+              @found_post = DatabaseService.lookup_post(@new_be_post.id)
+            end
+            expect(@found_post[:data][:id]).to eq(@new_be_post.id)
+          end
+        end
+        context 'if the id doesnt match an existing post' do
+          it 'returns an error message saying post doesnt exist' do
+  
+          end
+        end
+      end
+    end
   end
 end
 

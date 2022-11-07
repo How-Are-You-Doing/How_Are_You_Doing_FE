@@ -14,12 +14,7 @@ class DashboardsController < ApplicationController
     @pending_requests = DatabaseFacade.pending_requests(current_user.google_id)
   end
 
-  private
 
-  def post_params
-    params[:user_google_id] = current_user.google_id
-    params.permit(:description, :emotion, :user_google_id, :post_status, :id)
-  end
 
   # def recently_posted?
   #   latest_post = DatabaseFacade.last_post(@current_user.google_id)

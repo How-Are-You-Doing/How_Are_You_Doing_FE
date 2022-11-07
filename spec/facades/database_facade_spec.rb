@@ -172,5 +172,34 @@ RSpec.describe DatabaseFacade do
         # end
       end
     end
+
+    describe '#lookup_post' do
+      describe 'finds the post based on the id passed in' do
+        context 'if the id matches an existing post' do
+          it 'returns the post as a post object' do
+            @post_data = {
+              description: 'so excited for this is a new post to be made by the front end!',
+              emotion: 'Grateful',
+              post_status: 'personal',
+              user_google_id: '8675309'
+            }
+            @user_post = UserPost.new(@post_data)
+            VCR.use_cassette('successful_post_creation') do
+              @new_be_post = DatabaseFacade.new_post(@user_post)
+            end
+            VCR.use_cassette('find_post_by_id') do
+              @found_post = DatabaseFacade.lookup_post(@new_be_post.id)
+            end
+            expect(@found_post).to be_a(Post)
+            expect(@found_post.id).to eq(@new_be_post.id)
+          end
+        end
+        context 'if the id doesnt match an existing post' do
+          it 'returns an error message saying post doesnt exist' do
+  
+          end
+        end
+      end
+    end
   end
 end

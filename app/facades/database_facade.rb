@@ -33,4 +33,11 @@ class DatabaseFacade
     updated_post = DatabaseService.update_post(updated_post_params)
     Post.new(updated_post[:data])
   end
+
+  def self.lookup_post(post_id)
+    found_post = DatabaseService.lookup_post(post_id)
+    # return post_info[:data] if post_info[:data].empty?
+
+    Post.new(found_post[:data])
+  end
 end
