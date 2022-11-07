@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/posts/last?user=19023306
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"5971532b32e608f03aebb7d4ca65319c"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 43024824-34f6-4858-bcad-03f3dbe5656f
+      X-Runtime:
+      - '0.131372'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":"4","type":"post","attributes":{"emotion":"Peaceful","post_status":"personal","description":"This
+        is the text for user 1 post 4","tone":"angry","created_at":"2022-11-06T14:59:36.197Z"}}}'
+  recorded_at: Sun, 06 Nov 2022 15:00:45 GMT
+recorded_with: VCR 6.1.0

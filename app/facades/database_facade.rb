@@ -10,12 +10,11 @@ class DatabaseFacade
 
   end
 
-  def self.new_post(post_params)
+  def self.last_post(google_id)
+    post_info = DatabaseService.last_post(google_id)
+    return post_info[:data] if post_info[:data].empty?
 
-  end
-
-  def self.last_post(user_id)
-    
+    Post.new(post_info[:data])
   end
 
   def self.emotion_by_id(emotion_id)
@@ -34,5 +33,10 @@ class DatabaseFacade
     requests = DatabaseService.sent_requests(google_id)
     return requests if requests.empty?
     requests[:data].map { |user| UserPoro.new(user) }
+    end
+    
+  def self.new_post(post)
+    post_data = DatabaseService.new_post(post)
+    Post.new(post_data[:data])
   end
 end
