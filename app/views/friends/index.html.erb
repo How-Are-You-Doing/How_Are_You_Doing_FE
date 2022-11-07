@@ -1,3 +1,5 @@
+<%= button_to "Dashboard", dashboard_path, id: "dashboard", method: :get %>
+
 <div id="find_friend_form">
   <%= form_with url: '/friends', method: :get, local: true do |f| %>
     <%= f.label :email, 'Email' %>
@@ -10,18 +12,27 @@
   <% if @user %>
     <% if @user.present? %>
       <%= @user.name %>
-      <%= button_to 'Follow', '/friends' %>
+      <%= button_to 'Send Friend Request', "/friends?email=#{params[:email]}" %>
     <% else %>
       <p>No search results</p>
     <% end %>
   <% end %>
 </div>
 
+<div id="sent_friend_requests">
+  <h3>Sent Friend Requests</h3>
+  <ul>
+    <% @friend_request_sent.each do |friend| %>
+      <li><%= friend.email %></li>
+    <% end %>
+  </ul>
+</div>
+
 <div id="friends_list">
   <h3>Friend List</h3>
   <ol>
     <% @accepted_friends.each do |friend| %>
-      <li><%= friend.name %></li>
+      <li><%= link_to friend.name, "/friends/#{friend.google_id}/posts" %></li>
     <% end %>
   </ol>
 </div>

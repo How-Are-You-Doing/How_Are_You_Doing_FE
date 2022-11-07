@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:5000/api/v2/users?email=joe@joe.joe
+    uri: http://localhost:5000/api/v2/users/followers?request_status=pending&user=542088022299109
     body:
       encoding: US-ASCII
       string: ''
@@ -15,23 +15,21 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 200
-      message: OK
+      code: 400
+      message: Bad Request
     headers:
       Content-Type:
       - application/json; charset=utf-8
-      Etag:
-      - W/"8a5a91a7f612666d5bb5cdafcb8e2ce9"
       Cache-Control:
-      - max-age=0, private, must-revalidate
+      - no-cache
       X-Request-Id:
-      - 42a7f29d-ba92-4a83-8dd4-90df2e79d5f9
+      - cb0a99eb-94ac-4bcf-95ce-ed240d749e8e
       X-Runtime:
-      - '0.019279'
+      - '0.007242'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"data":{"id":"8","type":"user","attributes":{"name":"joe","email":"joe@joe.joe","google_id":"123456789"}}}'
-  recorded_at: Sat, 05 Nov 2022 03:11:42 GMT
+      string: '{"data":[]}'
+  recorded_at: Mon, 07 Nov 2022 21:51:28 GMT
 recorded_with: VCR 6.1.0
