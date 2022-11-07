@@ -6,10 +6,6 @@ class DatabaseFacade
     end
   end
 
-  def self.emotion(emotion_word)
-
-  end
-
   def self.last_post(google_id)
     post_info = DatabaseService.last_post(google_id)
     return post_info[:data] if post_info[:data].empty?
@@ -31,5 +27,10 @@ class DatabaseFacade
   def self.new_post(post)
     post_data = DatabaseService.new_post(post)
     Post.new(post_data[:data])
+  end
+
+  def self.update_post(updated_post_params)
+    updated_post = DatabaseService.update_post(updated_post_params)
+    Post.new(updated_post[:data])
   end
 end
