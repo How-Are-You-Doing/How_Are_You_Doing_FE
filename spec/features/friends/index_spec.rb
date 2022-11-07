@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'friends index page' do
   before :each do
-    @user = create(:user, google_id: '542088022299109')
+    @user = create(:user, google_id: '91239464')
     allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
     allow_any_instance_of(FriendsController).to receive(:current_user).and_return(@user)
     user_search_response = { "data": {
@@ -195,9 +195,11 @@ RSpec.describe 'friends index page' do
 
   it 'has a button to return to user dashboard page' do
     VCR.use_cassette('dashboard_return') do
-    visit '/friends'
-    click_button 'Dashboard'
-    expect(current_path).to eq(dashboard_path)
+      VCR.use_cassette('last_post_of_user') do
+      visit '/friends'
+      click_button 'Dashboard'
+      expect(current_path).to eq(dashboard_path)
+      end
     end
   end
 end
