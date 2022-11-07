@@ -147,7 +147,7 @@ RSpec.describe 'dashboard' do
         end
 
         it 'instead shows the most recent post' do
-          within '#recent_post' do
+          within "#post_#{@last_post}" do
             expect(page).to have_content(@last_post.description)
             expect(page).to have_content("I am feeling #{@last_post.emotion}")
             expect(page).to have_content(@last_post.tone)
