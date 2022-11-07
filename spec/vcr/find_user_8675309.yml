@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:5000/api/v1/users?search=8675309
+    uri: http://localhost:5000/api/v2/users?search=8675309
     body:
       encoding: US-ASCII
       string: ''
