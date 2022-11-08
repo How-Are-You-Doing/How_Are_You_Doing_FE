@@ -12,17 +12,17 @@ RSpec.describe 'history index page', type: :feature do
 
       it "I see a section on how I've been doing. Under that section, I see a list of all my public and private posts. I see the date, and a list of public and private as well as my description with more details." do
         VCR.use_cassette('user_info') do
-          @user_info = DatabaseFacade.user_post_history(@user.google_id)
+          user_posts = DatabaseFacade.user_post_history(@user.google_id)
 
           visit '/history'
 
           expect(page).to have_content("How You've Been Doing Lately")
           within('#history') do  
-            user_1_posts_shared.each do |post| 
-              expect(page).to have_content("#{post.emotion}")
-              expect(page).to have_content("#{post.description}")
-              expect(page).to have_content("#{post.post_status}")
-              expect(page).to have_content("#{post.tone}")
+            user_posts.each do |post| 
+                expect(page).to have_content("#{post.emotion}")
+                expect(page).to have_content("#{post.description}")
+                expect(page).to have_content("#{post.post_status}")
+                expect(page).to have_content("#{post.tone}")
             end
           end
         end
@@ -30,3 +30,4 @@ RSpec.describe 'history index page', type: :feature do
     end
   end
 end
+
