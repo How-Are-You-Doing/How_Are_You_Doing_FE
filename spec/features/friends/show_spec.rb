@@ -45,9 +45,9 @@ RSpec.describe 'friends show page' do
         {
           "id": "1",
           "type": "user",
-          "attributes": { "name": "Quinland Rutherford",
+          "attributes": { "name": "Legolas",
             "email": "sedude@hotmail.com",
-            "google_id": "whares"
+            "google_id": "middleearth"
           }
         }
       ]
@@ -56,7 +56,42 @@ RSpec.describe 'friends show page' do
     stub_request(:get, "http://localhost:5000/api/v1/friends").
       to_return(status: 200, body: friends_response, headers: {})
 
+    friend_posts_response = { "data": [
+      {
+        "id": "1",
+        "type": "post",
+        "attributes":
+          {
+            "emotion": "happy",
+            "post_status": "public",
+            "description": "feeling happy",
+            "tone": "joyful",
+            "created_at": "Tue, 01 Nov 2022 11:51:06 -0700"
+
+          }
+      },
+      {
+        "id": "2",
+        "type": "post",
+        "attributes":
+          { "emotion": "sad",
+            "post_status": "private",
+            "description": "stuck on code",
+            "tone": "upset",
+            "created_at": "Tue, 08 Nov 2022 11:51:06 -0700"
+
+          }
+      }
+    ]
+    }.to_json
+
+    stub_request(:get, "http://localhost:5000/api/v1/friends/middleearth/posts").
+      to_return(status: 200, body: friend_posts_response)
+
   end
+
+
+  # it 'has a link to each friends show p91age from the friends list index' do
 
   # describe 'I see the nav bar' do
   #   before :each do
@@ -76,10 +111,22 @@ RSpec.describe 'friends show page' do
   # end
 
   it 'has a link to each friends show page from the friends list index' do
+
     visit '/friends'
     within("#friends_list") do
-    click_link "Legolas"
-    expect(current_path).to eq("/friends/middleearth/posts")
+      click_link "Legolas"
+      expect(current_path).to eq("/friends/middleearth/posts")
+    end
+    expect(page).to have_content("Legolas's Recent Posts")
+  end
+
+  it 'displays a list of a friends posts' do
+    visit "/friends/middleearth/posts"
+    within("#posts") do
+      expect(page).to have_content("Tuesday, November 01, 2022")
+      expect(page).to have_content("Emotion: happy")
+      expect(page).to have_content("Description: feeling happy")
+      expect(page).to have_content("Tone: joyful")
     end
   end
 end
