@@ -41,6 +41,7 @@ RSpec.describe 'history index page', type: :feature do
           user_posts = DatabaseFacade.user_post_history(@user_2_lonely.google_id)
 
           visit '/history'
+
           expect(page).to have_content("How You've Been Doing Lately")
           expect(page).to have_content("You don't have any posts.")
         end
