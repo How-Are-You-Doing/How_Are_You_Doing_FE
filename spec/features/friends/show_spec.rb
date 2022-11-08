@@ -45,9 +45,9 @@ RSpec.describe 'friends show page' do
         {
           "id": "1",
           "type": "user",
-          "attributes": { "name": "Quinland Rutherford",
+          "attributes": { "name": "Legolas",
             "email": "sedude@hotmail.com",
-            "google_id": "whares"
+            "google_id": "middleearth"
           }
         }
       ]

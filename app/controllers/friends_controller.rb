@@ -22,6 +22,7 @@ class FriendsController < ApplicationController
   end
 
   def show
-    @friend
+    #TODO switch over to api/v1/friends/:id once it exists
+    @friend = UserFacade.friends(current_user).find { |friend| friend.google_id == params[:google_id]}
   end
 end

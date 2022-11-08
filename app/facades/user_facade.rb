@@ -22,6 +22,7 @@ class UserFacade
     end
   end
 
+
   def self.create(user)
     UserService.create(user)
   end
