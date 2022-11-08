@@ -19,6 +19,11 @@ class UserService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def self.friend_posts(google_id)
+    response = DatabaseService.conn.get("/api/v1/friends/#{google_id}/posts")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
 
   def self.create(user)
     response = DatabaseService.conn.post 'api/v1/users' do |req|
