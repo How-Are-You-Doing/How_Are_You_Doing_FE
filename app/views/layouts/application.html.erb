@@ -12,6 +12,16 @@
       <%= button_to "Logout", logout_path, id: "logout", method: :get %>
     <% end %>
   </div>
+  <% if current_page?(dashboard_path) %>
+    <%= button_to 'History', history_path, method: :get %>
+    <%= button_to 'Friends', friends_path, method: :get %>
+  <% elsif current_page?(friends_path) %>
+    <%= button_to 'Dashboard', dashboard_path, method: :get %>
+  <% elsif current_page?(history_path) %> 
+    <%= button_to 'Dashboard', dashboard_path, method: :get %>
+    <%= button_to 'Friends', friends_path, method: :get %>
+  <% end %>
+
 </head>
 
 <body>
