@@ -105,6 +105,7 @@ RSpec.describe 'friends index page' do
     end
   end
 
+
   it 'has a button to return to user dashboard page' do
     VCR.use_cassette('go_to_friends_path') do
       visit '/friends'

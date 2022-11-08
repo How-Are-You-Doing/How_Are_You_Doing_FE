@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://localhost:5000/api/v2/friends/4?request_status=rejected
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b5b6b6ff60d7f4b593b1a5212c123816"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 753008e0-d4f7-4f07-a13c-ea36414d448d
+      X-Runtime:
+      - '0.041531'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":7,"friendship_id":4,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309","request_status":"rejected"}}}'
+  recorded_at: Tue, 08 Nov 2022 21:16:44 GMT
+recorded_with: VCR 6.1.0

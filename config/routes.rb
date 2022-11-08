@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/history', to: 'posts#index'
   # resources :sessions, only: %i[create]
   resource :dashboard, only: %i[show]
-  resources :friends, only: [:index, :create]
+  resources :friends, only: [:index, :create, :update]
   resource :post, only: %i[update destroy edit]
   resources :posts, only: %i[index]
 end

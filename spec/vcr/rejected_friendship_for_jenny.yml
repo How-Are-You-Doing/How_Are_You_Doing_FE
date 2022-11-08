@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://localhost:5000/api/v2/friends/4?request_status=rejected
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b7747e8011d74731445dbc64babf5309"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - b4d2dda6-1a49-46ed-bd88-d98b609ab8f5
+      X-Runtime:
+      - '0.293902'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":1,"friendship_id":4,"type":"friend_follower","attributes":{"name":"Ricky
+        LaFleur","email":"igotmy@grade10.com","google_id":"19023306","request_status":"rejected"}}}'
+  recorded_at: Tue, 08 Nov 2022 22:10:18 GMT
+recorded_with: VCR 6.1.0

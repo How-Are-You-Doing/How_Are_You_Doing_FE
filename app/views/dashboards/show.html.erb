@@ -13,15 +13,16 @@
 <% if @recent_post %>
   <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>
 <% end %>
+<h3>Pending Friend Requests</h3>
 <ul id='pending_requests'>
   <% if @pending_requests.empty? %>
     <h4>No Pending Requests</h4>
   <% else%>
-    <% @pending_requests.each do |user| %>
-      <li id="friend_<%=user.id%>">
-        <%=user.name%>:
-        <%=button_to 'Accept', dashboard_path, method: :get, params: {follower: user.id, request_status: 'accepted'}, local: true %>
-        <%=button_to 'Reject', dashboard_path, method: :get, params: {follower: user.id, request_status: 'rejected'}, local: true %><br>
+    <% @pending_requests.each do |friend| %>
+      <li id="friend_<%=friend.friendship_id%>">
+        <%=friend.friend_name%>:
+        <%=button_to 'Accept', friend_path(friend.friendship_id), method: :put, params: {request_status: 'accepted'}, local: true %>
+        <%=button_to 'Reject', friend_path(friend.friendship_id), method: :put, params: {request_status: 'rejected'}, local: true %><br>
       </li>
     <% end%>
   <% end%>
