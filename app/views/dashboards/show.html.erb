@@ -13,6 +13,7 @@
 <% if @recent_post %>
   <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>
 <% end %>
+<h3>Pending Friend Requests</h3>
 <ul id='pending_requests'>
   <% if @pending_requests.empty? %>
     <h4>No Pending Requests</h4>

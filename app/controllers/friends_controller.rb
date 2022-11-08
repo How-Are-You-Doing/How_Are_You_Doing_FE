@@ -21,6 +21,10 @@ class FriendsController < ApplicationController
     #will be used to create new Friends(friendship) relation and send request to User dashboard
   end
 
+  def update
+
+  end
+  
   def show
 
   end

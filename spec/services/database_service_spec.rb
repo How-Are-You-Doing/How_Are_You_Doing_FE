@@ -272,6 +272,29 @@ RSpec.describe DatabaseService do
         end
       end
     end
+
+    describe '#update_friend_request' do
+      describe 'allows user to accept or reject a friend request' do
+        before :each do
+
+        end
+        context 'rejects request' do
+          it 'returns the friendship with status as reject' do
+            VCR.turn_off!
+                    WebMock.allow_net_connect!
+            require 'pry'; binding.pry
+            VCR.turn_on!
+                    WebMock.disable_net_connect!
+          end
+        end
+
+        context 'accepts request' do
+          it 'returns message that friendship was accepteded' do
+
+          end
+        end
+      end
+    end
   end
 end
 
