@@ -46,4 +46,14 @@ class DatabaseFacade
 
     Post.new(found_post[:data])
   end
+
+
+  def self.user_post_history(google_id)
+    user_history = DatabaseService.user_post_history(google_id)
+    user_history[:data].map do |user_post|
+      Post.new(user_post)
+    end
+  end
+
+
 end

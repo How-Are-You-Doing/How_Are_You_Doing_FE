@@ -65,4 +65,11 @@ class DatabaseService
     end
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.user_post_history(google_id)
+    response = conn.get("/api/v2/users/history") do |req|
+      req.params[:user] = google_id
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
