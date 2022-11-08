@@ -123,11 +123,16 @@ RSpec.describe 'friends show page' do
   it 'displays a list of a friends posts' do
     visit "/friends/middleearth/posts"
     within("#posts") do
-      save_and_open_page
       expect(page).to have_content("Tuesday, November 01, 2022")
       expect(page).to have_content("Emotion: happy")
       expect(page).to have_content("Description: feeling happy")
       expect(page).to have_content("Tone: joyful")
     end
+  end
+
+  it 'displays the dashboard and history buttons' do
+    visit "/friends/middleearth/posts"
+      expect(page).to have_button("Dashboard")
+      expect(page).to have_button("History")
   end
 end

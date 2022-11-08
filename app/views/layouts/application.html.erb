@@ -7,6 +7,10 @@
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+
+</head>
+<body>
+
   <div id="account">
     <% if current_user %>
       <%= button_to "Logout", logout_path, id: "logout", method: :get %>
@@ -16,19 +20,14 @@
     <%= button_to 'Friends', friends_path, method: :get %>
   <% elsif current_page?(friends_path) %>
     <%= button_to 'Dashboard', dashboard_path, method: :get %>
-    <!-- TODO will update line 21 with friend_path once that functionality is added-->
   <% elsif current_page?(history_path) %> 
     <%= button_to 'Dashboard', dashboard_path, method: :get %>
     <%= button_to 'Friends', friends_path, method: :get %>
-  <% elsif current_page?(controller: 'friends', action: 'show') %> 
+  <% elsif request.original_url.include?("/posts") %>
     <%= button_to 'Dashboard', dashboard_path, method: :get %>
     <%= button_to 'History', friends_path, method: :get %>
   <% end %>
   </div>
-
-</head>
-
-<body>
 <%= flash[:success] %>
 <%= yield %>
 </body>
