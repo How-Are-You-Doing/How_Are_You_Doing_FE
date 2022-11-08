@@ -22,6 +22,13 @@ class UserFacade
     end
   end
 
+  def self.friend_posts(google_id)
+    UserService.friend_posts(google_id)[:data].map do |data|
+      Post.new(data)
+    end
+  end
+
+
   def self.create(user)
     UserService.create(user)
   end

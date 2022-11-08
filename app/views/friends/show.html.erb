@@ -1,1 +1,10 @@
-<h1>Welcome To Friends Show Page!</h1>
+<h1><%= @friend.name %>'s Recent Posts</h1>
+
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <p>Description: <%= post.description %></p>
+    <p>Tone: <%= post.tone %></p>
+    <p>Emotion: <%= post.emotion %></p>
+  <% end %>
+</div>
