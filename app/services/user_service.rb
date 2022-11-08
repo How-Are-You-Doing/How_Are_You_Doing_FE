@@ -10,12 +10,12 @@ class UserService
   end
 
   def self.user_relationships_filter(user, request_status)
-    response = DatabaseService.conn(user).get("api/v1/friends?request_status=#{request_status}")
+    response = DatabaseService.conn(user).get("api/v2/friends?request_status=#{request_status}")
     JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.friends(user)
-    response = DatabaseService.conn(user).get('api/v1/friends')
+    response = DatabaseService.conn(user).get('api/v2/friends')
     JSON.parse(response.body, symbolize_names: true)
   end
 
@@ -29,7 +29,8 @@ class UserService
   end
 
   def self.send_friend_request(current_user, email)
-    DatabaseService.conn(current_user).post("api/v1/friends?email=#{email}")
+    require "pry"; binding.pry
+    DatabaseService.conn(current_user).post("api/v2/friends?email=#{email}&user=#{current_user.google_id}")
   end
 
   def self.sent_requests(google_id)
