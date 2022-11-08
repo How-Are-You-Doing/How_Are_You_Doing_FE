@@ -16,6 +16,27 @@ RSpec.describe 'dashboard' do
         allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(false)
         visit dashboard_path
       end
+
+      describe 'I see the nav bar' do
+        it 'has friends button' do
+          within '#account' do
+            expect(page).to have_button('Friends')
+          end
+        end
+
+        it 'has Logout button' do
+          within '#account' do
+            expect(page).to have_button('Logout')
+          end
+        end
+
+        it 'has History button' do
+          within '#account' do
+            expect(page).to have_button('History')
+          end
+        end
+      end
+      
       describe 'I see a list of my pending friend requests' do
         it 'lists the users/followers whose friend status with me are pending' do
           within '#pending_requests' do
