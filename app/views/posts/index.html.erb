@@ -12,6 +12,7 @@
       <p>You said: <%= user_post.description %></p>
       <p>This post is: <%= user_post.post_status %></p>
       <p>The tone of your post was: <%= user_post.tone %></p>
+      <p><%= button_to 'Delete', "/posts/#{user_post.id}", method: :delete %></p>
       <br>
     </div>
   <% end %>

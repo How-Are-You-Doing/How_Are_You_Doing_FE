@@ -66,6 +66,13 @@ class DatabaseService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def self.delete_post(post_id)
+    response = conn.delete("/api/v2/posts/#{post_id}") do |req|
+      req.params[:post] = post_id
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
   def self.user_post_history(google_id)
     response = conn.get("/api/v2/users/history") do |req|
       req.params[:user] = google_id

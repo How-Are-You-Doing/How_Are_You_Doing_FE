@@ -39,12 +39,11 @@ RSpec.describe UserService do
         # WebMock.disable_net_connect!
       end
     end
+
     describe '#friend_posts' do
       it 'can fetch a friends posts' do
         @user = User.create!(name: "Randy Bobandy", email: "assistantsupervisor@sunnyvale.ca", google_id: 52785579, token: 'asdfd15')
         VCR.use_cassette('friends_posts') do
-
-          # get "/api/v1/friends/#{@user.google_id}/posts"
 
           response = UserService.friend_posts(@user.google_id)
           expect(response).to have_key(:data)

@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/users/history?user=7357151
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"4c4af28d8501e504265e9c80029d9b7d"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e82d213f-259b-4d7d-973e-32ac056fe006
+      X-Runtime:
+      - '0.042093'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"5","type":"post","attributes":{"emotion":"Affectionate","post_status":"shared","description":"This
+        is the text for user 2 post 1","tone":"hyped up","created_at":"2022-11-08T22:25:20.696Z"}},{"id":"6","type":"post","attributes":{"emotion":"Engaged","post_status":"shared","description":"This
+        is the text for user 2 post 2","tone":"relaxed","created_at":"2022-11-08T22:25:20.702Z"}},{"id":"7","type":"post","attributes":{"emotion":"Engaged","post_status":"shared","description":"This
+        is the text for user 2 post 3","tone":"relaxed","created_at":"2022-11-08T22:25:20.704Z"}},{"id":"8","type":"post","attributes":{"emotion":"Inspired","post_status":"shared","description":"This
+        is the text for user 2 post 4","tone":"relaxed","created_at":"2022-11-08T22:25:20.705Z"}}]}'
+  recorded_at: Tue, 08 Nov 2022 22:41:43 GMT
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/users/history?user=7357151
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"4c4af28d8501e504265e9c80029d9b7d"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - cda3782b-6498-473f-bd5b-68235dcd17c0
+      X-Runtime:
+      - '0.020127'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"5","type":"post","attributes":{"emotion":"Affectionate","post_status":"shared","description":"This
+        is the text for user 2 post 1","tone":"hyped up","created_at":"2022-11-08T22:25:20.696Z"}},{"id":"6","type":"post","attributes":{"emotion":"Engaged","post_status":"shared","description":"This
+        is the text for user 2 post 2","tone":"relaxed","created_at":"2022-11-08T22:25:20.702Z"}},{"id":"7","type":"post","attributes":{"emotion":"Engaged","post_status":"shared","description":"This
+        is the text for user 2 post 3","tone":"relaxed","created_at":"2022-11-08T22:25:20.704Z"}},{"id":"8","type":"post","attributes":{"emotion":"Inspired","post_status":"shared","description":"This
+        is the text for user 2 post 4","tone":"relaxed","created_at":"2022-11-08T22:25:20.705Z"}}]}'
+  recorded_at: Tue, 08 Nov 2022 22:41:43 GMT
+recorded_with: VCR 6.1.0
