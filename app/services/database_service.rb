@@ -61,7 +61,7 @@ class DatabaseService
   def self.lookup_post(user, post_id)
     response = conn.get("/api/v2/users/posts") do |req|
       req.params[:user] = user.google_id
-      req.params[:id] = post_id
+      req.params[:post] = post_id
     end
     JSON.parse(response.body, symbolize_names: true)
   end
