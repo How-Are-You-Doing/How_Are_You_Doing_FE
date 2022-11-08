@@ -22,6 +22,6 @@ class FriendsController < ApplicationController
   end
 
   def show
-
+    @friend
   end
 end

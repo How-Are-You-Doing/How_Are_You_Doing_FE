@@ -64,5 +64,6 @@ RSpec.describe 'friends show page' do
     click_link "Legolas"
     expect(current_path).to eq("/friends/middleearth/posts")
     end
+    expect(page).to have_content("Legolas's Recent Posts")
   end
 end
