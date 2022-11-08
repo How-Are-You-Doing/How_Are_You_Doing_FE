@@ -209,14 +209,4 @@ RSpec.describe 'friends index page' do
       expect(page).to have_content("Gandalf")
     end
   end
-
-  it 'has a button to return to user dashboard page' do
-    VCR.use_cassette('dashboard_return') do
-      VCR.use_cassette('last_post_of_user') do
-      visit '/friends'
-      click_button 'Dashboard'
-      expect(current_path).to eq(dashboard_path)
-      end
-    end
-  end
 end

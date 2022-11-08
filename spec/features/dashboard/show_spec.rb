@@ -5,14 +5,16 @@ RSpec.describe 'dashboard' do
   describe 'as a user' do
     describe 'when I visit the dashboard' do
       before :each do
-        @user = create(:user)
-        @pending_friends = create_list(:user, 3)
+        @user = User.create!(name: "Jenny", email: "jenny@tommytutone.com", google_id: "8675309", token: "fake_token_7")
+        VCR.use_cassette('pending_friendships_for_jenny') do
+          @pending_friends = DatabaseFacade.pending_requests_to_friendships(@user.google_id)
+        end
         VCR.use_cassette('emotions') do
           @emotions = DatabaseFacade.emotions
         end
         @chosen_emotion = @emotions.first
         allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
-        allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends)
+        allow(DatabaseFacade).to receive(:pending_requests_to_friendships).with(@user.google_id).and_return(@pending_friends)
         allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(false)
         visit dashboard_path
       end
@@ -39,10 +41,12 @@ RSpec.describe 'dashboard' do
       
       describe 'I see a list of my pending friend requests' do
         it 'lists the users/followers whose friend status with me are pending' do
+
+          visit dashboard_path
           within '#pending_requests' do
             @pending_friends.each do |friend|
-              within "#friend_#{friend.id}" do
-                expect(page).to have_content(friend.name)
+              within "#friend_#{friend.friendship_id}" do
+                expect(page).to have_content(friend.friend_name)
               end
             end
           end
@@ -50,7 +54,7 @@ RSpec.describe 'dashboard' do
         it 'beside each pending request is an accept or reject button' do
           within '#pending_requests' do
             @pending_friends.each do |friend|
-              within "#friend_#{friend.id}" do
+              within "#friend_#{friend.friendship_id}" do
                 expect(page).to have_button('Accept')
                 expect(page).to have_button('Reject')
               end
@@ -58,18 +62,20 @@ RSpec.describe 'dashboard' do
           end
         end
         it 'pressing the accept or reject button reloads the page and the user is no longer in the list' do
-          allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends[1..2])
+          allow(DatabaseFacade).to receive(:pending_requests_to_friendships).with(@user.google_id).and_return([])
           within '#pending_requests' do
-            within "#friend_#{@pending_friends.first.id}" do
+            within "#friend_#{@pending_friends.first.friendship_id}" do
               click_button 'Accept'
             end
-
-            expect(page).to_not have_css("#friend_#{@pending_friends.first.id}")
+          end
+          visit dashboard_path
+          within '#pending_requests' do
+            expect(page).to_not have_css("#friend_#{@pending_friends.first.friendship_id}")
           end
         end
         context 'there are no pending requests' do
           it 'returns a message saying there are none' do
-            allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return([])
+            allow(DatabaseFacade).to receive(:pending_requests_to_friendships).with(@user.google_id).and_return([])
             visit dashboard_path
             within '#pending_requests' do
               expect(page).to have_content('No Pending Requests')

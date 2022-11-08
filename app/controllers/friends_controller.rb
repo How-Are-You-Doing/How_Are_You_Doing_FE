@@ -22,12 +22,19 @@ class FriendsController < ApplicationController
   end
 
   def update
-    
+    DatabaseFacade.update_friend_request(friends_params[:id], friends_params[:request_status])
+    redirect_to dashboard_path
   end
 
   def show
     #TODO switch over to api/v1/friends/:id once it exists
     @friend = UserFacade.friends(current_user).find { |friend| friend.google_id == params[:google_id]}
     @posts = UserFacade.friend_posts(@friend.google_id)
+  end
+
+  private
+
+  def friends_params
+    params.permit(:id, :request_status)
   end
 end
