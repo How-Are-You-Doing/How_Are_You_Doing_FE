@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    require 'pry' ; binding.pry
     # DatabaseFacade.user_post_history(current_user)
   end
 
