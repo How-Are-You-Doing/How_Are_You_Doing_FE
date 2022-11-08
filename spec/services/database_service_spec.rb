@@ -276,6 +276,7 @@ RSpec.describe DatabaseService do
     describe '#update_friend_request' do
       describe 'allows user to accept or reject a friend request' do
         before :each do
+          #create request
           @user = User.create!(name: "Jenny", email: "jenny@tommytutone.com", google_id: "8675309", token: "fake_token_7")
         end
 
@@ -290,6 +291,7 @@ RSpec.describe DatabaseService do
             end
 
             rejected_friendship = @users_pending_friendships.last
+            expect(rejected_friendship.request_status).to eq('pending')
 
             VCR.use_cassette('rejecting_friendship_for_jenny') do
               updated_friendship_data = DatabaseService.update_friend_request(rejected_friendship.friendship_id, "rejected")
@@ -300,18 +302,18 @@ RSpec.describe DatabaseService do
         end
 
         context 'accepts request' do
-          it 'returns the friendship with status as reject' do
+          it 'returns the friendship with status as accept' do
             VCR.use_cassette('pending_friendships_for_jenny') do
               @users_pending_friendships = DatabaseFacade.pending_requests_to_friendships(@user.google_id)
             end
 
             accepted_friendship = @users_pending_friendships.last
+            expect(accepted_friendship.request_status).to eq('pending')
 
             VCR.use_cassette('accepting_friendship_for_jenny') do
-              DatabaseService.update_friend_request(accepted_friendship.friendship_id, "accepted")
-            end
-            VCR.use_cassette('after_friendship_update_for_jenny') do
-              expect(DatabaseFacade.pending_requests_to_friendships(@user.google_id)).to_not include(accepted_friendship)
+              updated_friendship_data = DatabaseService.update_friend_request(accepted_friendship.friendship_id, "accepted")
+              updated_friendship = Friendship.new(updated_friendship_data[:data])
+              expect(updated_friendship.request_status).to eq('accepted')
             end
           end
         end

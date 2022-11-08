@@ -22,9 +22,9 @@ class FriendsController < ApplicationController
   end
 
   def update
-
+    
   end
-  
+
   def show
 
   end

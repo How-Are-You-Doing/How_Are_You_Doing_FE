@@ -18,11 +18,11 @@
   <% if @pending_requests.empty? %>
     <h4>No Pending Requests</h4>
   <% else%>
-    <% @pending_requests.each do |user| %>
-      <li id="friend_<%=user.id%>">
-        <%=user.name%>:
-        <%=button_to 'Accept', dashboard_path, method: :get, params: {follower: user.id, request_status: 'accepted'}, local: true %>
-        <%=button_to 'Reject', dashboard_path, method: :get, params: {follower: user.id, request_status: 'rejected'}, local: true %><br>
+    <% @pending_requests.each do |friend| %>
+      <li id="friend_<%=friend.friendship_id%>">
+        <%=friend.friend_name%>:
+        <%=button_to 'Accept', friend_path, method: :put, params: {follower: friend.friendship_id, request_status: 'accepted'}, local: true %>
+        <%=button_to 'Reject', friend_path, method: :put, params: {follower: friend.friendship_id, request_status: 'rejected'}, local: true %><br>
       </li>
     <% end%>
   <% end%>
