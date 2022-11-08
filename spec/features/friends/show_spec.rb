@@ -48,6 +48,7 @@ RSpec.describe 'friends show page' do
     VCR.use_cassette('veiw_bubbles_posts') do
       visit "/friends/7357151/posts"
       within("#posts") do
+        expect(page).to have_content("Tuesday, November 01, 2022")
         expect(page).to have_content("Emotion: Affectionate")
         expect(page).to have_content("Description: This is the text for user 2 post 1")
         expect(page).to have_content("Tone: relaxed")
