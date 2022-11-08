@@ -20,6 +20,9 @@
   <% elsif current_page?(history_path) %> 
     <%= button_to 'Dashboard', dashboard_path, method: :get %>
     <%= button_to 'Friends', friends_path, method: :get %>
+  <% elsif current_page?(controller: 'friends', action: 'show') %> 
+    <%= button_to 'Dashboard', dashboard_path, method: :get %>
+    <%= button_to 'History', friends_path, method: :get %>
   <% end %>
   </div>
 
