@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/users/history?user=52785579
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"838b20bb4b1373fb59cf54ecf2009245"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 82da3cd9-cc93-4cac-b43a-188d07287349
+      X-Runtime:
+      - '0.056878'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"13","type":"post","attributes":{"emotion":"Refreshed","post_status":"shared","description":"This
+        is the text for user 4 post 1","tone":"quizzical","created_at":"2022-11-05T22:31:56.902Z"}},{"id":"14","type":"post","attributes":{"emotion":"Hopeful","post_status":"personal","description":"This
+        is the text for user 4 post 2","tone":"frustrated","created_at":"2022-11-05T22:31:56.903Z"}},{"id":"15","type":"post","attributes":{"emotion":"Afraid","post_status":"personal","description":"This
+        is the text for user 4 post 3","tone":"psychotic","created_at":"2022-11-05T22:31:56.904Z"}},{"id":"16","type":"post","attributes":{"emotion":"Confused","post_status":"shared","description":"This
+        is the text for user 4 post 4","tone":"lazy","created_at":"2022-11-05T22:31:56.906Z"}}]}'
+  recorded_at: Tue, 08 Nov 2022 01:09:06 GMT
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/users/history?user=52785579
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"838b20bb4b1373fb59cf54ecf2009245"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 95032b3a-692a-4cdc-a21a-b79517795d79
+      X-Runtime:
+      - '0.005164'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"13","type":"post","attributes":{"emotion":"Refreshed","post_status":"shared","description":"This
+        is the text for user 4 post 1","tone":"quizzical","created_at":"2022-11-05T22:31:56.902Z"}},{"id":"14","type":"post","attributes":{"emotion":"Hopeful","post_status":"personal","description":"This
+        is the text for user 4 post 2","tone":"frustrated","created_at":"2022-11-05T22:31:56.903Z"}},{"id":"15","type":"post","attributes":{"emotion":"Afraid","post_status":"personal","description":"This
+        is the text for user 4 post 3","tone":"psychotic","created_at":"2022-11-05T22:31:56.904Z"}},{"id":"16","type":"post","attributes":{"emotion":"Confused","post_status":"shared","description":"This
+        is the text for user 4 post 4","tone":"lazy","created_at":"2022-11-05T22:31:56.906Z"}}]}'
+  recorded_at: Tue, 08 Nov 2022 01:09:06 GMT
+recorded_with: VCR 6.1.0

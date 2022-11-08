@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:5000/api/v2/users/posts?id=30&user=8675309
+    uri: http://localhost:5000/api/v2/users/posts?post=30&user=8675309
     body:
       encoding: US-ASCII
       string: ''
@@ -21,18 +21,18 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"c6d88068c09aa1451cea986637ae453a"
+      - W/"1f72ccb3904af80cca332f1f1833b53f"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 76f603fd-dfc7-4f4e-93d2-51ba74601d31
+      - '0397ce17-bc45-4871-8215-0d47fc9588f6'
       X-Runtime:
-      - '4.546882'
+      - '0.004218'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"data":{"id":"30","type":"post","attributes":{"emotion":"Affectionate","post_status":"shared","description":"so
-        in love with this new post to be made by the front end!","tone":"joy","created_at":"2022-11-06T19:45:20.670Z"}}}'
-  recorded_at: Mon, 07 Nov 2022 05:24:56 GMT
+      string: '{"data":{"id":"30","type":"post","attributes":{"emotion":"Grateful","post_status":"personal","description":"so
+        excited for this is a new post to be made by the front end!","tone":"joy","created_at":"2022-11-08T04:45:16.259Z"}}}'
+  recorded_at: Tue, 08 Nov 2022 04:45:16 GMT
 recorded_with: VCR 6.1.0

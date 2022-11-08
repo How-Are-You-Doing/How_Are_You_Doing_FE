@@ -1,0 +1,23 @@
+<h1>How You've Been Doing Lately</h1>
+
+<div id='history'>
+
+<% if @user_history.empty? %>
+  <%= "You don't have any posts." %>
+<% else %>
+  <% @user_history.each do |user_post| %>
+    <div id="post_<%=user_post.id%>">
+      <p>This post was created at: <%= user_post.created_at %></p>
+      <p>You were feeling: <%= user_post.emotion %></p>
+      <p>You said: <%= user_post.description %></p>
+      <p>This post is: <%= user_post.post_status %></p>
+      <p>The tone of your post was: <%= user_post.tone %></p>
+      <br>
+    </div>
+  <% end %>
+<% end %>
+</div>
+
+
+
+

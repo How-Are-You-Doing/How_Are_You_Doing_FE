@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    # DatabaseFacade.user_post_history(current_user)
+    @user_history = DatabaseFacade.user_post_history(current_user.google_id)
   end
 
 end

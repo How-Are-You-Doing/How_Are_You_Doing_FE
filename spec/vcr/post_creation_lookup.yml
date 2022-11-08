@@ -21,18 +21,18 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"6b2336e6f28769c49d413c5f4166634e"
+      - W/"1f72ccb3904af80cca332f1f1833b53f"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ab60718c-b9c0-4501-a117-cdaa17a7e912
+      - ba7f2088-29fd-455c-bc67-121ce348b803
       X-Runtime:
-      - '0.151894'
+      - '0.029784'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"data":{"id":"30","type":"post","attributes":{"emotion":"Grateful","post_status":"personal","description":"so
-        excited for this is a new post to be made by the front end!","tone":"joy","created_at":"2022-11-06T19:45:20.670Z"}}}'
-  recorded_at: Sun, 06 Nov 2022 19:53:56 GMT
+        excited for this is a new post to be made by the front end!","tone":"joy","created_at":"2022-11-08T04:45:16.259Z"}}}'
+  recorded_at: Tue, 08 Nov 2022 04:51:29 GMT
 recorded_with: VCR 6.1.0
