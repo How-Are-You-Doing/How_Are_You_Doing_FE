@@ -11,7 +11,18 @@
     <% if current_user %>
       <%= button_to "Logout", logout_path, id: "logout", method: :get %>
     <% end %>
+  <% if current_page?(dashboard_path) %>
+    <%= button_to 'History', history_path, method: :get %>
+    <%= button_to 'Friends', friends_path, method: :get %>
+  <% elsif current_page?(friends_path) %>
+    <%= button_to 'Dashboard', dashboard_path, method: :get %>
+    <!-- TODO will update line 21 with friend_path once that functionality is added-->
+  <% elsif current_page?(history_path) %> 
+    <%= button_to 'Dashboard', dashboard_path, method: :get %>
+    <%= button_to 'Friends', friends_path, method: :get %>
+  <% end %>
   </div>
+
 </head>
 
 <body>

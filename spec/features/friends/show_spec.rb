@@ -58,6 +58,23 @@ RSpec.describe 'friends show page' do
 
   end
 
+  # describe 'I see the nav bar' do
+  #   before :each do
+  #     visit "/friends/middleearth/posts"
+  #   end
+  #   it 'has Dashboard button' do
+  #     within '#account' do
+  #       expect(page).to have_button('Dashboard')
+  #     end
+  #   end
+
+  #   it 'has Logout button' do
+  #     within '#account' do
+  #       expect(page).to have_button('Logout')
+  #     end
+  #   end
+  # end
+
   it 'has a link to each friends show page from the friends list index' do
     visit '/friends'
     within("#friends_list") do

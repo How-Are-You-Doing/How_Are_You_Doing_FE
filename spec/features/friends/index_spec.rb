@@ -131,6 +131,23 @@ RSpec.describe 'friends index page' do
       to_return(status: 200, body: incoming_friend_requests_response.to_json, headers: {})
   end
 
+  describe 'I see the nav bar' do
+    before :each do
+      visit friends_path
+    end
+    it 'has Dashboard button' do
+      within '#account' do
+        expect(page).to have_button('Dashboard')
+      end
+    end
+
+    it 'has Logout button' do
+      within '#account' do
+        expect(page).to have_button('Logout')
+      end
+    end
+  end
+
   it 'has a friends index page with a search field to find new users by email' do
     visit '/friends'
 
