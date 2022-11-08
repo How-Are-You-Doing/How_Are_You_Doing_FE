@@ -7,7 +7,8 @@ RSpec.describe Friendship do
                   type: 'friend_follower', 
                   attributes: { name: 'Ricky LaFleur', 
                                 email: 'igotmy@grade10.com', 
-                                google_id: '19023306' } }
+                                google_id: '19023306',
+                                request_status: 'accepted'} }
     @friendship = Friendship.new(friend_data)
   end
   describe 'initialization' do
@@ -20,6 +21,7 @@ RSpec.describe Friendship do
       expect(@friendship.friend_name).to eq('Ricky LaFleur')
       expect(@friendship.friend_email).to eq('igotmy@grade10.com')
       expect(@friendship.friend_google_id).to eq('19023306')
+      expect(@friendship.request_status).to eq('accepted')
       expect(@friendship.friendship_id).to eq(4)
     end
   end

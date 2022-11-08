@@ -75,8 +75,8 @@ class DatabaseService
 
   def self.update_friend_request(friendship_id, request_status)
     # needs friendship table record ID and the decision on status (accept/reject)
-
-    response = conn.get("/api/v2/friends/#{friendship_id}") do |req|
+    #request status is numeric pending 0, accepted 1, rejected 2
+    response = conn.put("/api/v2/friends/#{friendship_id}") do |req|
       req.params[:request_status] = request_status
     end
     JSON.parse(response.body, symbolize_names: true)
