@@ -3,6 +3,7 @@
 
 <div id="posts">
   <% @posts.each do |post| %>
+    <strong><%= post.created_at.strftime("%A, %B %d, %Y") %></strong>
     <p>Description: <%= post.description %></p>
     <p>Tone: <%= post.tone %></p>
     <p>Emotion: <%= post.emotion %></p>
