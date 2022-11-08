@@ -4,6 +4,7 @@ class DatabaseService
   def self.conn(user = nil)
     Faraday.new(url: 'http://localhost:5000') do |req|
       req.headers['USER'] = user.google_id if user
+      # req.params[:user] = user.google_id if user
     end
   end
 
@@ -31,6 +32,7 @@ class DatabaseService
   def self.sent_requests(google_id)
     response = conn.get("/api/v2/friends?request_status=pending") do |req|
       req.params[:user] = google_id
+      # req.params[:request_status] = 'pending'
     end
     JSON.parse(response.body, symbolize_names: true)
   end
