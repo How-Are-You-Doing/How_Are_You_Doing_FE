@@ -123,6 +123,7 @@ RSpec.describe 'friends show page' do
   it 'displays a list of a friends posts' do
     visit "/friends/middleearth/posts"
     within("#posts") do
+      expect(page).to have_content("Tuesday, November 01, 2022")
       expect(page).to have_content("Emotion: happy")
       expect(page).to have_content("Description: feeling happy")
       expect(page).to have_content("Tone: joyful")
