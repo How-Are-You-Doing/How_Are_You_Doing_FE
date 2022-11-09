@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 
   def destroy
     DatabaseFacade.delete_post(params[:id])
-    redirect_to history_path
+    redirect_back fallback_location: root_path
   end
 
   def index

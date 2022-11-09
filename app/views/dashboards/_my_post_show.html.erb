@@ -5,4 +5,5 @@
     <p> Created on <%= @recent_post.created_at.to_formatted_s(:long_ordinal) %></p>
     <p> This post is currently <%= @recent_post.post_status %></p>
     <%= button_to 'edit this post', edit_post_path, method: :get, params: { post_id: @recent_post.id, source: 'dashboard' } %>
+    <%= button_to 'Delete', "/posts/#{@recent_post.id}", method: :delete %>
   </div>
