@@ -1,3 +1,18 @@
+<head>
+  <title>JavaScript Tag Cloud Chart</title>  
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+  <style>
+    html, body, #container {
+    width: 85%;
+    height: 85%;
+    margin: 0;
+    padding: 0;
+    }
+  </style>    
+</head>
+
+
 <% if @recent_post %>
   <%= render partial: 'my_post_show'%>
 
@@ -7,7 +22,8 @@
 <% else %>
   <h1>Welcome, <%=current_user.name%>!</h1>
   <h2>How are you doing?</h2>
-  <%= render partial: 'word_cloud', formats: [:js, :html] %>
+  <span id='container'></span>
+  <%= render partial: 'word_cloud.html.js', formats: :js %>
 <% end %>
 <% if @recent_post %>
   <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>

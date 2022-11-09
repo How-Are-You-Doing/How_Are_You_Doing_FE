@@ -4,19 +4,18 @@ class DashboardsController < ApplicationController
   # protect_from_forgery except: :show
 
   def show
-    render 'word_cloud.html.js'
-    # @pending_requests = DatabaseFacade.pending_requests_to_friendships(current_user.google_id)
-    # return show_recent_post if recently_posted?
-    # if params[:description]
-    #   new_post = UserPost.new(post_params)
-    #   @recent_post = DatabaseFacade.new_post(new_post)
-    # elsif params[:emotion]
-    #   word = params[:emotion]
-    #   definition = lookup_emotion(word).definition
-    #   @emotion = [word, definition]
-    # else
-    #   @emotions_grid = words_only(DatabaseFacade.emotions)
-    # end
+    @pending_requests = DatabaseFacade.pending_requests_to_friendships(current_user.google_id)
+    return show_recent_post if recently_posted?
+    if params[:description]
+      new_post = UserPost.new(post_params)
+      @recent_post = DatabaseFacade.new_post(new_post)
+    elsif params[:emotion]
+      word = params[:emotion]
+      definition = lookup_emotion(word).definition
+      @emotion = [word, definition]
+    else
+      # render 'word_cloud.html.js'
+    end
   end
 
   private
