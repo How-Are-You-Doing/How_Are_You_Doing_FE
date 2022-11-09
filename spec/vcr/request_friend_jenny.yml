@@ -1,0 +1,177 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:5000/api/v2/friends?email=jenny@tommytutone.com&user=19023306
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"120251510f95190d98451b30bb43677c"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 01bb0833-d92a-4f31-9c41-57c7f876f58e
+      X-Runtime:
+      - '0.067371'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"message":"Friend successfully created"}'
+  recorded_at: Tue, 08 Nov 2022 20:16:38 GMT
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/friends?request_status=accepted&user=19023306
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"f4faa1df65c0f02691f7d88e159b9ea3"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 901470f4-c4f9-441d-ac7a-1d111ffbce03
+      X-Runtime:
+      - '0.003938'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":2,"friendship_id":1,"type":"friend_followee","attributes":{"name":"Bubbles","email":"catlover69@hotmail.com","google_id":"7357151","request_status":"accepted"}}]}'
+  recorded_at: Tue, 08 Nov 2022 20:16:38 GMT
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/friends?request_status=pending&user=19023306
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"d72d64ace8e5470d395146f1d5307652"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - aaeb00b4-678f-4cec-a1f4-4e299fc60230
+      X-Runtime:
+      - '0.003330'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":7,"friendship_id":4,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309","request_status":"pending"}},{"id":7,"friendship_id":21,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309","request_status":"pending"}}]}'
+  recorded_at: Tue, 08 Nov 2022 20:16:38 GMT
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/friends?user=19023306
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"e5b01bd906c23ae5e8952036b49e3073"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5601521a-ec46-44aa-a90b-e374db0a290a
+      X-Runtime:
+      - '0.019248'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":2,"friendship_id":1,"type":"friend_followee","attributes":{"name":"Bubbles","email":"catlover69@hotmail.com","google_id":"7357151","request_status":"accepted"}},{"id":3,"friendship_id":2,"type":"friend_followee","attributes":{"name":"Jim
+        Lahey","email":"supervisor@sunnyvale.ca","google_id":"83465653","request_status":"rejected"}},{"id":3,"friendship_id":3,"type":"friend_followee","attributes":{"name":"Jim
+        Lahey","email":"supervisor@sunnyvale.ca","google_id":"83465653","request_status":"rejected"}},{"id":7,"friendship_id":4,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309","request_status":"pending"}},{"id":7,"friendship_id":21,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309","request_status":"pending"}}]}'
+  recorded_at: Tue, 08 Nov 2022 20:16:38 GMT
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/friends?request_status=pending&user=19023306
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"d72d64ace8e5470d395146f1d5307652"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 81edaee9-528e-43d3-a57d-c0541dc938b2
+      X-Runtime:
+      - '0.004610'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":7,"friendship_id":4,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309","request_status":"pending"}},{"id":7,"friendship_id":21,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309","request_status":"pending"}}]}'
+  recorded_at: Tue, 08 Nov 2022 20:16:38 GMT
+recorded_with: VCR 6.1.0

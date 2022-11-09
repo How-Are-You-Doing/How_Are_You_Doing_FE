@@ -24,11 +24,17 @@ class DatabaseFacade
     pending_requests[:data].map { |user| UserPoro.new(user) }
   end
 
+  def self.pending_requests_to_friendships(google_id)
+    pending_requests = DatabaseService.users_pending_requests(google_id)
+    # return pending_requests if pending_requests.empty?
+    pending_requests[:data].map { |friendship| Friendship.new(friendship) }
+  end
+
   #these are outgoing friend requests in the pending state
   def self.sent_friend_requests(google_id)
     requests = DatabaseService.sent_requests(google_id)
     requests[:data].map { |user| UserPoro.new(user) }
-    end
+  end
     
   def self.new_post(post)
     post_data = DatabaseService.new_post(post)
@@ -59,5 +65,10 @@ class DatabaseFacade
     end
   end
 
+  def self.update_friend_request(friendship_id, request_status)
+    updated_frienship = DatabaseService.update_friend_request(friendship_id, request_status)
+    return {} if updated_frienship.nil?
 
+    Friendship.new(updated_frienship[:data])
+  end
 end

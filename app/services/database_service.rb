@@ -4,6 +4,7 @@ class DatabaseService
   def self.conn(user = nil)
     Faraday.new(url: 'http://localhost:5000') do |req|
       req.headers['USER'] = user.google_id if user
+      # req.params[:user] = user.google_id if user
     end
   end
 
@@ -29,8 +30,9 @@ class DatabaseService
 
   #these are outgoing requests that display on the friends index once a request has been sent
   def self.sent_requests(google_id)
-    response = conn.get("/api/v1/friends?request_status=pending") do |req|
-      req.headers[:user] = google_id
+    response = conn.get("/api/v2/friends?request_status=pending") do |req|
+      req.params[:user] = google_id
+      # req.params[:request_status] = 'pending'
     end
     JSON.parse(response.body, symbolize_names: true)
   end
@@ -77,6 +79,15 @@ class DatabaseService
   def self.user_post_history(google_id)
     response = conn.get("/api/v2/users/history") do |req|
       req.params[:user] = google_id
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.update_friend_request(friendship_id, request_status)
+    # needs friendship table record ID and the decision on status (accept/reject)
+    #request status is numeric pending 0, accepted 1, rejected 2
+    response = conn.put("/api/v2/friends/#{friendship_id}") do |req|
+      req.params[:request_status] = request_status
     end
     JSON.parse(response.body, symbolize_names: true)
   end

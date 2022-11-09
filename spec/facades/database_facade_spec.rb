@@ -240,5 +240,43 @@ RSpec.describe DatabaseFacade do
         end
       end
     end
+
+    describe '#update_friend_request' do
+      describe 'updates a friend request from pending to rej/accepted' do
+        before :each do
+          @user = User.create!(name: "Jenny", email: "jenny@tommytutone.com", google_id: "8675309", token: "fake_token_7")
+          VCR.use_cassette('pending_friendships_for_jenny') do
+            @users_pending_friendships = DatabaseFacade.pending_requests_to_friendships(@user.google_id)
+          end
+          @rejected_friendship = @users_pending_friendships.last
+          @accepted_friendship = @users_pending_friendships.last
+        end
+
+        it 'returns a Friendship object' do
+          VCR.use_cassette('rejecting_friendship_for_jenny', allow_playback_repeats: true ) do
+            updated_friendship = DatabaseFacade.update_friend_request(@rejected_friendship.friendship_id, "rejected")
+            expect(updated_friendship).to be_a(Friendship)
+          end
+        end
+
+        context 'accepting request' do
+          it 'returns the friendship object with updated request status' do
+            VCR.use_cassette('accepting_friendship_for_jenny', allow_playback_repeats: true ) do
+              updated_friendship = DatabaseFacade.update_friend_request(@accepted_friendship.friendship_id, "accepted")
+              expect(updated_friendship.request_status).to eq('accepted')
+            end
+          end
+        end
+
+        context 'rejected request' do
+          it 'returns the friendship object with updated request status' do
+            VCR.use_cassette('rejected_friendship_for_jenny', allow_playback_repeats: true ) do
+              updated_friendship = DatabaseFacade.update_friend_request(@rejected_friendship.friendship_id, "rejected")
+              expect(updated_friendship.request_status).to eq('rejected')
+            end
+          end
+        end
+      end
+    end
   end
 end

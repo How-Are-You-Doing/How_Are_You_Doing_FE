@@ -2,138 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'friends index page' do
   before :each do
-    @user = create(:user, google_id: '91239464')
+    @user = create(:user, google_id: '19023306')
     allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
     allow_any_instance_of(FriendsController).to receive(:current_user).and_return(@user)
-    user_search_response = { "data": {
-      "id": "36",
-      "type": "user",
-      "attributes": {
-        "name": "Some Dude",
-        "email": "somedude@hotmail.com",
-        "google_id": "whocares"
-      }
-    } }.to_json
-
-    stub_request(:get, "http://localhost:5000/api/v2/users?email=somedude@hotmail.com").
-      to_return(status: 200, body: user_search_response, headers: {})
-
-    user_2 = { "data": {
-      "id": "48",
-      "type": "user",
-      "attributes": {
-        "name": "Frodo",
-        "email": "frodo@hotmail.com",
-        "google_id": "googleid"
-      }
-    },
-    }.to_json
-
-    stub_request(:get, "http://localhost:5000/api/v2/users?email=frodo@hotmail.com").
-      to_return(status: 200, body: user_2, headers: {})
-
-    user_3 = { "data": {
-      "id": "48",
-      "type": "user",
-      "attributes": {
-        "name": "Fofandalf",
-        "email": "wizardstuff3@hotmail.com",
-        "google_id": "midtierearth"
-      }
-    },
-    }.to_json
-
-    stub_request(:get, "http://localhost:5000/api/v2/users?email=wizardstuff3@hotmail.com").
-      to_return(status: 200, body: user_3, headers: {})
-
-    friends_response = { "data":
-      [
-        {
-          "id": "1",
-          "type": "user",
-          "attributes": { "name": "Quinland Rutherford",
-            "email": "sedude@hotmail.com",
-            "google_id": "whares"
-          }
-        },
-        {
-          "id": "2",
-          "type": "user",
-          "attributes": { "name": "Spider Man",
-            "email": "sedu@hotmail.com",
-            "google_id": "hars" }
-        }
-      ]
-    }.to_json
-
-    stub_request(:get, "http://localhost:5000/api/v1/friends").
-      to_return(status: 200, body: friends_response, headers: {})
-
-    accepted_friends_response = {
-      "data": [{
-        "id": "111",
-        "type": "user",
-        "attributes": {
-          "name": "Gandalf",
-          "email": "wizardstuff@hotmail.com",
-          "google_id": "middleearth"
-        }
-      }],
-    }.to_json
-
-    stub_request(:get, "http://localhost:5000/api/v1/friends?request_status=accepted").
-      to_return(status: 200, body: accepted_friends_response)
-
-    rejected_friends_response = {
-      "data": [{
-        "id": "112",
-        "type": "user",
-        "attributes": {
-          "name": "Shmandalf",
-          "email": "wizardstuff2@hotmail.com",
-          "google_id": "centerearth"
-        }
-      }],
-    }.to_json
-
-    stub_request(:get, "http://localhost:5000/api/v1/friends?request_status=rejected").
-      to_return(status: 200, body: rejected_friends_response)
-
-    pending_friends_response = {
-      "data": [{
-        "id": "113",
-        "type": "user",
-        "attributes": {
-          "name": "Fofandalf",
-          "email": "wizardstuff3@hotmail.com",
-          "google_id": "midtierearth"
-        }
-      }],
-    }.to_json
-
-    stub_request(:get, "http://localhost:5000/api/v1/friends?request_status=pending").
-      to_return(status: 200, body: pending_friends_response)
-
-
-    sent_friend_request_response = { "data":
-      { "attributes":
-        { "email": "wizardstuff3@hotmail.com" }
-      }
-    }.to_json
-
-    stub_request(:post, "http://localhost:5000/api/v1/friends?email=wizardstuff3@hotmail.com").
-      to_return(status: 201, body: sent_friend_request_response)
-
-    incoming_friend_requests_response = { data: [
-
-    ] }
-    stub_request(:get, "http://localhost:5000/api/v2/users/followers?request_status=pending").
-      to_return(status: 200, body: incoming_friend_requests_response.to_json, headers: {})
   end
 
   describe 'I see the nav bar' do
     before :each do
-      visit friends_path
+      VCR.use_cassette('go_to_friends_path') do
+        visit friends_path
+      end
     end
     it 'has Dashboard button' do
       within '#account' do
@@ -149,73 +27,93 @@ RSpec.describe 'friends index page' do
   end
 
   it 'has a friends index page with a search field to find new users by email' do
-    visit '/friends'
+    VCR.use_cassette('go_to_friends_path') do
+      visit '/friends'
 
-    within("#find_friend_form") do
-      fill_in 'Email', with: "somedude@hotmail.com"
-      click_button 'Find Friend'
-    end
+      VCR.use_cassette('find_friend_jenny') do
+        within("#find_friend_form") do
+          fill_in 'Email', with: "jenny@tommytutone.com"
+          click_button 'Find Friend'
+        end
 
-    within("#search_results") do
-      expect(page).to have_content("Some Dude")
+        within("#search_results") do
+          expect(page).to have_content("Jenny")
+        end
+      end
     end
   end
 
   it 'has a button to follow a new friend' do
-    visit 'friends'
-    fill_in 'Email', with: "wizardstuff3@hotmail.com"
-    click_button 'Find Friend'
+    VCR.use_cassette('go_to_friends_path') do
+      visit 'friends'
+      VCR.use_cassette('find_friend_jenny') do
+        fill_in 'Email', with: "jenny@tommytutone.com"
+        click_button 'Find Friend'
 
-    expect(page).to have_content("Fofandalf")
-    click_button 'Send Friend Request'
-    expect(current_path).to eq('/friends')
+        expect(page).to have_content("Jenny")
+        VCR.use_cassette('request_friend_jenny') do
+          click_button 'Send Friend Request'
+          expect(current_path).to eq('/friends')
+        end
+      end
+    end
   end
 
   it 'returns a message when a friend request is successfully sent' do
-    visit 'friends'
-    fill_in 'Email', with: "wizardstuff3@hotmail.com"
-    click_button 'Find Friend'
-    click_button 'Send Friend Request'
-    expect(page).to have_content("Friend Request Sent Successfully")
+     VCR.use_cassette('go_to_friends_path') do
+      visit 'friends'
+      VCR.use_cassette('find_friend_jenny') do
+        fill_in 'Email', with: "jenny@tommytutone.com"
+        click_button 'Find Friend'
+        VCR.use_cassette('request_friend_jenny') do
+          click_button 'Send Friend Request'
+          expect(page).to have_content("Friend Request Sent Successfully")
 
-    within("#sent_friend_requests") do
-      expect(page).to have_content("wizardstuff3@hotmail.com")
+          within("#sent_friend_requests") do
+            expect(page).to have_content("jenny@tommytutone.com")
+          end
+        end
+      end
     end
   end
 
   context 'if there are no results' do
     it 'returns message' do
-      user_search_response = { "data": [] }.to_json
+      VCR.use_cassette('go_to_friends_path_2') do
+        visit '/friends'
 
-      stub_request(:get, "http://localhost:5000/api/v2/users?email=somedude@hotmail.com").
-        to_return(status: 200, body: user_search_response, headers: {})
+        VCR.use_cassette('find_nonexistent_friend') do
+          within("#find_friend_form") do
+            fill_in 'Email', with: "somedude@hotmail.com"
+            click_button 'Find Friend'
+          end
 
-      visit '/friends'
-
-      within("#find_friend_form") do
-        fill_in 'Email', with: "somedude@hotmail.com"
-        click_button 'Find Friend'
-      end
-
-      within("#search_results") do
-        expect(page).to have_content('No search results')
+          within("#search_results") do
+            expect(page).to have_content('No search results')
+          end
+        end
       end
     end
   end
 
   it 'has a list of friends the user follows and has been accepted by' do
-    visit '/friends'
-    within("#friends_list") do
-      expect(page).to have_content("Gandalf")
+    VCR.use_cassette('go_to_friends_path') do
+      visit '/friends'
+      within("#friends_list") do
+        expect(page).to have_content("Bubbles")
+      end
     end
   end
 
+
   it 'has a button to return to user dashboard page' do
-    VCR.use_cassette('dashboard_return') do
-      VCR.use_cassette('last_post_of_user') do
+    VCR.use_cassette('go_to_friends_path') do
       visit '/friends'
       click_button 'Dashboard'
-      expect(current_path).to eq(dashboard_path)
+      VCR.use_cassette('dashboard_return') do
+        VCR.use_cassette('last_post_of_user') do
+          expect(current_path).to eq(dashboard_path)
+        end
       end
     end
   end
