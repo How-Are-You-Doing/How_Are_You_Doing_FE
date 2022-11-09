@@ -10,25 +10,35 @@
 
 </head>
 <body>
-
-  <div id="account">
-    <% if current_user %>
-      <%= button_to "Logout", logout_path, id: "logout", method: :get %>
-    <% end %>
-  <% if current_page?(dashboard_path) %>
-    <%= button_to 'History', history_path, method: :get %>
-    <%= button_to 'Friends', friends_path, method: :get %>
-  <% elsif current_page?(friends_path) %>
-    <%= button_to 'Dashboard', dashboard_path, method: :get %>
-  <% elsif current_page?(history_path) %> 
-    <%= button_to 'Dashboard', dashboard_path, method: :get %>
-    <%= button_to 'Friends', friends_path, method: :get %>
-  <% elsif request.original_url.include?("/posts") %>
-    <%= button_to 'Dashboard', dashboard_path, method: :get %>
-    <%= button_to 'History', friends_path, method: :get %>
-  <% end %>
+  <div class="nav justify-content-center">
+    <div id="account">
+      <ul>
+        <% if current_user %>
+          <li><%= button_to "Logout", logout_path, id: "logout", method: :get, class: "nav justify-content-right" %></li>
+        <% end %>
+        <% if current_page?(dashboard_path) %>
+          <li><%= button_to 'History', history_path, method: :get %></li>
+          <li><%= button_to 'Friends', friends_path, method: :get %></li>
+        <% elsif current_page?(friends_path) %>
+          <li><%= button_to 'Dashboard', dashboard_path, method: :get %></li>
+        <% elsif current_page?(history_path) %> 
+          <li><%= button_to 'Dashboard', dashboard_path, method: :get %></li>
+          <li><%= button_to 'Friends', friends_path, method: :get %></li>
+        <% elsif request.original_url.include?("/posts") %>
+          <li><%= button_to 'Dashboard', dashboard_path, method: :get %></li>
+          <li><%= button_to 'History', friends_path, method: :get %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-<%= flash[:success] %>
+  <div class="alert alert-success" role="alert">
+    <%= flash[:success] %>
+  </div>
+
+  <div class="alert alert-danger" role="alert">
+    <%= flash[:error] %>
+  </div>
+
 <%= yield %>
 </body>
 </html>
