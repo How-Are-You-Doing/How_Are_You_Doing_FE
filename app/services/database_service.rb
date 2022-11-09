@@ -37,7 +37,8 @@ class DatabaseService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def self.last_post(google_id) #using v2 according to Aleisha's newest endpoint drop. I'm gonna pass this back to you and update the docs from here.
+  def self.last_post(google_id)
+    #using v2 according to Aleisha's newest endpoint drop. I'm gonna pass this back to you and update the docs from here.
     response = conn.get("/api/v2/posts/last?user=#{google_id}")
     JSON.parse(response.body, symbolize_names: true)
   end
@@ -66,6 +67,13 @@ class DatabaseService
       req.params[:post] = post_id
     end
     JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def self.delete_post(post_id)
+    response = conn.delete("/api/v2/posts/#{post_id}") do |req|
+      req.params[:post] = post_id
+    end
+    return 'post did not delete' if response.status != 204
   end
 
   def self.user_post_history(google_id)

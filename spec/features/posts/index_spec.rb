@@ -29,7 +29,7 @@ RSpec.describe 'history index page', type: :feature do
             expect(page).to have_button('Dashboard')
           end
         end
-    
+
         it 'has Logout button' do
           within '#account' do
             expect(page).to have_button('Logout')
@@ -47,12 +47,12 @@ RSpec.describe 'history index page', type: :feature do
           visit '/history'
 
           expect(page).to have_content("How You've Been Doing Lately")
-          within('#history') do  
-            user_posts.each do |post| 
-                expect(page).to have_content("#{post.emotion}")
-                expect(page).to have_content("#{post.description}")
-                expect(page).to have_content("#{post.post_status}")
-                expect(page).to have_content("#{post.tone}")
+          within('#history') do
+            user_posts.each do |post|
+              expect(page).to have_content("#{post.emotion}")
+              expect(page).to have_content("#{post.description}")
+              expect(page).to have_content("#{post.post_status}")
+              expect(page).to have_content("#{post.tone}")
             end
           end
         end
@@ -61,7 +61,7 @@ RSpec.describe 'history index page', type: :feature do
       it "If i am a user with no posts I see 'You have no posts yet' on my history page" do
 
         @user_2_lonely = User.create!(name: "Lonely", email: "noposts@lonely.alone", google_id: 8675310, token: 'fake_token')
-        
+
         allow_any_instance_of(PostsController).to receive(:current_user).and_return(@user_2_lonely)
         VCR.use_cassette('lonely_user_info') do
 
@@ -73,6 +73,34 @@ RSpec.describe 'history index page', type: :feature do
           expect(page).to have_content("You don't have any posts.")
         end
       end
+
+      it "has a button to delete a users posts from the post history page" do
+        VCR.use_cassette('delete_posts') do
+          @user = User.create!(name: "Bubbles", email: "catlover69@hotmail.com", google_id: "7357151", token: "s23463")
+          allow_any_instance_of(PostsController).to receive(:current_user).and_return(@user)
+
+          post_data = {
+            description: "'don't feel this way anymore so going to delete!'",
+            emotion: 'Embarrassed',
+            post_status: 'personal',
+            user_google_id: '7357151'
+          }
+
+          @user_post = DatabaseFacade.new_post(UserPost.new(post_data))
+          visit '/history'
+
+          VCR.use_cassette('redirect_back') do
+            within("#post_#{@user_post.id}") do
+              click_button 'Delete'
+              expect(current_path).to eq(history_path)
+            end
+              expect(page).to_not have_content(@user_post.description)
+              expect(page).to_not have_content(@user_post.emotion)
+              expect(page).to_not have_content(@user_post.created_at)
+              end
+            end
+          end
+        end
+      end
     end
-  end
-end
+

@@ -5,7 +5,6 @@ class DashboardsController < ApplicationController
   def show
     @pending_requests = DatabaseFacade.pending_requests_to_friendships(current_user.google_id)
     return show_recent_post if recently_posted?
-
     if params[:description]
       new_post = UserPost.new(post_params)
       @recent_post = DatabaseFacade.new_post(new_post)

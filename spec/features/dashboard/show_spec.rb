@@ -38,7 +38,7 @@ RSpec.describe 'dashboard' do
           end
         end
       end
-      
+
       describe 'I see a list of my pending friend requests' do
         it 'lists the users/followers whose friend status with me are pending' do
 
@@ -155,7 +155,7 @@ RSpec.describe 'dashboard' do
 
           allow(DatabaseFacade).to receive(:new_post).and_return(@last_post)
           allow(DatabaseFacade).to receive(:last_post).and_return(@last_post)
-          
+
           within '#emotion_form' do
             select @chosen_emotion.word
             click_button 'submit'
@@ -183,13 +183,34 @@ RSpec.describe 'dashboard' do
             expect(page).to have_content(@last_post.post_status)
           end
         end
-        
       end
 
-      
       describe 'I can delete my post' do
-        # <%= button_to 'delete this post', method: :delete, params: { post_id = @recent_post.id } %>
+        it 'can allow the user to delete their post off user dashboard' do
+          VCR.use_cassette('user_delete_post') do
+            post_data = {
+              description: "trying to delete post",
+              emotion: 'Embarrassed',
+              post_status: 'personal',
+              user_google_id: '8675309'
+            }
 
+            @user_post = DatabaseFacade.new_post(UserPost.new(post_data))
+
+            allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(true)
+            allow(DatabaseFacade).to receive(:last_post).with('8675309').and_return(@user_post)
+
+            visit dashboard_path
+            allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(false)
+
+            within("#post_#{@user_post.id}") do
+              click_button 'Delete'
+              expect(current_path).to eq dashboard_path
+            end
+            expect(page).to_not have_content(@user_post.description)
+            expect(page).to_not have_content(@user_post.tone)
+          end
+        end
       end
     end
   end
