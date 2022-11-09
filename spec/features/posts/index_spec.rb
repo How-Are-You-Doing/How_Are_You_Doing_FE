@@ -76,19 +76,31 @@ RSpec.describe 'history index page', type: :feature do
 
       it "has a button to delete a users posts from the post history page" do
         VCR.use_cassette('delete_posts') do
-          user_2 = User.create!(name: "Bubbles", email: "catlover69@hotmail.com", google_id: "7357151", token: "s23463")
-          allow_any_instance_of(PostsController).to receive(:current_user).and_return(user_2)
+          @user = User.create!(name: "Bubbles", email: "catlover69@hotmail.com", google_id: "7357151", token: "s23463")
+          allow_any_instance_of(PostsController).to receive(:current_user).and_return(@user)
 
-          last_post = DatabaseFacade.user_post_history(user_2.google_id).last
+          post_data = {
+            description: "'don't feel this way anymore so going to delete!'",
+            emotion: 'Embarrassed',
+            post_status: 'personal',
+            user_google_id: '7357151'
+          }
 
+          @user_post = DatabaseFacade.new_post(UserPost.new(post_data))
           visit '/history'
 
-          within("#post_#{last_post.id}") do
-            click_button 'Delete'
+          VCR.use_cassette('redirect_back') do
+            within("#post_#{@user_post.id}") do
+              click_button 'Delete'
+              expect(current_path).to eq(history_path)
+            end
+              expect(page).to_not have_content(@user_post.description)
+              expect(page).to_not have_content(@user_post.emotion)
+              expect(page).to_not have_content(@user_post.created_at)
+              end
+            end
           end
-          expect(last_post.present?).to eq False
         end
       end
     end
-  end
-end
+
