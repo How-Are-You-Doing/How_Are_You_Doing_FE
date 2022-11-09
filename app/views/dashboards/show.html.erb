@@ -7,7 +7,7 @@
 <% else %>
   <h1>Welcome, <%=current_user.name%>!</h1>
   <h2>How are you doing?</h2>
-  <%= render partial: 'emotion_form_A' %>
+  <%= render partial: 'word_cloud', formats: [:js, :html] %>
 <% end %>
 <% if @recent_post %>
   <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>
