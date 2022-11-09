@@ -31,13 +31,19 @@
       </ul>
     </div>
   </div>
-  <div class="alert alert-success" role="alert">
-    <%= flash[:success] %>
-  </div>
+  <% flash.each do |type, message| %>
+    <% if type == :success %>
+      <div class="alert alert-success" role="alert">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
 
-  <div class="alert alert-danger" role="alert">
-    <%= flash[:error] %>
-  </div>
+    <% if type == :error %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+  <% end %>
 
 <%= yield %>
 </body>
