@@ -55,4 +55,10 @@ RSpec.describe 'friends show page' do
       end
     end
   end
+
+  it 'displays the dashboard and history buttons' do
+    visit "/friends/middleearth/posts"
+      expect(page).to have_button("Dashboard")
+      expect(page).to have_button("History")
+  end
 end
