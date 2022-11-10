@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="mx-auto" style="width: 450px">
+  <div class="justify-content-center">
     <div id="search_results">
       <% if @user %>
         <% if @user.present? %>
@@ -28,7 +28,7 @@
 <div class="container" style="padding:50px 0px;">
   <div class="row">
     <div class="col-sm" id="sent_friend_requests">
-      <div class="mx-auto">
+      <div class="justify-content-center">
         <h4>Sent Friend Requests</h4>
           <ul>
             <% @friend_request_sent.each do |friend| %>
@@ -38,13 +38,13 @@
     </div>
 
     <div class="col-lg" id="friends_list">
-      <div class="mx-auto">
-      <h3>Friend List</h3>
-      <ol>
-        <% @accepted_friends.each do |friend| %>
-          <li><%= link_to friend.name, "/friends/#{friend.google_id}/posts" %></li>
-        <% end %>
-      </ol>
+      <div class="justify-content-center">
+        <h3>Friend List</h3>
+          <ol>
+            <% @accepted_friends.each do |friend| %>
+              <li><%= link_to friend.name, "/friends/#{friend.google_id}/posts" %></li>
+            <% end %>
+          </ol>
     </div>
   </div>
 </div>

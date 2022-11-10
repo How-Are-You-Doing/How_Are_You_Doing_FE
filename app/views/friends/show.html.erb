@@ -1,11 +1,15 @@
-<h1><%= @friend.name %>'s Recent Posts</h1>
+<div class="container">
+  <div class="justify-content-center">
+    <h1><%= @friend.name %>'s Recent Posts</h1>
 
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <strong><%= post.created_at.strftime("%A, %B %d, %Y") %></strong>
-    <p>Description: <%= post.description %></p>
-    <p>Tone: <%= post.tone %></p>
-    <p>Emotion: <%= post.emotion %></p>
-  <% end %>
+      <div id="posts">
+        <% @posts.each do |post| %>
+          <strong><%= post.created_at.strftime("%A, %B %d, %Y") %></strong>
+          <p>Description: <%= post.description %></p>
+          <p>Tone: <%= post.tone %></p>
+          <p>Emotion: <%= post.emotion %></p>
+        <% end %>
+    </div>
+  </div>
 </div>
