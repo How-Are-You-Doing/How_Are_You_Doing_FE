@@ -28,10 +28,20 @@
     <%= button_to 'History', friends_path, method: :get %>
   <% end %>
   </div>
-<%= flash[:success] %>
-<%= yield %>
+
+    <% flash.each do |type, msg| %>
+      <% if type == "success" %>
+        <div class="alert alert-success" role="alert">
+          <p><%= msg %></p>
+        </div>
+      <% else %>
+        <div class="alert alert-danger" role="alert">
+          <p><%= msg %></p>
+        </div>
+      <% end %>
+    <% end %>
+
+   <%= yield %>
+
 </body>
-<footer style="padding:100px 0px;">
-  <p>Repo Name:</p>
-</footer>
 </html>
