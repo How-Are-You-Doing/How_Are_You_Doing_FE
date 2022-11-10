@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:5000/api/v2/friends?user=19023306
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"1cfb13bc41790f506329f26484b07df7"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 84b8f904-b714-48ff-a68d-30e9bd7106d5
+      X-Runtime:
+      - '0.305685'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":2,"friendship_id":1,"type":"friend_followee","attributes":{"name":"Bubbles","email":"catlover69@hotmail.com","google_id":"7357151"}},{"id":3,"friendship_id":2,"type":"friend_followee","attributes":{"name":"Jim
+        Lahey","email":"supervisor@sunnyvale.ca","google_id":"83465653"}},{"id":3,"friendship_id":3,"type":"friend_followee","attributes":{"name":"Jim
+        Lahey","email":"supervisor@sunnyvale.ca","google_id":"83465653"}},{"id":7,"friendship_id":4,"type":"friend_followee","attributes":{"name":"Jenny","email":"jenny@tommytutone.com","google_id":"8675309"}}]}'
+  recorded_at: Wed, 09 Nov 2022 16:28:47 GMT
+recorded_with: VCR 6.1.0

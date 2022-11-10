@@ -1,9 +1,13 @@
-  <div id='post_<%=@recent_post.id%>'>
-    <h2>I am feeling <%= @recent_post.emotion %>:</h2>
-    <p> <%= @recent_post.description %></p>
-    <p> The tone of your description best matches a <%= @recent_post.tone %> tone.</p>
-    <p> Created on <%= @recent_post.created_at.to_formatted_s(:long_ordinal) %></p>
-    <p> This post is currently <%= @recent_post.post_status %></p>
-    <%= button_to 'edit this post', edit_post_path, method: :get, params: { post_id: @recent_post.id, source: 'dashboard' } %>
-    <%= button_to 'Delete', "/posts/#{@recent_post.id}", method: :delete %>
+<div class="container">
+  <div class="justify-content-left align-items-center" style="padding:50px 0px;" >
+    <div id='post_<%= @recent_post.id %>'>
+      <h2>I am feeling <%= @recent_post.emotion %>:</h2>
+      <p> <%= @recent_post.description %></p>
+      <p> The tone of your description best matches a <%= @recent_post.tone %> tone.</p>
+      <p> Created on <%= @recent_post.created_at.to_formatted_s(:long_ordinal) %></p>
+      <p> This post is currently <%= @recent_post.post_status %></p>
+      <p><%= button_to 'edit this post', edit_post_path, class: 'btn btn-info', method: :get, params: { post_id: @recent_post.id, source: 'dashboard' } %></p>
+      <p><%= button_to 'Delete', "/posts/#{@recent_post.id}", class: 'btn btn-info', method: :delete %></p>
+    </div>
   </div>
+</div>

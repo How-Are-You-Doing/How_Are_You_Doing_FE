@@ -9,6 +9,7 @@
 
 # "How Are You Doing?" is a group project where a user can create an account, reflect and log their feelings, and check in on friends.
  <img align="center" alt="GIF" src="https://media3.giphy.com/media/VduFvPwm3gfGO8duNN/giphy.gif?cid=790b7611e73061164dd5e7294f6e6a58ca2fca00527bce79&rid=giphy.gif&ct=g" width="200" height="200" />
+ <img src="./app/assets/images/hayd_logo.jpg" alt="How Are You Doing" >
 
 #  ⚫ [Alaina Kneiling](https://github.com/Alaina-Noel) ⚫ [Mary Ballantyne](https://github.com/mballantyne3) ⚫⚫ [Andrew Mullins ](https://github.com/mullinsand) ⚫ [Carter Ball](https://github.com/cballryb) ⚫⚫ [Aleisha Mork](https://github.com/aleish-m) ⚫
 
