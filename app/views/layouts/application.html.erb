@@ -8,6 +8,11 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 </head>
+<style>
+body {
+  font-family: 'Times New Roman', serif;
+}
+</style>
 <body>
 
 <div id="account">
@@ -29,7 +34,22 @@
     <% end %>
   </nav>
 </div>
-<%= flash[:success] %>
+  
+  <% flash.each do |type, message| %>
+    <% if (type == :success) || (type == "success") %>
+      <div class="alert alert-success" role="alert">
+        <%= message %>
+      </div>
+    <% end %>
+
+
+    <% if (type == :error || type == "error") %>
+      <div class="alert alert-danger" role="alert">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+
 <%= yield %>
 </body>
 <footer class="page-footer font-small fixed-bottom bg-info">

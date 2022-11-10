@@ -10,10 +10,10 @@
         <% @user_history.each do |user_post| %>
           <div id="post_<%= user_post.id %>">
             <p>This post was created at: <%= user_post.created_at.strftime("%A, %B %d, %Y") %></p>
-            <p>You were feeling: <%= user_post.emotion %></p>
+            <p>You were feeling: <font color="#17a2b8"><%= user_post.emotion %></font></p>
             <p>You said: <%= user_post.description %></p>
             <p>This post is: <%= user_post.post_status %></p>
-            <p>The tone of your post was: <%= user_post.tone %></p>
+            <p>The tone of your post was: <font color="#17a2b8"><%= user_post.tone %></font></p>
             <p><%= button_to 'Delete', "/posts/#{user_post.id}", method: :delete, class: 'btn btn-info' %></p>
             <br>
           </div>

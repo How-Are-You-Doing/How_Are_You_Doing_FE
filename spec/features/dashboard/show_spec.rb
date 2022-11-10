@@ -147,6 +147,18 @@ RSpec.describe 'dashboard' do
             end
           end
         end
+
+        context 'submit an emotion with no text in description' do
+          it 'returns me back to description page with flash message' do
+            allow_any_instance_of(DashboardsController).to receive(:flash).and_return(error: "Post Description must have content")
+            within '#emotion_form' do
+              fill_in :description, with: ""
+              click_button 'submit'
+            end
+            expect(current_path).to eq(dashboard_path)
+            expect(page).to have_content("Post Description must have content")
+          end
+        end
       end
 
       describe 'when I submit an emotion and description' do
@@ -161,6 +173,7 @@ RSpec.describe 'dashboard' do
             click_button 'submit'
           end
           allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(true)
+          allow_any_instance_of(DashboardsController).to receive(:flash).and_return(success: "Post Created!")
           within '#emotion_form' do
             fill_in :description, with: @last_post.description
             click_button 'submit'
@@ -169,6 +182,12 @@ RSpec.describe 'dashboard' do
 
         it 'returns me to the dashboard' do
           expect(current_path).to eq(dashboard_path)
+        end
+
+        context 'successfully created post' do
+          it 'flash message saying post has been created' do
+            expect(page).to have_content("Post Created!")
+          end
         end
 
         it 'does not have an emotion form' do
