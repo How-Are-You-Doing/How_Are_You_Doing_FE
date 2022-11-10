@@ -1,4 +1,4 @@
-
+<div class="container">
 <div id="find_friend_form">
   <%= form_with url: '/friends', method: :get, local: true do |f| %>
     <%= f.label :email, 'Email' %>
@@ -34,4 +34,5 @@
       <li><%= link_to friend.name, "/friends/#{friend.google_id}/posts" %></li>
     <% end %>
   </ol>
+</div>
 </div>

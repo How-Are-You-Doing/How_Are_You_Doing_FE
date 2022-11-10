@@ -1,7 +1,11 @@
-  <h4>I am feeling...</h4>
-  <div id='emotion_form'>
-    <%= form_with url: dashboard_path, method: :get, local: true do |f| %>
-      <%= f.select :emotion, @emotions_grid %>
-      <%= f.submit 'submit' %>
-    <% end %>
+<div class="container">
+  <div class="justify-content-center">
+    <h4>I am feeling...</h4>
+    <div id='emotion_form'>
+      <%= form_with url: dashboard_path, method: :get, local: true do |f| %>
+        <%= f.select :emotion, @emotions_grid %>
+        <%= f.submit 'submit', class: 'btn btn-info mt-1' %>
+      <% end %>
+    </div>
   </div>
+</div>
