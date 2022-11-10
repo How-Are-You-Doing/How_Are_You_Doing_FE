@@ -34,19 +34,22 @@ body {
     <% end %>
   </nav>
 </div>
-
-<% flash.each do |type, msg| %>
-      <% if type == "success" %>
-        <div class="alert alert-success" role="alert">
-          <p><%= msg %></p>
-        </div>
-      <% else %>
-        <div class="alert alert-danger" role="alert">
-          <p><%= msg %></p>
-        </div>
-      <% end %>
+  
+  <% flash.each do |type, message| %>
+    <% if (type == :success) || (type == "success") %>
+      <div class="alert alert-success" role="alert">
+        <%= message %>
+      </div>
     <% end %>
-    
+
+
+    <% if (type == :error || type == "error") %>
+      <div class="alert alert-danger" role="alert">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+
 <%= yield %>
 </body>
 <footer class="page-footer font-small fixed-bottom bg-info">
