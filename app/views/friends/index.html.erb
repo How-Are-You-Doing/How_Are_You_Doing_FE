@@ -11,12 +11,12 @@
     </div>
   </div>
 
-  <div class="justify-content-center">
+  <div class="mx-auto" style="width: 450px">
     <div id="search_results">
       <% if @user %>
         <% if @user.present? %>
-          <%= @user.name %>
-          <%= button_to 'Send Friend Request', "/friends?email=#{params[:email]}" %>
+          <h4><%= @user.name %></h4>
+          <%= button_to 'Send Friend Request', "/friends?email=#{params[:email]}", class:"btn btn-info" %>
         <% else %>
           <p>No search results</p>
         <% end %>
