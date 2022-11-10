@@ -6,9 +6,9 @@
       <div id="posts">
         <% @posts.each do |post| %>
           <strong><%= post.created_at.strftime("%A, %B %d, %Y") %></strong>
-          <p>Description: <%= post.description %></p>
-          <p>Tone: <%= post.tone %></p>
-          <p>Emotion: <%= post.emotion %></p>
+          <p><b>Description:</b> <%= post.description %></p>
+          <p><b>Tone:</b> <%= post.tone %></p>
+          <p><b>Emotion:</b> <font color="#17a2b8"><%= post.emotion %></font></p>
         <% end %>
     </div>
   </div>
