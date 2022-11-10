@@ -1,28 +1,37 @@
-<% if @recent_post %>
-  <%= render partial: 'my_post_show'%>
+<div class="container">
+  <div class="justify-content-center">
+    <% if @recent_post %>
+      <%= render partial: 'my_post_show' %>
 
-<% elsif @emotion %>
-  <%= render partial: 'emotion_form_B', locals: {emotion: @emotion.first, definition: @emotion.last} %>
+    <% elsif @emotion %>
+      <%= render partial: 'emotion_form_B', locals: { emotion: @emotion.first, definition: @emotion.last } %>
 
-<% else %>
-  <h1>Welcome, <%=current_user.name%>!</h1>
-  <h2>How are you doing?</h2>
-  <%= render partial: 'emotion_form_A' %>
-<% end %>
-<% if @recent_post %>
-  <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>
-<% end %>
-<h3>Pending Friend Requests</h3>
-<ul id='pending_requests'>
-  <% if @pending_requests.empty? %>
-    <h4>No Pending Requests</h4>
-  <% else%>
-    <% @pending_requests.each do |friend| %>
-      <li id="friend_<%=friend.friendship_id%>">
-        <%=friend.friend_name%>:
-        <%=button_to 'Accept', friend_path(friend.friendship_id), method: :put, params: {request_status: 'accepted'}, local: true %>
-        <%=button_to 'Reject', friend_path(friend.friendship_id), method: :put, params: {request_status: 'rejected'}, local: true %><br>
-      </li>
-    <% end%>
-  <% end%>
-</ul>
+    <% else %>
+      <h1>Welcome, <%= current_user.name %>!</h1>
+      <h2>How are you doing?</h2>
+      <%= render partial: 'emotion_form_A' %>
+    <% end %>
+    <% if @recent_post %>
+      <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>
+    <% end %>
+
+
+    <div id='pending_requests'>
+      <h3>Pending Friend Requests</h3>
+      <% if @pending_requests.empty? %>
+        <h4>No Pending Requests</h4>
+      <% else %>
+        <% @pending_requests.each do |friend| %>
+          <div id="friend_<%= friend.friendship_id %>">
+            <ul>
+              <li><%= friend.friend_name %>:</li>
+              <%= button_to 'Accept', friend_path(friend.friendship_id), method: :put, params: { request_status: 'accepted' }, local: true %>
+              <%= button_to 'Reject', friend_path(friend.friendship_id), method: :put, params: { request_status: 'rejected' }, local: true %>
+            </ul>
+          </div>
+          <br>
+        <% end %>
+        </div>
+        </div>
+      <% end %>
+      </div>
