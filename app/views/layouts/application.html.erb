@@ -31,16 +31,17 @@
       </ul>
     </div>
   </div>
+  
   <% flash.each do |type, message| %>
-    <% if type == :success %>
+    <% if (type == :success) || (type == "success") %>
       <div class="alert alert-success" role="alert">
-        <%= flash[:success] %>
+        <%= message %>
       </div>
     <% end %>
 
-    <% if type == :error %>
+    <% if (type == :error || type == "error") %>
       <div class="alert alert-danger" role="alert">
-        <%= flash[:error] %>
+        <%= message %>
       </div>
     <% end %>
   <% end %>
