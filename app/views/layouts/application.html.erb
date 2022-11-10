@@ -7,30 +7,33 @@
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-
 </head>
+<style>
+body {
+  font-family: 'Times New Roman', serif;
+}
+</style>
 <body>
-  <div class="nav justify-content-center">
-    <div id="account">
-      <ul>
-        <% if current_user %>
-          <li><%= button_to "Logout", logout_path, id: "logout", method: :get, class: "nav justify-content-right" %></li>
-        <% end %>
-        <% if current_page?(dashboard_path) %>
-          <li><%= button_to 'History', history_path, method: :get %></li>
-          <li><%= button_to 'Friends', friends_path, method: :get %></li>
-        <% elsif current_page?(friends_path) %>
-          <li><%= button_to 'Dashboard', dashboard_path, method: :get %></li>
-        <% elsif current_page?(history_path) %> 
-          <li><%= button_to 'Dashboard', dashboard_path, method: :get %></li>
-          <li><%= button_to 'Friends', friends_path, method: :get %></li>
-        <% elsif request.original_url.include?("/posts") %>
-          <li><%= button_to 'Dashboard', dashboard_path, method: :get %></li>
-          <li><%= button_to 'History', friends_path, method: :get %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
+
+<div id="account">
+  <nav class="navbar navbar-expand-lg navbar-light bg-info my-2, my-lg-0, mr-sm-0, my-sm-0">
+    <% if current_user %>
+      <%= button_to "Logout", logout_path, id: "logout", method: :get %>
+    <% end %>
+    <% if current_page?(dashboard_path) %>
+      <%= button_to 'History', history_path, method: :get %>
+      <%= button_to 'Friends', friends_path, method: :get %>
+    <% elsif current_page?(friends_path) %>
+      <%= button_to 'Dashboard', dashboard_path, method: :get %>
+    <% elsif current_page?(history_path) %>
+      <%= button_to 'Dashboard', dashboard_path, method: :get %>
+      <%= button_to 'Friends', friends_path, method: :get %>
+    <% elsif request.original_url.include?("/posts") %>
+      <%= button_to 'Dashboard', dashboard_path, method: :get %>
+      <%= button_to 'History', friends_path, method: :get %>
+    <% end %>
+  </nav>
+</div>
   
   <% flash.each do |type, message| %>
     <% if (type == :success) || (type == "success") %>
@@ -38,6 +41,7 @@
         <%= message %>
       </div>
     <% end %>
+
 
     <% if (type == :error || type == "error") %>
       <div class="alert alert-danger" role="alert">
@@ -48,4 +52,12 @@
 
 <%= yield %>
 </body>
+<footer class="page-footer font-small fixed-bottom bg-info">
+  <div class="container text-center text-light font-weight-bold text-md-left mt-3 mb-4">
+    <div class="font-weight-bold text-uppercase text-dark">
+      <p>References</p>
+      <a href="https://findahelpline.com/us" class="text-light">findahelpline.com</a>
+    </div>
+  </div>
+</footer>
 </html>
