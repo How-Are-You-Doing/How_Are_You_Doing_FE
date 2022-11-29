@@ -13,10 +13,12 @@ RSpec.describe 'Post Update' do
           @recent_post = DatabaseFacade.lookup_post(@user, 30)
         end
 
-        @pending_friends = create_list(:user, 3)
+        VCR.use_cassette('pending_friendships_for_jenny') do
+          @pending_friends = DatabaseFacade.pending_requests_to_friendships(@user.google_id)
+        end
         allow_any_instance_of(DashboardsController).to receive(:current_user).and_return(@user)
         allow_any_instance_of(PostsController).to receive(:current_user).and_return(@user)
-        allow(DatabaseFacade).to receive(:pending_requests).with(@user.google_id).and_return(@pending_friends)
+        allow(DatabaseFacade).to receive(:pending_requests_to_friendships).with(@user.google_id).and_return(@pending_friends)
         allow_any_instance_of(DashboardsController).to receive(:recently_posted?).and_return(true)
         allow(DatabaseFacade).to receive(:last_post).with('8675309').and_return(@recent_post)
 

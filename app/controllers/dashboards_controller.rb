@@ -3,12 +3,15 @@ class DashboardsController < ApplicationController
   before_action :current_user
 
   def show
-    @pending_requests = DatabaseFacade.pending_requests(current_user.google_id)
+    @pending_requests = DatabaseFacade.pending_requests_to_friendships(current_user.google_id)
     return show_recent_post if recently_posted?
 
     if params[:description]
+      return back_to_description if description_empty?
+
       new_post = UserPost.new(post_params)
       @recent_post = DatabaseFacade.new_post(new_post)
+      flash[:success] = "Post Created!" if @recent_post
     elsif params[:emotion]
       word = params[:emotion]
       definition = lookup_emotion(word).definition
@@ -30,5 +33,4 @@ class DashboardsController < ApplicationController
   def show_recent_post
     @recent_post = DatabaseFacade.last_post(current_user.google_id)
   end
-
 end

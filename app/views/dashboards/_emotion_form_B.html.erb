@@ -1,12 +1,15 @@
-  <div id='emotion_def'>
+<div class="mx-auto" style="width: 500px">
+<div id='emotion_def'>
     <h2>I am feeling <%= emotion %>:</h2>
     <p> <%= definition %></p>
   </div>
-    <%=link_to 'Change emotion choice', url: dashboard_path, local: true %>
-  <h3>Take a moment and jot down some of your thoughts about this<h3>
+
+  <%=link_to 'Change emotion choice', url: dashboard_path, local: true %>
+
+  <h3>Take a moment and jot down some of your thoughts about this</h3>
   <div id='emotion_form'>
     <%= form_with url: dashboard_path, method: :get, local: true do |f| %>
-      <%= f.text_area :description, size: "60x10" %><br>
+      <%= f.text_area :description, size: "60x5", maxlength: 280 %><br>
       <p>Would you like to make this post public?
       <%= f.label :post_status, 'Yes', value: 'shared'%>
       <%= f.radio_button :post_status, 'shared'  %>
@@ -14,6 +17,7 @@
       <%= f.radio_button :post_status, 'personal', checked: true %>
       </p>
       <%= f.hidden_field :emotion, value: emotion%>
-      <%= f.submit 'submit' %>
+      <%= f.submit 'submit', class:"btn btn-info" %>
     <% end %>
   </div>
+</div>

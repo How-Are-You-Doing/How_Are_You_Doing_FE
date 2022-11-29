@@ -1,1 +1,15 @@
-<h1>Welcome To Friends Show Page!</h1>
+<div class="container">
+  <div class="justify-content-center">
+    <h1><%= @friend.name %>'s Recent Posts</h1>
+
+
+      <div id="posts">
+        <% @posts.each do |post| %>
+          <strong><%= post.created_at.strftime("%A, %B %d, %Y") %></strong>
+          <p><b>Description:</b> <%= post.description %></p>
+          <p><b>Tone:</b> <%= post.tone %></p>
+          <p><b>Emotion:</b> <font color="#17a2b8"><%= post.emotion %></font></p>
+        <% end %>
+    </div>
+  </div>
+</div>
