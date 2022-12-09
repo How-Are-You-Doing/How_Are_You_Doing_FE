@@ -1,15 +1,18 @@
+<div style="text-align:center;">
 <div style="padding:80px 0px;">
   <div id="find_friend_form" >
     <div class="mx-auto" style="width: 450px">
       <div class="input-group mb-3">
         <%= form_with url: '/friends', method: :get, local: true do |f| %>
-          <h4><%= f.label :email, 'Find a Friend by Email' %></h4>
+          <h3><%= f.label :email, 'Find a Friend by Email' %></h3>
+          <h4><%= 'Type the email address of the friend you would like to find. Your friend will need to make a How Are You Doing accont in order to be found. For demo purposes you can send a friend request to alaina.noel.8@gmail.com and be accepted' %></h4>
           <%= f.text_field :email, placeholder: 'Email Address', class:"form-control" %>
           <%= f.submit 'Find Friend', class:"btn btn-info"%> 
         <% end %>
       </div>
     </div>
   </div>
+</div>
 
   <div class="mx-auto" style="width: 450px">
     <div id="search_results">
