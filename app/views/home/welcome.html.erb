@@ -1,7 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info my-0, my-lg-2, mr-sm-0, my-sm-0">
 <%=button_to 'Login with Google', '/auth/google_oauth2' %>
 </nav>
+<div style="text-align:center;">
+  <div class="justify-content-center">
+  <h1>Welcome to How Are You Doing</h1>
+  <h3>This is a place where you can log how you are feeling<br> each day and check in on how your friends are doing.</h3>
 
-<div class="text-center">
-<img align="center" alt="This shows the logo for how are you doing" src="hayd_logo.jpg" width="500" height="500" class:="img-fluid"/>
+  <h4>I am feeling...</h4>
+  <div id='emotion_form'>
+    <%= form_with url: '/auth/google_oauth2', method: :post, local: true do |f| %>
+      <%= f.select :emotion, @emotions_grid %>
+      <%= f.submit 'submit', class: 'btn btn-info mt-1' %>
+    <% end %>
+  </div>
 </div>
+
+<div style="text-align:center;">
+  <div id='pending_requests'>
+    <h3>Pending Friend Requests</h3>
+    <li><strong><%= "Melissa Fabre" %>
+      <%= button_to 'Accept', '/auth/google_oauth2', method: :post, local: true %>
+      <%= button_to 'Reject', '/auth/google_oauth2', method: :post, local: true %></li>
+    <li><%= "Marshall Rosenberg" %>:</li>
+      <%= button_to 'Accept', '/auth/google_oauth2', method: :post, local: true %>
+      <%= button_to 'Reject', '/auth/google_oauth2', method: :post, local: true %>
+    <li><%= "Alaina Noel" %>:</li>
+      <%= button_to 'Accept', '/auth/google_oauth2', method: :post, local: true %>
+      <%= button_to 'Reject', '/auth/google_oauth2', method: :post, local: true %>
+  </div>
+</div>
+
