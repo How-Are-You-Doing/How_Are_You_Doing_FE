@@ -1,6 +1,7 @@
 class DashboardsController < ApplicationController
   include EmotionHelper
   before_action :current_user
+  # protect_from_forgery except: :show
 
   def show
     @pending_requests = DatabaseFacade.pending_requests_to_friendships(current_user.google_id)
@@ -17,7 +18,7 @@ class DashboardsController < ApplicationController
       definition = lookup_emotion(word).definition
       @emotion = [word, definition]
     else
-      @emotions_grid = words_only(DatabaseFacade.emotions)
+      # render 'word_cloud.html.js'
     end
   end
 
