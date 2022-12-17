@@ -16,8 +16,10 @@
 <% if @recent_post %>
   <%= render partial: 'my_post_show'%>
 
-<% elsif @emotion %>
-  <%= render partial: 'emotion_form_B', locals: {emotion: @emotion.first, definition: @emotion.last} %>
+<div class="container">
+  <div class="justify-content-center">
+    <% if @recent_post %>
+      <%= render partial: 'my_post_show' %>
 
 <% else %>
   <h1>Welcome, <%=current_user.name%>!</h1>

@@ -42,7 +42,7 @@
     <orderEntry type="library" scope="PROVIDED" name="autoprefixer-rails (v10.4.7.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.8.1, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.13.0, rbenv: 2.7.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bootstrap (v5.2.2, rbenv: 2.7.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bootstrap (v4.0.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.1.4, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, rbenv: 2.7.4) [gem]" level="application" />
@@ -70,6 +70,7 @@
     <orderEntry type="library" scope="PROVIDED" name="hashie (v5.0.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.12.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.11.5, rbenv: 2.7.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jquery-rails (v4.5.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jwt (v2.5.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="launchy (v2.5.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.1.5, rbenv: 2.7.4) [gem]" level="application" />
@@ -91,7 +92,7 @@
     <orderEntry type="library" scope="PROVIDED" name="omniauth-oauth2 (v1.8.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-rails_csrf_protection (v1.0.1, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.4.4, rbenv: 2.7.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="popper_js (v2.11.6, rbenv: 2.7.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="popper_js (v1.16.1, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.14.1, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v5.0.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.12.6, rbenv: 2.7.4) [gem]" level="application" />
@@ -118,8 +119,6 @@
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.7.4, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-listen (v4.0.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v5.1.0, rbenv: 2.7.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sassc (v2.4.0, rbenv: 2.7.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sassc-rails (v2.1.2, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="shoulda-matchers (v5.2.0, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simplecov (v0.21.2, rbenv: 2.7.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simplecov-html (v0.12.3, rbenv: 2.7.4) [gem]" level="application" />
@@ -411,8 +410,10 @@
           <RakeTaskImpl description="Run all specs in spec directory (excluding plugin specs)" fullCommand="spec" id="spec" />
           <RakeTaskImpl id="spec">
             <subtasks>
+              <RakeTaskImpl description="Run the code examples in spec/facades" fullCommand="spec:facades" id="facades" />
               <RakeTaskImpl description="Run the code examples in spec/features" fullCommand="spec:features" id="features" />
               <RakeTaskImpl description="Run the code examples in spec/models" fullCommand="spec:models" id="models" />
+              <RakeTaskImpl description="Run the code examples in spec/poros" fullCommand="spec:poros" id="poros" />
               <RakeTaskImpl description="Run the code examples in spec/services" fullCommand="spec:services" id="services" />
               <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
               <RakeTaskImpl description="" fullCommand="spec:statsetup" id="statsetup" />
