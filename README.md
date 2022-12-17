@@ -2,6 +2,18 @@
  
  <div style="color: yellow">
 
+ ## Features
+Users can select from a menu of emotions and log how they are feeling today: 
+![log-feelings-how-are-you-doing](./app/assets/images/emotions.gif)
+
+Users can look at their previous posts and edit if desired: 
+![log-feelings-how-are-you-doing](./app/assets/images/posts.gif)
+
+Users can find friends and see how they are doing by checking their public posts: 
+![log-feelings-how-are-you-doing](./app/assets/images/friends.gif)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 # [🔵🟢🟡 Take me to the site! 🟡🟢🔵](https://how-are-you-doing-fe.herokuapp.com/)
 </div>
 
