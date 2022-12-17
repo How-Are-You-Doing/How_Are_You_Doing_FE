@@ -4,8 +4,8 @@
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
   <style>
     html, body, #container {
-    width: 85%;
-    height: 85%;
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     }
@@ -15,32 +15,36 @@
 
 <% if @recent_post %>
   <%= render partial: 'my_post_show'%>
+<% end%>
+
 
 <div class="container">
   <div class="justify-content-center">
     <% if @recent_post %>
       <%= render partial: 'my_post_show' %>
+    <% else %>
+      <h1>Welcome, <%=current_user.name%>!</h1>
+      <h2>How are you doing?</h2>
+      <span id='container'></span>
+      <%= render partial: 'word_cloud.html.js', formats: :js %>
+    <% end %>
 
-<% else %>
-  <h1>Welcome, <%=current_user.name%>!</h1>
-  <h2>How are you doing?</h2>
-  <span id='container'></span>
-  <%= render partial: 'word_cloud.html.js', formats: :js %>
-<% end %>
-<% if @recent_post %>
-  <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>
-<% end %>
-<h3>Pending Friend Requests</h3>
-<ul id='pending_requests'>
-  <% if @pending_requests.empty? %>
-    <h4>No Pending Requests</h4>
-  <% else%>
-    <% @pending_requests.each do |friend| %>
-      <li id="friend_<%=friend.friendship_id%>">
-        <%=friend.friend_name%>:
-        <%=button_to 'Accept', friend_path(friend.friendship_id), method: :put, params: {request_status: 'accepted'}, local: true %>
-        <%=button_to 'Reject', friend_path(friend.friendship_id), method: :put, params: {request_status: 'rejected'}, local: true %><br>
-      </li>
-    <% end%>
-  <% end%>
-</ul>
+    <% if @recent_post %>
+      <%= link_to 'Create new post', dashboard_path(post: 'new_post') %>
+    <% end %>
+
+    <h3>Pending Friend Requests</h3>
+    <ul id='pending_requests'>
+      <% if @pending_requests.empty? %>
+        <h4>No Pending Requests</h4>
+      <% else%>
+        <% @pending_requests.each do |friend| %>
+          <li id="friend_<%=friend.friendship_id%>">
+            <%=friend.friend_name%>:
+            <%=button_to 'Accept', friend_path(friend.friendship_id), method: :put, params: {request_status: 'accepted'}, local: true %>
+            <%=button_to 'Reject', friend_path(friend.friendship_id), method: :put, params: {request_status: 'rejected'}, local: true %><br>
+          </li>
+        <% end%>
+      <% end%>
+    </ul>
+  </div>
